@@ -8,6 +8,7 @@ function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [currentUser, setCurrentUser] = useState({});
 
+	console.log();
 	useEffect(() => {
 		fetch('/me')
 			.then((r) => r.json())
