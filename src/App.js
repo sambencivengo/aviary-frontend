@@ -1,25 +1,57 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
+import Home from './Home';
+import Login from './Login';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [loggedIn, setLoggedIn] = useState(false);
+	const [currentUser, setCurrentUser] = useState({});
+
+	useEffect(() => {
+		fetch('http://localhost:3000/me')
+			.then((r) => r.json())
+			.then((data) => {
+				setCurrentUser(data);
+				if (data.id !== null) {
+					setLoggedIn(true);
+				} else {
+					setLoggedIn(false);
+				}
+			})
+			.catch((error) => console.log(error, 'error'));
+	}, []);
+
+	const handleLogIn = (formData) => {
+		fetch('http://localhost:3000/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(formData),
+		})
+			.then((r) => r.json())
+			.then((data) => {
+				setCurrentUser(data);
+				setLoggedIn(true);
+			});
+	};
+
+	const handleLogout = () => {
+		setLoggedIn(false);
+	};
+
+	console.log('Are you logged in?', loggedIn);
+
+	return (
+		<div className="App">
+			{loggedIn ? (
+				<Home handleLogout={handleLogout} currentUser={currentUser} />
+			) : (
+				<Login handleLogIn={handleLogIn} />
+			)}
+		</div>
+	);
 }
 
 export default App;
