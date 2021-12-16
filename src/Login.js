@@ -19,6 +19,9 @@ const Login = ({ handleLogIn }) => {
 
 	return (
 		<>
+			<Form>
+				<Form.Group></Form.Group>
+			</Form>
 			<form onSubmit={logIn}>
 				<input
 					onChange={handleChange}
@@ -30,8 +33,9 @@ const Login = ({ handleLogIn }) => {
 					name="password"
 					placeholder="password"
 				></input>{' '}
-				<button>Submit</button>
+				<Button>Submit</Button>
 			</form>
+
 			<Link to="/signup">Don't have an account? Sign up!</Link>
 		</>
 	);
