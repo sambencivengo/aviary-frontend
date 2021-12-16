@@ -9,7 +9,7 @@ function App() {
 	const [currentUser, setCurrentUser] = useState({});
 
 	useEffect(() => {
-		fetch('http://localhost:3000/me')
+		fetch('/me')
 			.then((r) => r.json())
 			.then((data) => {
 				setCurrentUser(data);
@@ -23,7 +23,7 @@ function App() {
 	}, []);
 
 	const handleLogIn = (formData) => {
-		fetch('http://localhost:3000/login', {
+		fetch('/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

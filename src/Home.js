@@ -7,7 +7,7 @@ const Home = ({ handleLogout, currentUser }) => {
 	};
 
 	const logOut = () => {
-		fetch('http://localhost:3000/logout', { method: 'DELETE' })
+		fetch('/logout', { method: 'DELETE' })
 			.then((r) => r.json())
 			.then(handleLogout())
 			.catch((error) => console.log(error));
