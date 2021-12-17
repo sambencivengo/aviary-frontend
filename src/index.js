@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import 'antd/dist/antd.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
 import SignUp from './SignUp';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
 	<React.StrictMode>
