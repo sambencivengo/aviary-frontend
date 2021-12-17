@@ -1,5 +1,5 @@
 import MapContainer from './MapContainer';
-
+import { Wrapper } from '@googlemaps/react-wrapper';
 const SpottingForm = () => {
 	return (
 		<>

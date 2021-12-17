@@ -8,7 +8,6 @@ function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [currentUser, setCurrentUser] = useState({});
 
-	console.log();
 	useEffect(() => {
 		fetch('/me')
 			.then((r) => r.json())
@@ -33,8 +32,12 @@ function App() {
 		})
 			.then((r) => r.json())
 			.then((data) => {
-				setCurrentUser(data);
-				setLoggedIn(true);
+				if (data.username === undefined) {
+					setLoggedIn(false);
+				} else {
+					setCurrentUser(data);
+					setLoggedIn(true);
+				}
 			});
 	};
 
