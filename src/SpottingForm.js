@@ -23,12 +23,11 @@ const SpottingForm = () => {
 			.then((r) => r.json())
 			.then((birds) => {
 				setBirds(birds);
-				console.log(birds);
+				// console.log(birds);
 			});
 	}, []);
 
 	const renderOptions = birds.map((birdOption) => {
-		console.log(birdOption);
 		return <Option value={birdOption.id}>{birdOption.common_name}</Option>;
 	});
 

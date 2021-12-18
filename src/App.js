@@ -2,7 +2,10 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
-import { Navigate, useNavigate } from 'react-router-dom';
+
+import { Button, Layout } from 'antd';
+
+const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -41,19 +44,47 @@ function App() {
 			});
 	};
 
-	const handleLogout = () => {
-		setLoggedIn(false);
+	const handleLogOut = () => {
+		fetch('/logout', { method: 'DELETE' })
+			.then((r) => r.json())
+			.catch((error) => {
+				setLoggedIn(false);
+				console.log(error);
+			});
 	};
 
 	console.log('Are you logged in?', loggedIn);
 
 	return (
 		<div className="App">
-			{loggedIn ? (
-				<Home handleLogout={handleLogout} currentUser={currentUser} />
-			) : (
-				<Login handleLogIn={handleLogIn} />
-			)}
+			<Layout>
+				<Sider>
+					{' '}
+					{!loggedIn ? null : (
+						<Button
+							type="primary"
+							htmlType="submit"
+							className="login-form-button"
+							onClick={handleLogOut}
+						>
+							Log out
+						</Button>
+					)}
+				</Sider>
+				<Layout>
+					<Header>
+						<h1>AVIARY</h1>
+					</Header>
+					<Content>
+						{loggedIn ? (
+							<Home currentUser={currentUser} />
+						) : (
+							<Login handleLogIn={handleLogIn} />
+						)}
+					</Content>
+					<Footer>Footer</Footer>
+				</Layout>
+			</Layout>
 		</div>
 	);
 }
