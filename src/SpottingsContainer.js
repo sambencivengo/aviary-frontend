@@ -2,14 +2,16 @@ import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import MapContainer from './MapContainer';
+import SpottingCard from './SpottingCard';
 
 const SpottingsContainer = () => {
 	const [spottings, setSpottings] = useState([]);
 
 	useEffect(() => {
-		fetch('/spottings')
+		fetch('/mybirds')
 			.then((r) => r.json())
 			.then((data) => {
+				console.log(data);
 				setSpottings(data);
 			});
 	}, []);
@@ -23,6 +25,9 @@ const SpottingsContainer = () => {
 		lng: -73.969749,
 	};
 
+	const renderCards = spottings.map((bird) => {
+		return <SpottingCard key={bird.id} bird={bird} />;
+	});
 	// console.log(spottings[0].lat, spottings[0].long);
 	// set spottings into an array
 	// pass them to the google maps component
@@ -34,7 +39,7 @@ const SpottingsContainer = () => {
 
 	return (
 		<>
-			<h4>Container for User Spottings</h4>
+			<h4>This is the container for the User's spotted birds.</h4>
 			<LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
 				<GoogleMap
 					mapContainerStyle={mapStyles}
@@ -48,6 +53,7 @@ const SpottingsContainer = () => {
 					})} */}
 				</GoogleMap>
 			</LoadScript>
+			{renderCards}
 		</>
 	);
 };

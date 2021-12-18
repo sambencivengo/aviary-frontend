@@ -1,3 +1,5 @@
+import { Button } from 'antd';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import MapContainer from './MapContainer';
 import SpottingForm from './SpottingForm';
@@ -17,11 +19,19 @@ const Home = ({ handleLogout, currentUser }) => {
 		setSpottingMode(!spottingMode);
 	}
 
+	useEffect(() => {
+		fetch('/spottings');
+	}, []);
+
 	return (
 		<>
 			<h1>Hello, {currentUser.username}!</h1>
-			<button onClick={logOut}>Log Out</button>
-			<button onClick={() => toggleSpottingMode()}>See a bird?</button>
+			<Button value={'small'} danger onClick={logOut}>
+				Log Out
+			</Button>
+			<Button value={'small'} onClick={() => toggleSpottingMode()}>
+				See a bird?
+			</Button>
 			{spottingMode ? <SpottingForm /> : <SpottingsContainer />}
 		</>
 	);
