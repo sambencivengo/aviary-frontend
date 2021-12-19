@@ -4,6 +4,7 @@ import Home from './Home';
 import Login from './Login';
 import { Typography } from 'antd';
 import { Button, Layout } from 'antd';
+import Text from 'antd/lib/typography/Text';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -75,7 +76,9 @@ function App() {
 				</Sider>
 				<Layout>
 					<Header className="header">
-						<Title>Aviary</Title>{' '}
+						<Title style={{ color: 'white', fontSize: '50px' }}>
+							Aviary
+						</Title>{' '}
 					</Header>
 					<Content className="mainContent">
 						{loggedIn ? (
@@ -84,7 +87,12 @@ function App() {
 							<Login handleLogIn={handleLogIn} />
 						)}
 					</Content>
-					<Footer className="footer">Footer</Footer>
+					<Footer className="footer">
+						<Text italic>
+							Regular Birdwatching is required to lead a healthy
+							and fulfilling life.
+						</Text>
+					</Footer>
 				</Layout>
 			</Layout>
 		</div>

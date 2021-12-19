@@ -16,7 +16,7 @@ const SpottingForm = ({ currentUser }) => {
 	// });
 	// REFACTOR WHEN YOU CAN! EXTREMELY NOT DRY
 	const [bird_id, setBird_Id] = useState('');
-	const [user_id, setUser_Id] = useState(currentUser.id);
+	const user_id = currentUser.id;
 	const [image, setImage] = useState('');
 	const [lat, setLat] = useState('');
 	const [long, setLong] = useState('');
@@ -39,8 +39,18 @@ const SpottingForm = ({ currentUser }) => {
 	// 	console.log(e.target.name, ':', e.target.value);
 	// 	setFormdata({ ...formData, [e.target.name]: e.target.value });
 	// };
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	const handleSubmit = () => {
+		fetch('/spottings', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ bird_id, user_id, notes, image, lat, long }),
+		})
+			.then((r) => r.json())
+			.then((data) => {
+				console.log(data);
+			});
 	};
 
 	// filter the bird array live, when selecting the bird,
@@ -68,7 +78,7 @@ const SpottingForm = ({ currentUser }) => {
 	return (
 		<>
 			<h3>What did you see?</h3>
-			<Form onSubmit={handleSubmit} name="spotting-form">
+			<Form onFinish={handleSubmit} name="spotting-form">
 				<Form.Item>
 					<Select
 						onChange={(value) => {
