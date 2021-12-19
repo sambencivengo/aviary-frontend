@@ -23,7 +23,11 @@ const Home = ({ currentUser }) => {
 			<Button value={'small'} onClick={() => toggleSpottingMode()}>
 				See a bird?
 			</Button>
-			{spottingMode ? <SpottingForm /> : <SpottingsContainer />}
+			{spottingMode ? (
+				<SpottingForm currentUser={currentUser} />
+			) : (
+				<SpottingsContainer />
+			)}
 		</>
 	);
 };

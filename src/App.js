@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
-
+import { Typography } from 'antd';
 import { Button, Layout } from 'antd';
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -10,6 +10,8 @@ const { Header, Footer, Sider, Content } = Layout;
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [currentUser, setCurrentUser] = useState({});
+
+	const { Title } = Typography;
 
 	useEffect(() => {
 		fetch('/me')
@@ -53,12 +55,12 @@ function App() {
 			});
 	};
 
-	console.log('Are you logged in?', loggedIn);
+	// console.log('Are you logged in?', loggedIn);
 
 	return (
 		<div className="App">
 			<Layout>
-				<Sider>
+				<Sider className="sider">
 					{' '}
 					{!loggedIn ? null : (
 						<Button
@@ -72,17 +74,17 @@ function App() {
 					)}
 				</Sider>
 				<Layout>
-					<Header>
-						<h1>AVIARY</h1>
+					<Header className="header">
+						<Title>Aviary</Title>{' '}
 					</Header>
-					<Content>
+					<Content className="mainContent">
 						{loggedIn ? (
 							<Home currentUser={currentUser} />
 						) : (
 							<Login handleLogIn={handleLogIn} />
 						)}
 					</Content>
-					<Footer>Footer</Footer>
+					<Footer className="footer">Footer</Footer>
 				</Layout>
 			</Layout>
 		</div>
