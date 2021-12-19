@@ -6,15 +6,23 @@ import Map from './Map';
 const SpottingForm = ({ currentUser }) => {
 	const { Option } = Select;
 	const [birds, setBirds] = useState([]);
-	const [formData, setFormdata] = useState({
-		notes: '',
-		user_id: currentUser.id,
-		bird_id: '',
-		image: '',
-		lat: '',
-		long: '',
-	});
-	console.log(formData);
+	// const [formData, setFormdata] = useState({
+	// 	notes: '',
+	// 	user_id: currentUser.id,
+	// 	bird_id: '',
+	// 	image: '',
+	// 	lat: '',
+	// 	long: '',
+	// });
+	// REFACTOR WHEN YOU CAN! EXTREMELY NOT DRY
+	const [bird_id, setBird_Id] = useState('');
+	const [user_id, setUser_Id] = useState(currentUser.id);
+	const [image, setImage] = useState('');
+	const [lat, setLat] = useState('');
+	const [long, setLong] = useState('');
+	const [notes, setNotes] = useState('');
+	//
+	console.log(bird_id, notes);
 	const mapStyles = {
 		height: '50vh',
 		width: '50vh',
@@ -27,10 +35,10 @@ const SpottingForm = ({ currentUser }) => {
 
 	// fetch and render Option components for each bird?
 
-	const handleChange = (e) => {
-		console.log(e.target.name, ':', e.target.value);
-		setFormdata({ ...formData, [e.target.name]: e.target.value });
-	};
+	// const handleChange = (e) => {
+	// 	console.log(e.target.name, ':', e.target.value);
+	// 	setFormdata({ ...formData, [e.target.name]: e.target.value });
+	// };
 	const handleSubmit = (e) => {
 		e.preventDefault();
 	};
@@ -47,16 +55,11 @@ const SpottingForm = ({ currentUser }) => {
 			.then((r) => r.json())
 			.then((birds) => {
 				setBirds(birds);
-				// console.log(birds);
 			});
 	}, []);
 	const renderOptions = birds.map((birdOption) => {
 		return (
-			<Option
-				onChange={handleChange}
-				key={birdOption.id}
-				value={birdOption.id}
-			>
+			<Option key={birdOption.id} value={birdOption.id}>
 				{birdOption.common_name}
 			</Option>
 		);
@@ -66,24 +69,29 @@ const SpottingForm = ({ currentUser }) => {
 		<>
 			<h3>What did you see?</h3>
 			<Form onSubmit={handleSubmit} name="spotting-form">
-				<Select
-					showSearch
-					style={{ width: 200 }}
-					placeholder="Search to Select"
-					optionFilterProp="children"
-					filterOption={(input, option) =>
-						option.children
-							.toLowerCase()
-							.indexOf(input.toLowerCase()) >= 0
-					}
-					filterSort={(optionA, optionB) =>
-						optionA.children
-							.toLowerCase()
-							.localeCompare(optionB.children.toLowerCase())
-					}
-				>
-					{renderOptions}
-				</Select>
+				<Form.Item>
+					<Select
+						onChange={(value) => {
+							setBird_Id(value);
+						}}
+						showSearch
+						style={{ width: 600 }}
+						placeholder="Search to Select"
+						optionFilterProp="children"
+						filterOption={(input, option) =>
+							option.children
+								.toLowerCase()
+								.indexOf(input.toLowerCase()) >= 0
+						}
+						filterSort={(optionA, optionB) =>
+							optionA.children
+								.toLowerCase()
+								.localeCompare(optionB.children.toLowerCase())
+						}
+					>
+						{renderOptions}
+					</Select>
+				</Form.Item>
 				<Form.Item
 				// rules={[
 				// 	{
@@ -93,12 +101,15 @@ const SpottingForm = ({ currentUser }) => {
 				// ]}
 				>
 					<Input
+						style={{ width: 600 }}
 						name="notes"
 						// prefix={
 						// 	<SmallDashOutlined className="site-form-item-icon" />
 						// }
 						placeholder="Field notes"
-						onChange={handleChange}
+						onChange={(e) => {
+							setNotes(e.target.value);
+						}}
 					/>
 				</Form.Item>
 				<Form.Item
@@ -110,12 +121,55 @@ const SpottingForm = ({ currentUser }) => {
 				// ]}
 				>
 					<Input
+						style={{ width: 600 }}
 						name="image"
 						// prefix={
 						// 	<SmallDashOutlined className="site-form-item-icon" />
 						// }
 						placeholder="Image"
-						onChange={handleChange}
+						onChange={(e) => {
+							setImage(e.target.value);
+						}}
+					/>
+				</Form.Item>
+				<Form.Item
+				// rules={[
+				// 	{
+				// 		required: true,
+				// 		message: 'Please input your Username!',
+				// 	},
+				// ]}
+				>
+					<Input
+						name="lat"
+						style={{ width: 600 }}
+						// prefix={
+						// 	<SmallDashOutlined className="site-form-item-icon" />
+						// }
+						placeholder="Latitude"
+						onChange={(e) => {
+							setLat(e.target.value);
+						}}
+					/>
+				</Form.Item>
+				<Form.Item
+				// rules={[
+				// 	{
+				// 		required: true,
+				// 		message: 'Please input your Username!',
+				// 	},
+				// ]}
+				>
+					<Input
+						name="long"
+						style={{ width: 600 }}
+						// prefix={
+						// 	<SmallDashOutlined className="site-form-item-icon" />
+						// }
+						placeholder="Longitude"
+						onChange={(e) => {
+							setLong(e.target.value);
+						}}
 					/>
 				</Form.Item>
 				<Form.Item>
