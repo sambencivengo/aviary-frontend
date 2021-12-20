@@ -1,7 +1,8 @@
-import { Button, Form, Input, message, Select } from 'antd';
+import { Button, Col, Form, Input, message, Row, Select } from 'antd';
 import Layout, { Content } from 'antd/lib/layout/layout';
 import { useEffect, useState } from 'react';
-import Map from './Map';
+
+import MapContainer from './MapContainer';
 
 const SpottingForm = ({ currentUser }) => {
 	const { Option } = Select;
@@ -82,11 +83,8 @@ const SpottingForm = ({ currentUser }) => {
 	return (
 		<>
 			<Layout>
-				<Content style={{ margin: '0 16px' }}>
-					<h3>Where did you see it?</h3>
-					<div id="map">
-						<Map />
-					</div>{' '}
+				<Row>
+					<Col span={12}>col-12</Col>
 					<h3>What did you see?</h3>
 					<Form onFinish={handleSubmit} name="spotting-form">
 						<Form.Item>
@@ -204,6 +202,15 @@ const SpottingForm = ({ currentUser }) => {
 							</Button>
 						</Form.Item>
 					</Form>
+					<Col span={12}>
+						{' '}
+						<h3>Where did you see it?</h3>
+						<div id="map">
+							<MapContainer />
+						</div>{' '}
+					</Col>
+				</Row>
+				<Content style={{ margin: '0 16px' }}>
 					{/* <Wrapper googleMapsApiKey={process.env.REACT_APP_API_KEY}>
 				<Map />
 			</Wrapper> */}
