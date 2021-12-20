@@ -40,19 +40,6 @@ const SpottingsContainer = () => {
 	return (
 		<>
 			<h4>This is the container for the User's spotted birds.</h4>
-			<LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
-				<GoogleMap
-					mapContainerStyle={mapStyles}
-					zoom={13}
-					center={defaultCenter}
-				>
-					{/* {locations.map((item) => {
-						return (
-							<Marker key={item.name} position={item.location} />
-						);
-					})} */}
-				</GoogleMap>
-			</LoadScript>
 			{renderCards}
 		</>
 	);

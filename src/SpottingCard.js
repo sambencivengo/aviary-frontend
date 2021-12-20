@@ -1,7 +1,20 @@
+import { Card } from 'antd';
+const { Meta } = Card;
+
 const SpottingCard = ({ bird }) => {
 	return (
 		<>
-			<h2>{bird.bird.common_name}</h2>
+			<Card
+				hoverable
+				style={{ width: 240 }}
+				cover={<img alt="example" src={bird.bird.image} />}
+			>
+				<Meta
+					title={bird.bird.common_name}
+					description={bird.bird.sci_name}
+				/>
+			</Card>
+			,
 		</>
 	);
 };

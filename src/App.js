@@ -3,14 +3,26 @@ import { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
 import { Typography } from 'antd';
-import { Button, Layout } from 'antd';
+import { Button, Layout, Menu, Breadcrumb } from 'antd';
 import Text from 'antd/lib/typography/Text';
-
+import {
+	DashOutlined,
+	FileOutlined,
+	TeamOutlined,
+	HomeOutlined,
+} from '@ant-design/icons';
 const { Header, Footer, Sider, Content } = Layout;
+
+const { SubMenu } = Menu;
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [currentUser, setCurrentUser] = useState({});
+	const [collapsed, setCollapsed] = useState(false);
+
+	function onCollapse() {
+		setCollapsed(!collapsed);
+	}
 
 	const { Title } = Typography;
 
@@ -59,43 +71,114 @@ function App() {
 	// console.log('Are you logged in?', loggedIn);
 
 	return (
-		<div className="App">
-			<Layout>
-				<Sider className="sider">
-					{' '}
-					{!loggedIn ? null : (
-						<Button
-							type="primary"
-							htmlType="submit"
-							className="login-form-button"
-							onClick={handleLogOut}
+		// <div className="App">
+		// 	<Layout>
+		// 		{loggedIn ? (
+		// 			<Sider className="sider">
+		// 				<Button
+		// 					type="primary"
+		// 					htmlType="submit"
+		// 					className="login-form-button"
+		// 					onClick={handleLogOut}
+		// 				>
+		// 					Log out
+		// 				</Button>{' '}
+		// 				<Button
+		// 					type="primary"
+		// 					htmlType="submit"
+		// 					className="login-form-button"
+		// 					onClick={handleLogOut}
+		// 				>
+		// 					Log out
+		// 				</Button>{' '}
+		// 				<Button
+		// 					type="primary"
+		// 					htmlType="submit"
+		// 					className="login-form-button"
+		// 					onClick={handleLogOut}
+		// 				>
+		// 					Log out
+		// 				</Button>
+		// 			</Sider>
+		// 		) : null}
+		// 		<Layout>
+		// 			<Header className="header">
+		// 				<Title style={{ color: 'white', fontSize: '50px' }}>
+		// 					Aviary
+		// 				</Title>{' '}
+		// 			</Header>
+		// 			<Content className="mainContent">
+		// 				{loggedIn ? (
+		// 					<Home currentUser={currentUser} />
+		// 				) : (
+		// 					<Login handleLogIn={handleLogIn} />
+		// 				)}
+		// 			</Content>
+		//
+		// 		</Layout>
+		// 	</Layout>
+		// </div>
+
+		<Layout style={{ minHeight: '100vh' }}>
+			{loggedIn ? (
+				<Sider
+					collapsible
+					collapsed={collapsed}
+					onCollapse={onCollapse}
+				>
+					<div className="logo" />
+					<Menu
+						theme="dark"
+						defaultSelectedKeys={['1']}
+						mode="inline"
+					>
+						<Menu.Item key="1" icon={<HomeOutlined />}>
+							Home
+						</Menu.Item>
+						<Menu.Item key="2" icon={<TeamOutlined />}>
+							Feed
+						</Menu.Item>
+						<SubMenu
+							key="sub1"
+							icon={<DashOutlined />}
+							title="Account"
 						>
-							Log out
-						</Button>
-					)}
+							<Menu.Item
+								onClick={() => {
+									handleLogOut();
+								}}
+								key="3"
+							>
+								Log Out
+							</Menu.Item>
+						</SubMenu>
+					</Menu>
 				</Sider>
-				<Layout>
-					<Header className="header">
-						<Title style={{ color: 'white', fontSize: '50px' }}>
-							Aviary
-						</Title>{' '}
-					</Header>
-					<Content className="mainContent">
-						{loggedIn ? (
-							<Home currentUser={currentUser} />
-						) : (
-							<Login handleLogIn={handleLogIn} />
-						)}
-					</Content>
-					<Footer className="footer">
-						<Text italic>
-							Regular Birdwatching is required to lead a healthy
-							and fulfilling life.
-						</Text>
-					</Footer>
-				</Layout>
+			) : null}
+			<Layout className="site-layout">
+				<Header
+					className="site-layout-background"
+					style={{ padding: 0, textAlign: 'center' }}
+				>
+					<Title style={{ color: 'white', fontSize: '50px' }}>
+						Aviary{' '}
+					</Title>{' '}
+				</Header>
+				<Content style={{ margin: '0 16px' }}>
+					{loggedIn ? (
+						<Home currentUser={currentUser} />
+					) : (
+						<Login handleLogIn={handleLogIn} />
+					)}
+				</Content>
+				<Footer style={{ textAlign: 'center' }} className="footer">
+					<Text italic>
+						Regular Birdwatching is required to lead a healthy and
+						fulfilling life.{' '}
+					</Text>
+				</Footer>
 			</Layout>
-		</div>
+		</Layout>
 	);
 }
 

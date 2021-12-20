@@ -1,7 +1,5 @@
-import { Wrapper } from '@googlemaps/react-wrapper';
 import { Button, Form, Input, Select } from 'antd';
 import { useEffect, useState } from 'react';
-import Map from './Map';
 
 const SpottingForm = ({ currentUser }) => {
 	const { Option } = Select;
@@ -23,15 +21,6 @@ const SpottingForm = ({ currentUser }) => {
 	const [notes, setNotes] = useState('');
 	//
 	console.log(bird_id, notes);
-	const mapStyles = {
-		height: '50vh',
-		width: '50vh',
-	};
-
-	const defaultCenter = {
-		lat: 40.6602,
-		lng: -73.969749,
-	};
 
 	// fetch and render Option components for each bird?
 
