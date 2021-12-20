@@ -1,5 +1,6 @@
-import { Button, Form, Input, Select } from 'antd';
+import { Button, Form, Input, message, Select } from 'antd';
 import { useEffect, useState } from 'react';
+import Map from './Map';
 
 const SpottingForm = ({ currentUser }) => {
 	const { Option } = Select;
@@ -39,7 +40,18 @@ const SpottingForm = ({ currentUser }) => {
 			.then((r) => r.json())
 			.then((data) => {
 				console.log(data);
+				success();
 			});
+	};
+
+	const success = () => {
+		message.success({
+			content: 'Good eye! This bird has been added to your aviary.',
+			className: 'custom-class',
+			style: {
+				marginTop: '20vh',
+			},
+		});
 	};
 
 	// filter the bird array live, when selecting the bird,
@@ -66,6 +78,8 @@ const SpottingForm = ({ currentUser }) => {
 
 	return (
 		<>
+			;<h3>Where did you see it?</h3>
+			{/* <Map /> */}
 			<h3>What did you see?</h3>
 			<Form onFinish={handleSubmit} name="spotting-form">
 				<Form.Item>
