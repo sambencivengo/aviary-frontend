@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
 import SignUp from './SignUp';
+import SpottingsContainer from './SpottingsContainer';
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.render(
 				<Route path="/home" element={<Home />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<SignUp />} />
+				<Route path="/myaviary" element={<SpottingsContainer />} />
 			</Routes>
 		</BrowserRouter>
 	</React.StrictMode>,
