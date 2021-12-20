@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import MapContainer from './MapContainer';
 import SpottingCard from './SpottingCard';
 
-const SpottingsContainer = () => {
+const SpottingsContainer = ({ currentUser }) => {
 	const [spottings, setSpottings] = useState([]);
 
 	useEffect(() => {
@@ -26,7 +26,9 @@ const SpottingsContainer = () => {
 	};
 
 	const renderCards = spottings.map((bird) => {
-		return <SpottingCard key={bird.id} bird={bird} />;
+		return (
+			<SpottingCard key={bird.id} bird={bird} currentUser={currentUser} />
+		);
 	});
 	// console.log(spottings[0].lat, spottings[0].long);
 	// set spottings into an array

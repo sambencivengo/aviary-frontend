@@ -26,7 +26,7 @@ const Home = ({ currentUser }) => {
 			{spottingMode ? (
 				<SpottingForm currentUser={currentUser} />
 			) : (
-				<SpottingsContainer />
+				<SpottingsContainer currentUser={currentUser} />
 			)}
 		</>
 	);

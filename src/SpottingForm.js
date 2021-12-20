@@ -78,7 +78,6 @@ const SpottingForm = ({ currentUser }) => {
 	});
 
 	//
-	
 
 	return (
 		<>

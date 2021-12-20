@@ -1,7 +1,8 @@
-import { Card } from 'antd';
+import { Button, Card } from 'antd';
+import { useEffect } from 'react';
 const { Meta } = Card;
 
-const SpottingCard = ({ bird }) => {
+const SpottingCard = ({ bird, currentUser }) => {
 	return (
 		<>
 			<Card
@@ -13,6 +14,7 @@ const SpottingCard = ({ bird }) => {
 					title={bird.bird.common_name}
 					description={bird.bird.sci_name}
 				/>
+				<Button>Edit</Button>
 			</Card>
 			,
 		</>
