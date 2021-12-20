@@ -1,4 +1,5 @@
 import { Button, Form, Input, message, Select } from 'antd';
+import Layout, { Content } from 'antd/lib/layout/layout';
 import { useEffect, useState } from 'react';
 import Map from './Map';
 
@@ -76,128 +77,139 @@ const SpottingForm = ({ currentUser }) => {
 		);
 	});
 
+	//
+	
+
 	return (
 		<>
-			;<h3>Where did you see it?</h3>
-			{/* <Map /> */}
-			<h3>What did you see?</h3>
-			<Form onFinish={handleSubmit} name="spotting-form">
-				<Form.Item>
-					<Select
-						onChange={(value) => {
-							setBird_Id(value);
-						}}
-						showSearch
-						style={{ width: 600 }}
-						placeholder="Search to Select"
-						optionFilterProp="children"
-						filterOption={(input, option) =>
-							option.children
-								.toLowerCase()
-								.indexOf(input.toLowerCase()) >= 0
-						}
-						filterSort={(optionA, optionB) =>
-							optionA.children
-								.toLowerCase()
-								.localeCompare(optionB.children.toLowerCase())
-						}
-					>
-						{renderOptions}
-					</Select>
-				</Form.Item>
-				<Form.Item
-				// rules={[
-				// 	{
-				// 		required: true,
-				// 		message: 'Please input your Username!',
-				// 	},
-				// ]}
-				>
-					<Input
-						style={{ width: 600 }}
-						name="notes"
-						// prefix={
-						// 	<SmallDashOutlined className="site-form-item-icon" />
-						// }
-						placeholder="Field notes"
-						onChange={(e) => {
-							setNotes(e.target.value);
-						}}
-					/>
-				</Form.Item>
-				<Form.Item
-				// rules={[
-				// 	{
-				// 		required: true,
-				// 		message: 'Please input your Username!',
-				// 	},
-				// ]}
-				>
-					<Input
-						style={{ width: 600 }}
-						name="image"
-						// prefix={
-						// 	<SmallDashOutlined className="site-form-item-icon" />
-						// }
-						placeholder="Image"
-						onChange={(e) => {
-							setImage(e.target.value);
-						}}
-					/>
-				</Form.Item>
-				<Form.Item
-				// rules={[
-				// 	{
-				// 		required: true,
-				// 		message: 'Please input your Username!',
-				// 	},
-				// ]}
-				>
-					<Input
-						name="lat"
-						style={{ width: 600 }}
-						// prefix={
-						// 	<SmallDashOutlined className="site-form-item-icon" />
-						// }
-						placeholder="Latitude"
-						onChange={(e) => {
-							setLat(e.target.value);
-						}}
-					/>
-				</Form.Item>
-				<Form.Item
-				// rules={[
-				// 	{
-				// 		required: true,
-				// 		message: 'Please input your Username!',
-				// 	},
-				// ]}
-				>
-					<Input
-						name="long"
-						style={{ width: 600 }}
-						// prefix={
-						// 	<SmallDashOutlined className="site-form-item-icon" />
-						// }
-						placeholder="Longitude"
-						onChange={(e) => {
-							setLong(e.target.value);
-						}}
-					/>
-				</Form.Item>
-				<Form.Item>
-					<Button
-						type="primary"
-						htmlType="submit"
-						className="spotting-form-button"
-					>
-						Submit
-					</Button>
-				</Form.Item>
-			</Form>
-			{/* <Wrapper googleMapsApiKey={process.env.REACT_APP_API_KEY}>
+			<Layout>
+				<Content style={{ margin: '0 16px' }}>
+					<h3>Where did you see it?</h3>
+					<div id="map">
+						<Map />
+					</div>{' '}
+					<h3>What did you see?</h3>
+					<Form onFinish={handleSubmit} name="spotting-form">
+						<Form.Item>
+							<Select
+								onChange={(value) => {
+									setBird_Id(value);
+								}}
+								showSearch
+								style={{ width: 600 }}
+								placeholder="Search to Select"
+								optionFilterProp="children"
+								filterOption={(input, option) =>
+									option.children
+										.toLowerCase()
+										.indexOf(input.toLowerCase()) >= 0
+								}
+								filterSort={(optionA, optionB) =>
+									optionA.children
+										.toLowerCase()
+										.localeCompare(
+											optionB.children.toLowerCase()
+										)
+								}
+							>
+								{renderOptions}
+							</Select>
+						</Form.Item>
+						<Form.Item
+						// rules={[
+						// 	{
+						// 		required: true,
+						// 		message: 'Please input your Username!',
+						// 	},
+						// ]}
+						>
+							<Input
+								style={{ width: 600 }}
+								name="notes"
+								// prefix={
+								// 	<SmallDashOutlined className="site-form-item-icon" />
+								// }
+								placeholder="Field notes"
+								onChange={(e) => {
+									setNotes(e.target.value);
+								}}
+							/>
+						</Form.Item>
+						<Form.Item
+						// rules={[
+						// 	{
+						// 		required: true,
+						// 		message: 'Please input your Username!',
+						// 	},
+						// ]}
+						>
+							<Input
+								style={{ width: 600 }}
+								name="image"
+								// prefix={
+								// 	<SmallDashOutlined className="site-form-item-icon" />
+								// }
+								placeholder="Image"
+								onChange={(e) => {
+									setImage(e.target.value);
+								}}
+							/>
+						</Form.Item>
+						<Form.Item
+						// rules={[
+						// 	{
+						// 		required: true,
+						// 		message: 'Please input your Username!',
+						// 	},
+						// ]}
+						>
+							<Input
+								name="lat"
+								style={{ width: 600 }}
+								// prefix={
+								// 	<SmallDashOutlined className="site-form-item-icon" />
+								// }
+								placeholder="Latitude"
+								onChange={(e) => {
+									setLat(e.target.value);
+								}}
+							/>
+						</Form.Item>
+						<Form.Item
+						// rules={[
+						// 	{
+						// 		required: true,
+						// 		message: 'Please input your Username!',
+						// 	},
+						// ]}
+						>
+							<Input
+								name="long"
+								style={{ width: 600 }}
+								// prefix={
+								// 	<SmallDashOutlined className="site-form-item-icon" />
+								// }
+								placeholder="Longitude"
+								onChange={(e) => {
+									setLong(e.target.value);
+								}}
+							/>
+						</Form.Item>
+						<Form.Item>
+							<Button
+								type="primary"
+								htmlType="submit"
+								className="spotting-form-button"
+							>
+								Submit
+							</Button>
+						</Form.Item>
+					</Form>
+					{/* <Wrapper googleMapsApiKey={process.env.REACT_APP_API_KEY}>
 				<Map />
 			</Wrapper> */}
+				</Content>
+			</Layout>
 		</>
 	);
 };

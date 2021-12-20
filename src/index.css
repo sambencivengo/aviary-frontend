@@ -12,6 +12,10 @@ code {
 		monospace;
 }
 
+#map {
+	height: 180px;
+}
+
 .login-form {
 	max-width: 300px;
 }
