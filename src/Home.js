@@ -7,6 +7,7 @@ import SpottingsContainer from './SpottingsContainer';
 
 const Home = ({ currentUser }) => {
 	const [spottingMode, setSpottingMode] = useState(false);
+	const [editMode, setEditMode] = useState(false);
 
 	function toggleSpottingMode() {
 		setSpottingMode(!spottingMode);
@@ -23,10 +24,22 @@ const Home = ({ currentUser }) => {
 			<Button value={'small'} onClick={() => toggleSpottingMode()}>
 				See a bird?
 			</Button>
+			<Button
+				value={'small'}
+				danger
+				onClick={() => {
+					setEditMode(!editMode);
+				}}
+			>
+				Edit Aviary
+			</Button>
 			{spottingMode ? (
 				<SpottingForm currentUser={currentUser} />
 			) : (
-				<SpottingsContainer currentUser={currentUser} />
+				<SpottingsContainer
+					currentUser={currentUser}
+					editMode={editMode}
+				/>
 			)}
 		</>
 	);

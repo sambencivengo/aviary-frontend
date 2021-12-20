@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import MapContainer from './MapContainer';
 import SpottingCard from './SpottingCard';
 
-const SpottingsContainer = ({ currentUser }) => {
+const SpottingsContainer = ({ currentUser, editMode }) => {
 	const [spottings, setSpottings] = useState([]);
 
 	useEffect(() => {
@@ -35,6 +35,7 @@ const SpottingsContainer = ({ currentUser }) => {
 						key={bird.id}
 						bird={bird}
 						currentUser={currentUser}
+						editMode={editMode}
 					/>
 				))}
 			</Space>
