@@ -1,4 +1,5 @@
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { Col, Row, Space } from 'antd';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import MapContainer from './MapContainer';
@@ -27,7 +28,16 @@ const SpottingsContainer = ({ currentUser }) => {
 
 	const renderCards = spottings.map((bird) => {
 		return (
-			<SpottingCard key={bird.id} bird={bird} currentUser={currentUser} />
+			<Space size={[8, 16]} wrap>
+				{new Array(1).fill(null).map((_, index) => (
+					// eslint-disable-next-line react/no-array-index-key
+					<SpottingCard
+						key={bird.id}
+						bird={bird}
+						currentUser={currentUser}
+					/>
+				))}
+			</Space>
 		);
 	});
 	// console.log(spottings[0].lat, spottings[0].long);
