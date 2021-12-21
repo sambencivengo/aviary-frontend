@@ -3,15 +3,13 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const MapContainer = ({ handleMarkerState }) => {
 	const [marker, setMarker] = useState({});
-
+	const [center, setCenter] = useState({
+		lat: 40.6602,
+		lng: -73.969749,
+	});
 	const mapStyles = {
 		height: '80vh',
 		width: '80vh',
-	};
-
-	const defaultCenter = {
-		lat: 40.6602,
-		lng: -73.969749,
 	};
 
 	const handleMarkerCreate = (e) => {
@@ -35,7 +33,7 @@ const MapContainer = ({ handleMarkerState }) => {
 					onClick={handleMarkerCreate}
 					mapContainerStyle={mapStyles}
 					zoom={13}
-					center={defaultCenter}
+					center={center}
 				>
 					{/* {locations.map((marker) => {
 					return <Marker key={marker.name} position={marker.location} />;
