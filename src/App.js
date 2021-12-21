@@ -191,7 +191,7 @@ function App() {
 				</Content>
 				<Footer style={{ textAlign: 'center' }} className="footer">
 					<Text italic>
-						Regular Birdwatching is required to lead a healthy and
+						Regular birdwatching is required to lead a healthy and
 						fulfilling life.{' '}
 					</Text>
 				</Footer>

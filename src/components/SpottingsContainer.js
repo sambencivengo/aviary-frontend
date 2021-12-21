@@ -8,7 +8,6 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 	const [spottings, setSpottings] = useState([]);
 	const [showEditForm, setShowEditForm] = useState(false);
 
-
 	function displayEditForm() {
 		showEditForm ? setShowEditForm(false) : setShowEditForm(true);
 	}
@@ -25,9 +24,10 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 
 	const handleDelete = (bird) => {
 		fetch(`/spottings/${bird.id}`, { method: 'DELETE' })
-			.then((r) => console.log(r))
-			.then(reFetch());
+			.then((r) => r.json())
+			.then((newSpottings) => setSpottings(newSpottings));
 	};
+
 	const reFetch = () => {
 		fetch('/mybirds')
 			.then((r) => r.json())
