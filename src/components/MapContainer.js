@@ -14,37 +14,6 @@ const MapContainer = ({ handleMarkerState }) => {
 		lng: -73.969749,
 	};
 
-	const locations = [
-		{
-			name: 'Location 1',
-			location: {
-				lat: 40.6601,
-				lng: -73.969748,
-			},
-		},
-		{
-			name: 'Location 2',
-			location: {
-				lat: 40.6603,
-				lng: -73.969748,
-			},
-		},
-		{
-			name: 'Location 3',
-			location: {
-				lat: 40.6602,
-				lng: -73.969749,
-			},
-		},
-		{
-			name: 'Location 4',
-			location: {
-				lat: 40.9602,
-				lng: -73.969749,
-			},
-		},
-	];
-
 	const handleMarkerCreate = (e) => {
 		const locationObj = {
 			location: { lat: e.latLng.lat(), lng: e.latLng.lng() },
@@ -58,6 +27,7 @@ const MapContainer = ({ handleMarkerState }) => {
 	// return <Marker key={marker.name} position={marker.location} />;
 	// });
 
+	// RESET CENTER STATE ON CLICK
 	return (
 		<div className="map">
 			<LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>

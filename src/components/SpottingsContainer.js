@@ -1,6 +1,7 @@
-import { Space } from 'antd';
+import { Button, Space } from 'antd';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import AviaryMap from './AviaryMap';
 import EditCardForm from './EditCardForm';
 import SpottingCard from './SpottingCard';
 
@@ -13,6 +14,7 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 		showEditForm ? setShowEditForm(false) : setShowEditForm(true);
 	}
 
+	const [showMap, setShowMap] = useState(false);
 	console.log(spottings);
 
 	useEffect(() => {
@@ -39,6 +41,10 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 			});
 	};
 
+	const handleShowMap = () => {
+		setShowMap(!showMap);
+	};
+	console.log(showMap);
 	const renderCards = spottings.map((spotting) => {
 		return (
 			<>
@@ -69,7 +75,13 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 
 	return (
 		<>
-			<h4>This is the container for the User's spotted birds.</h4>
+			<Button onClick={handleShowMap}>Show Map</Button>
+			{showMap ? (
+				<div id="map">
+					{' '}
+					<AviaryMap spottings={spottings} />
+				</div>
+			) : null}
 			{showEditForm ? <EditCardForm spotting={spottingToEdit} /> : null}
 			{renderCards}
 		</>
