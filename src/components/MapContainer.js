@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-const MapContainer = () => {
-	const [markerArray, setMarkerArray] = useState([]);
+const MapContainer = ({ handleMarkerState }) => {
+	const [marker, setMarker] = useState({});
 
 	const mapStyles = {
-		height: '50vh',
-		width: '50vh',
+		height: '80vh',
+		width: '80vh',
 	};
 
 	const defaultCenter = {
@@ -47,30 +47,34 @@ const MapContainer = () => {
 
 	const handleMarkerCreate = (e) => {
 		const locationObj = {
-			name: 'test',
 			location: { lat: e.latLng.lat(), lng: e.latLng.lng() },
 		};
-		setMarkerArray([...markerArray, locationObj]);
+
+		setMarker(locationObj);
+		handleMarkerState(locationObj);
 	};
 
-	const renderMarkers = markerArray.map((marker) => {
-		return <Marker key={marker.name} position={marker.location} />;
-	});
+	// const renderMarkers = markerArray.map((marker) => {
+	// return <Marker key={marker.name} position={marker.location} />;
+	// });
 
 	return (
-		<LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
-			<GoogleMap
-				onClick={handleMarkerCreate}
-				mapContainerStyle={mapStyles}
-				zoom={13}
-				center={defaultCenter}
-			>
-				{/* {locations.map((marker) => {
+		<div className="map">
+			<LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
+				<GoogleMap
+					onClick={handleMarkerCreate}
+					mapContainerStyle={mapStyles}
+					zoom={13}
+					center={defaultCenter}
+				>
+					{/* {locations.map((marker) => {
 					return <Marker key={marker.name} position={marker.location} />;
 				})} */}
-				{renderMarkers}
-			</GoogleMap>
-		</LoadScript>
+					{/* {renderMarkers} */}
+					<Marker key={marker.name} position={marker.location} />
+				</GoogleMap>
+			</LoadScript>
+		</div>
 	);
 };
 

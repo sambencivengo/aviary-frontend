@@ -7,8 +7,9 @@ import { Button, Layout, Menu, Breadcrumb } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import {
 	DashOutlined,
-	FileOutlined,
+	PlusCircleOutlined,
 	TeamOutlined,
+	DatabaseOutlined,
 	HomeOutlined,
 } from '@ant-design/icons';
 const { Header, Footer, Sider, Content } = Layout;
@@ -135,9 +136,16 @@ function App() {
 						<Menu.Item key="1" icon={<HomeOutlined />}>
 							Home
 						</Menu.Item>
-						<Menu.Item key="2" icon={<TeamOutlined />}>
+						<Menu.Item key="2" icon={<DatabaseOutlined />}>
+							My Aviary
+						</Menu.Item>
+						<Menu.Item key="3" icon={<PlusCircleOutlined />}>
+							Spot a bird
+						</Menu.Item>
+						<Menu.Item key="4" icon={<TeamOutlined />}>
 							Feed
 						</Menu.Item>
+
 						<SubMenu
 							key="sub1"
 							icon={<DashOutlined />}

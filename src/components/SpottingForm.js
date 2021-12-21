@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import MapContainer from './MapContainer';
 
 const SpottingForm = ({ currentUser }) => {
+	const [marker, setMarker] = useState({});
+
 	const { Option } = Select;
 	const [birds, setBirds] = useState([]);
 	// const [formData, setFormdata] = useState({
@@ -45,6 +47,12 @@ const SpottingForm = ({ currentUser }) => {
 				success();
 			});
 	};
+
+	const handleMarkerState = (location) => {
+		setLat(location.location.lat);
+		setLong(location.location.lng);
+	};
+	console.log(lat, long);
 
 	const success = () => {
 		message.success({
@@ -93,7 +101,7 @@ const SpottingForm = ({ currentUser }) => {
 										setBird_Id(value);
 									}}
 									showSearch
-									style={{ width: 600 }}
+									style={{ width: 300 }}
 									placeholder="Search to Select"
 									optionFilterProp="children"
 									filterOption={(input, option) =>
@@ -121,7 +129,7 @@ const SpottingForm = ({ currentUser }) => {
 							// ]}
 							>
 								<Input
-									style={{ width: 600 }}
+									style={{ width: 300 }}
 									name="notes"
 									// prefix={
 									// 	<SmallDashOutlined className="site-form-item-icon" />
@@ -132,7 +140,7 @@ const SpottingForm = ({ currentUser }) => {
 									}}
 								/>
 							</Form.Item>
-							<Form.Item
+							{/* <Form.Item
 							// rules={[
 							// 	{
 							// 		required: true,
@@ -151,47 +159,8 @@ const SpottingForm = ({ currentUser }) => {
 										setImage(e.target.value);
 									}}
 								/>
-							</Form.Item>
-							<Form.Item
-							// rules={[
-							// 	{
-							// 		required: true,
-							// 		message: 'Please input your Username!',
-							// 	},
-							// ]}
-							>
-								<Input
-									name="lat"
-									style={{ width: 600 }}
-									// prefix={
-									// 	<SmallDashOutlined className="site-form-item-icon" />
-									// }
-									placeholder="Latitude"
-									onChange={(e) => {
-										setLat(e.target.value);
-									}}
-								/>
-							</Form.Item>
-							<Form.Item
-							// rules={[
-							// 	{
-							// 		required: true,
-							// 		message: 'Please input your Username!',
-							// 	},
-							// ]}
-							>
-								<Input
-									name="long"
-									style={{ width: 600 }}
-									// prefix={
-									// 	<SmallDashOutlined className="site-form-item-icon" />
-									// }
-									placeholder="Longitude"
-									onChange={(e) => {
-										setLong(e.target.value);
-									}}
-								/>
-							</Form.Item>
+							</Form.Item> */}
+
 							<Form.Item>
 								<Button
 									type="primary"
@@ -208,7 +177,9 @@ const SpottingForm = ({ currentUser }) => {
 						{' '}
 						<h3>Where did you see it?</h3>
 						<div id="map">
-							<MapContainer />
+							<MapContainer
+								handleMarkerState={handleMarkerState}
+							/>
 						</div>{' '}
 					</Col>
 				</Row>

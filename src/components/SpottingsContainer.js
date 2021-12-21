@@ -13,6 +13,8 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 		showEditForm ? setShowEditForm(false) : setShowEditForm(true);
 	}
 
+	console.log(spottings);
+
 	useEffect(() => {
 		fetch('/mybirds')
 			.then((r) => r.json())

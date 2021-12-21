@@ -44,10 +44,8 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 const Login = ({ handleLogIn }) => {
-	const onFinish = (values: any) => {
+	const onFinish = ()=> {
 		handleLogIn(formData);
-
-		console.log('Received values of form: ', values);
 	};
 
 	const [formData, setFormData] = useState({
