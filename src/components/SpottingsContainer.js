@@ -7,8 +7,9 @@ import SpottingCard from './SpottingCard';
 const SpottingsContainer = ({ currentUser, editMode }) => {
 	const [spottings, setSpottings] = useState([]);
 	const [showEditForm, setShowEditForm] = useState(false);
-
-	function displayEditForm() {
+	const [spottingToEdit, setSpottingToEdit] = useState({});
+	function displayEditForm(spotting) {
+		setSpottingToEdit(spotting);
 		showEditForm ? setShowEditForm(false) : setShowEditForm(true);
 	}
 
@@ -67,7 +68,7 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 	return (
 		<>
 			<h4>This is the container for the User's spotted birds.</h4>
-			{showEditForm ? <EditCardForm /> : null}
+			{showEditForm ? <EditCardForm spotting={spottingToEdit} /> : null}
 			{renderCards}
 		</>
 	);

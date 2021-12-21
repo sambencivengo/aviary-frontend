@@ -23,7 +23,7 @@ const SpottingCard = ({
 								<EditOutlined
 									onClick={() => {
 										console.log(spotting);
-										displayEditForm();
+										displayEditForm(spotting);
 									}}
 									key={spotting.id + 1000}
 								/>,

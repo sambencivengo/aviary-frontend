@@ -3,13 +3,19 @@ import { useEffect, useState } from 'react';
 
 const { Option } = Select;
 
-const EditCardForm = () => {
+const EditCardForm = ({ spotting }) => {
+	console.log(spotting);
 	const [birds, setBirds] = useState([]);
 	const [formData, setFormdata] = useState({
 		notes: '',
 		bird_id: '',
 		image: '',
 	});
+
+	const handleChange = (e) => {
+		console.log(e.target.name, ':', e.target.value);
+		setFormdata({ ...formData, [e.target.name]: e.target.value });
+	};
 
 	useEffect(() => {
 		fetch('/birds')
@@ -71,9 +77,7 @@ const EditCardForm = () => {
 						// 	<SmallDashOutlined className="site-form-item-icon" />
 						// }
 						placeholder="Field notes"
-						onChange={(e) => {
-							// setNotes(e.target.value);
-						}}
+						onChange={handleChange}
 					/>
 				</Form.Item>
 				<Form.Item
@@ -91,9 +95,7 @@ const EditCardForm = () => {
 						// 	<SmallDashOutlined className="site-form-item-icon" />
 						// }
 						placeholder="Image"
-						onChange={(e) => {
-							// setImage(e.target.value);
-						}}
+						onChange={handleChange}
 					/>
 				</Form.Item>
 
