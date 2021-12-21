@@ -10,7 +10,6 @@ const SpottingCard = ({
 	displayEditForm,
 	handleDelete,
 }) => {
-	console.log(spotting);
 	return (
 		<>
 			<Meta />
@@ -20,13 +19,12 @@ const SpottingCard = ({
 				actions={
 					editMode
 						? [
-								<EditOutlined
-									onClick={() => {
-										console.log(spotting);
-										displayEditForm(spotting);
-									}}
-									key={spotting.id + 1000}
-								/>,
+								// <EditOutlined
+								// 	onClick={() => {
+								// 		displayEditForm(spotting);
+								// 	}}
+								// 	key={spotting.id + 1000}
+								// />,
 								<DeleteTwoTone
 									key={spotting.id}
 									twoToneColor="#EE4B2B"

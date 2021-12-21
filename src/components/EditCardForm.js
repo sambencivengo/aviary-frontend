@@ -48,6 +48,14 @@ const EditCardForm = ({ spotting }) => {
 						style={{ width: 600 }}
 						placeholder="Search to Select"
 						optionFilterProp="children"
+						defaultValue={
+							<Option
+								key={spotting.bird.id}
+								value={spotting.bird.id}
+							>
+								{spotting.bird.common_name}{' '}
+							</Option>
+						}
 						filterOption={(input, option) =>
 							option.children
 								.toLowerCase()
