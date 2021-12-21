@@ -1,9 +1,15 @@
 import { Button, Card } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteTwoTone } from '@ant-design/icons';
 import { useEffect } from 'react';
 const { Meta } = Card;
 
-const SpottingCard = ({ bird, currentUser, editMode, displayEditForm }) => {
+const SpottingCard = ({
+	bird,
+	currentUser,
+	editMode,
+	displayEditForm,
+	handleDelete,
+}) => {
 	return (
 		<>
 			<Card
@@ -12,7 +18,14 @@ const SpottingCard = ({ bird, currentUser, editMode, displayEditForm }) => {
 						? [
 								<EditOutlined
 									onClick={() => displayEditForm()}
-									key="edit"
+									key={bird.id}
+								/>,
+								<DeleteTwoTone
+									key={bird.id}
+									twoToneColor="#EE4B2B"
+									onClick={() => {
+										handleDelete(bird);
+									}}
 								/>,
 						  ]
 						: null

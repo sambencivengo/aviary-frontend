@@ -12,7 +12,6 @@ const Home = ({ currentUser }) => {
 	function toggleSpottingMode() {
 		setSpottingMode(!spottingMode);
 	}
-
 	useEffect(() => {
 		fetch('/spottings');
 	}, []);

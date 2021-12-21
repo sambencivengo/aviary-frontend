@@ -18,7 +18,6 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 		fetch('/mybirds')
 			.then((r) => r.json())
 			.then((data) => {
-				console.log(data);
 				setSpottings(data);
 			});
 	}, []);
@@ -32,6 +31,15 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 		lng: -73.969749,
 	};
 
+
+	// GET STATE TO UPDATE!!!
+
+	const handleDelete = (bird) => {
+		fetch(`/spottings/${bird.id}`, { method: 'DELETE' })
+			.then((r) => r.json())
+			.then(() => {});
+	};
+
 	const renderCards = spottings.map((bird) => {
 		return (
 			<>
@@ -39,6 +47,7 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 					{new Array(1).fill(null).map((_, index) => (
 						// eslint-disable-next-line react/no-array-index-key
 						<SpottingCard
+							handleDelete={handleDelete}
 							key={bird.id}
 							bird={bird}
 							currentUser={currentUser}
