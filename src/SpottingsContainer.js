@@ -1,9 +1,7 @@
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import { Col, Row, Space } from 'antd';
+import { Space } from 'antd';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import EditCardForm from './EditCardForm';
-import MapContainer from './MapContainer';
 import SpottingCard from './SpottingCard';
 
 const SpottingsContainer = ({ currentUser, editMode }) => {
@@ -22,25 +20,22 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 			});
 	}, []);
 
-	const mapStyles = {
-		height: '50vh',
-		width: '50vh',
-	};
-	const defaultCenter = {
-		lat: 40.6602,
-		lng: -73.969749,
-	};
-
-
 	// GET STATE TO UPDATE!!!
 
 	const handleDelete = (bird) => {
 		fetch(`/spottings/${bird.id}`, { method: 'DELETE' })
+			.then((r) => console.log(r))
+			.then(reFetch());
+	};
+	const reFetch = () => {
+		fetch('/mybirds')
 			.then((r) => r.json())
-			.then(() => {});
+			.then((data) => {
+				setSpottings(data);
+			});
 	};
 
-	const renderCards = spottings.map((bird) => {
+	const renderCards = spottings.map((spotting) => {
 		return (
 			<>
 				<Space size={[8, 16]} wrap>
@@ -48,8 +43,8 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 						// eslint-disable-next-line react/no-array-index-key
 						<SpottingCard
 							handleDelete={handleDelete}
-							key={bird.id}
-							bird={bird}
+							key={spotting.id}
+							spotting={spotting}
 							currentUser={currentUser}
 							editMode={editMode}
 							displayEditForm={displayEditForm}

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 const { Meta } = Card;
 
 const SpottingCard = ({
-	bird,
+	spotting,
 	currentUser,
 	editMode,
 	displayEditForm,
@@ -17,14 +17,17 @@ const SpottingCard = ({
 					editMode
 						? [
 								<EditOutlined
-									onClick={() => displayEditForm()}
-									key={bird.id}
+									onClick={() => {
+										console.log(spotting);
+										displayEditForm();
+									}}
+									key={spotting.id + 1000}
 								/>,
 								<DeleteTwoTone
-									key={bird.id}
+									key={spotting.id}
 									twoToneColor="#EE4B2B"
 									onClick={() => {
-										handleDelete(bird);
+										handleDelete(spotting);
 									}}
 								/>,
 						  ]
@@ -32,11 +35,11 @@ const SpottingCard = ({
 				}
 				hoverable
 				style={{ width: 240 }}
-				cover={<img alt="example" src={bird.bird.image} />}
+				cover={<img alt="example" src={spotting.bird.image} />}
 			>
 				<Meta
-					title={bird.bird.common_name}
-					description={bird.bird.sci_name}
+					title={spotting.bird.common_name}
+					description={spotting.bird.sci_name}
 				/>
 			</Card>
 		</>
