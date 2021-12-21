@@ -1,4 +1,4 @@
-import { Button, Space } from 'antd';
+import { Button, Col, Row, Space } from 'antd';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import AviaryMap from './AviaryMap';
@@ -76,14 +76,22 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 	return (
 		<>
 			<Button onClick={handleShowMap}>Show Map</Button>
-			{showMap ? (
-				<div id="map">
-					{' '}
-					<AviaryMap spottings={spottings} />
-				</div>
-			) : null}
-			{showEditForm ? <EditCardForm spotting={spottingToEdit} /> : null}
-			{renderCards}
+			<Row>
+				{showMap ? (
+					<div id="map">
+						{' '}
+						<AviaryMap spottings={spottings} />
+					</div>
+				) : null}
+			</Row>
+			<Row>
+				<Col span={12}>
+					{showEditForm ? (
+						<EditCardForm spotting={spottingToEdit} />
+					) : null}
+				</Col>
+				<Col span={12}>{renderCards}</Col>
+			</Row>
 		</>
 	);
 };

@@ -121,57 +121,58 @@ function App() {
 		// </div>
 
 		<Layout style={{ minHeight: '100vh' }}>
-			{loggedIn ? (
-				<Sider
-					collapsible
-					collapsed={collapsed}
-					onCollapse={onCollapse}
-				>
-					<div className="logo" />
-					<Menu
-						theme="dark"
-						defaultSelectedKeys={['1']}
-						mode="inline"
+			<Header
+				className="site-layout-background"
+				style={{ padding: 0, textAlign: 'center' }}
+			>
+				<Title style={{ color: 'white', fontSize: '50px' }}>
+					Aviary{' '}
+				</Title>{' '}
+			</Header>
+			<Layout>
+				{loggedIn ? (
+					<Sider
+						collapsible
+						collapsed={collapsed}
+						onCollapse={onCollapse}
 					>
-						<Menu.Item key="1" icon={<HomeOutlined />}>
-							Home
-						</Menu.Item>
-						<Menu.Item key="2" icon={<DatabaseOutlined />}>
-							My Aviary
-						</Menu.Item>
-						<Menu.Item key="3" icon={<PlusCircleOutlined />}>
-							Spot a bird
-						</Menu.Item>
-						<Menu.Item key="4" icon={<TeamOutlined />}>
-							Feed
-						</Menu.Item>
-
-						<SubMenu
-							key="sub1"
-							icon={<DashOutlined />}
-							title="Account"
+						<div className="logo" />
+						<Menu
+							theme="dark"
+							defaultSelectedKeys={['1']}
+							mode="inline"
 						>
-							<Menu.Item
-								onClick={() => {
-									handleLogOut();
-								}}
-								key="3"
-							>
-								Log Out
+							<Menu.Item key="1" icon={<HomeOutlined />}>
+								Home
 							</Menu.Item>
-						</SubMenu>
-					</Menu>
-				</Sider>
-			) : null}
-			<Layout className="site-layout">
-				<Header
-					className="site-layout-background"
-					style={{ padding: 0, textAlign: 'center' }}
-				>
-					<Title style={{ color: 'white', fontSize: '50px' }}>
-						Aviary{' '}
-					</Title>{' '}
-				</Header>
+							<Menu.Item key="2" icon={<DatabaseOutlined />}>
+								My Aviary
+							</Menu.Item>
+							<Menu.Item key="3" icon={<PlusCircleOutlined />}>
+								Spot a bird
+							</Menu.Item>
+							<Menu.Item key="4" icon={<TeamOutlined />}>
+								Feed
+							</Menu.Item>
+
+							<SubMenu
+								key="sub1"
+								icon={<DashOutlined />}
+								title="Account"
+							>
+								<Menu.Item
+									onClick={() => {
+										handleLogOut();
+									}}
+									key="3"
+								>
+									Log Out
+								</Menu.Item>
+							</SubMenu>
+						</Menu>
+					</Sider>
+				) : null}
+
 				<Content style={{ margin: '0 16px' }}>
 					{loggedIn ? (
 						<Home currentUser={currentUser} />
@@ -197,13 +198,13 @@ function App() {
 						</Row>
 					)}
 				</Content>
-				<Footer style={{ textAlign: 'center' }} className="footer">
-					<Text italic>
-						Regular birdwatching is required to lead a healthy and
-						fulfilling life.{' '}
-					</Text>
-				</Footer>
 			</Layout>
+			<Footer style={{ textAlign: 'center' }} className="footer">
+				<Text italic>
+					Regular birdwatching is required to lead a healthy and
+					fulfilling life.{' '}
+				</Text>
+			</Footer>
 		</Layout>
 	);
 }
