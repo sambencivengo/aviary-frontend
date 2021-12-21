@@ -2,11 +2,17 @@ import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { Col, Row, Space } from 'antd';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import EditCardForm from './EditCardForm';
 import MapContainer from './MapContainer';
 import SpottingCard from './SpottingCard';
 
 const SpottingsContainer = ({ currentUser, editMode }) => {
 	const [spottings, setSpottings] = useState([]);
+	const [showEditForm, setShowEditForm] = useState(false);
+
+	function displayEditForm() {
+		showEditForm ? setShowEditForm(false) : setShowEditForm(true);
+	}
 
 	useEffect(() => {
 		fetch('/mybirds')
@@ -28,17 +34,20 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 
 	const renderCards = spottings.map((bird) => {
 		return (
-			<Space size={[8, 16]} wrap>
-				{new Array(1).fill(null).map((_, index) => (
-					// eslint-disable-next-line react/no-array-index-key
-					<SpottingCard
-						key={bird.id}
-						bird={bird}
-						currentUser={currentUser}
-						editMode={editMode}
-					/>
-				))}
-			</Space>
+			<>
+				<Space size={[8, 16]} wrap>
+					{new Array(1).fill(null).map((_, index) => (
+						// eslint-disable-next-line react/no-array-index-key
+						<SpottingCard
+							key={bird.id}
+							bird={bird}
+							currentUser={currentUser}
+							editMode={editMode}
+							displayEditForm={displayEditForm}
+						/>
+					))}
+				</Space>
+			</>
 		);
 	});
 	// console.log(spottings[0].lat, spottings[0].long);
@@ -53,6 +62,7 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 	return (
 		<>
 			<h4>This is the container for the User's spotted birds.</h4>
+			{showEditForm ? <EditCardForm /> : null}
 			{renderCards}
 		</>
 	);

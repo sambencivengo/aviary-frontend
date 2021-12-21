@@ -3,16 +3,18 @@ import { EditOutlined } from '@ant-design/icons';
 import { useEffect } from 'react';
 const { Meta } = Card;
 
-const SpottingCard = ({ bird, currentUser, editMode }) => {
-	const handleEdit = () => {
-		console.log(bird);
-	};
+const SpottingCard = ({ bird, currentUser, editMode, displayEditForm }) => {
 	return (
 		<>
 			<Card
 				actions={
 					editMode
-						? [<EditOutlined onClick={handleEdit} key="edit" />]
+						? [
+								<EditOutlined
+									onClick={() => displayEditForm()}
+									key="edit"
+								/>,
+						  ]
 						: null
 				}
 				hoverable
@@ -24,7 +26,6 @@ const SpottingCard = ({ bird, currentUser, editMode }) => {
 					description={bird.bird.sci_name}
 				/>
 			</Card>
-			,
 		</>
 	);
 };
