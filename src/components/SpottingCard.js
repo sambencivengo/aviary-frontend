@@ -10,9 +10,13 @@ const SpottingCard = ({
 	displayEditForm,
 	handleDelete,
 }) => {
+	console.log(spotting);
 	return (
 		<>
+			<Meta />
 			<Card
+				title={spotting.bird.common_name}
+				description={spotting.bird.sci_name}
 				actions={
 					editMode
 						? [
@@ -37,10 +41,7 @@ const SpottingCard = ({
 				style={{ width: 240 }}
 				cover={<img alt="example" src={spotting.bird.image} />}
 			>
-				<Meta
-					title={spotting.bird.common_name}
-					description={spotting.bird.sci_name}
-				/>
+				<p>{spotting.notes}</p>
 			</Card>
 		</>
 	);

@@ -8,6 +8,7 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 	const [spottings, setSpottings] = useState([]);
 	const [showEditForm, setShowEditForm] = useState(false);
 
+
 	function displayEditForm() {
 		showEditForm ? setShowEditForm(false) : setShowEditForm(true);
 	}

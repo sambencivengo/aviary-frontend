@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import MapContainer from './MapContainer';
+
 import SpottingForm from './SpottingForm';
 import SpottingsContainer from './SpottingsContainer';
 

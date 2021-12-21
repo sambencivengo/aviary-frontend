@@ -1,8 +1,8 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import Home from './Home';
-import Login from './Login';
-import { Typography } from 'antd';
+import Home from './components/Home';
+import Login from './components/Login';
+import { Col, Row, Typography } from 'antd';
 import { Button, Layout, Menu, Breadcrumb } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import {
@@ -168,7 +168,25 @@ function App() {
 					{loggedIn ? (
 						<Home currentUser={currentUser} />
 					) : (
-						<Login handleLogIn={handleLogIn} />
+						<Row
+							type="flex"
+							justify="center"
+							align="middle"
+							style={{ minHeight: '80vh' }}
+						>
+							{' '}
+							<Col>
+								<div
+									style={{
+										display: 'inline-flex',
+										justifyContent: 'center',
+										alignItems: 'center',
+									}}
+								>
+									<Login handleLogIn={handleLogIn} />
+								</div>
+							</Col>
+						</Row>
 					)}
 				</Content>
 				<Footer style={{ textAlign: 'center' }} className="footer">

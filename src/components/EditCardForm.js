@@ -5,6 +5,11 @@ const { Option } = Select;
 
 const EditCardForm = () => {
 	const [birds, setBirds] = useState([]);
+	const [formData, setFormdata] = useState({
+		notes: '',
+		bird_id: '',
+		image: '',
+	});
 
 	useEffect(() => {
 		fetch('/birds')
@@ -91,46 +96,7 @@ const EditCardForm = () => {
 						}}
 					/>
 				</Form.Item>
-				<Form.Item
-				// rules={[
-				// 	{
-				// 		required: true,
-				// 		message: 'Please input your Username!',
-				// 	},
-				// ]}
-				>
-					<Input
-						name="lat"
-						style={{ width: 600 }}
-						// prefix={
-						// 	<SmallDashOutlined className="site-form-item-icon" />
-						// }
-						placeholder="Latitude"
-						onChange={(e) => {
-							// setLat(e.target.value);
-						}}
-					/>
-				</Form.Item>
-				<Form.Item
-				// rules={[
-				// 	{
-				// 		required: true,
-				// 		message: 'Please input your Username!',
-				// 	},
-				// ]}
-				>
-					<Input
-						name="long"
-						style={{ width: 600 }}
-						// prefix={
-						// 	<SmallDashOutlined className="site-form-item-icon" />
-						// }
-						placeholder="Longitude"
-						onChange={(e) => {
-							// setLong(e.target.value);
-						}}
-					/>
-				</Form.Item>
+
 				<Form.Item>
 					<Button
 						type="primary"
