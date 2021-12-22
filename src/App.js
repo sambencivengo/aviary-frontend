@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Home from './components/Home';
 import Login from './components/Login';
-import { Col, Row, Typography } from 'antd';
+import { Col, Row, Switch, Typography } from 'antd';
 import { Button, Layout, Menu, Breadcrumb } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import {
@@ -19,6 +19,7 @@ const { Header, Footer, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
 function App() {
+	const [theme, setTheme] = useState('light');
 	const [spottingMode, setSpottingMode] = useState(false);
 	const [showAviary, setShowAviary] = useState(true);
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -33,6 +34,10 @@ function App() {
 
 	const handleSignUpRender = () => {
 		setRenderSignUp(!renderSignUp);
+	};
+
+	const changeTheme = (value) => {
+		setTheme(value ? 'dark' : 'light');
 	};
 
 	const { Title } = Typography;
@@ -133,21 +138,37 @@ function App() {
 		// </div>
 
 		<Layout style={{ minHeight: '100vh' }}>
-			<Header
+			{/* <Header
 				className="site-layout-background"
-				style={{ padding: 0, textAlign: 'center' }}
+				style={{
+					padding: 0,
+					textAlign: 'center',
+					opacity: 0,
+				}}
 			>
 				<Title style={{ color: 'white', fontSize: '50px' }}>
 					Aviary{' '}
 				</Title>{' '}
-			</Header>
+			</Header> */}
 			<Layout>
 				{loggedIn ? (
 					<Sider
 						collapsible
 						collapsed={collapsed}
 						onCollapse={onCollapse}
+						// style={{ backgroundColor: '#406353' }}
 					>
+						<Header>
+							<Title
+								style={{
+									color: 'white',
+									fontSize: '30px',
+									paddingTop: '10px',
+								}}
+							>
+								Aviary{' '}
+							</Title>{' '}
+						</Header>
 						<div className="logo" />
 						<Menu
 							theme="dark"
@@ -190,7 +211,6 @@ function App() {
 							>
 								Feed
 							</Menu.Item>
-
 							<SubMenu
 								key="sub1"
 								icon={<DashOutlined />}
@@ -205,6 +225,7 @@ function App() {
 									Log Out
 								</Menu.Item>
 							</SubMenu>
+							<Switch onChange={changeTheme} /> Change Style
 						</Menu>
 					</Sider>
 				) : null}
