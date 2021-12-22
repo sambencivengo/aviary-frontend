@@ -17,7 +17,6 @@ const SignUp = ({ handleLogIn }) => {
 	});
 
 	const handleChange = (e) => {
-		console.log(e.target.name, ':', e.target.value);
 		setFormdata({ ...formData, [e.target.name]: e.target.value });
 	};
 
@@ -32,10 +31,12 @@ const SignUp = ({ handleLogIn }) => {
 		})
 			.then((r) => r.json())
 			.then((data) => {
-				console.log(data);
-				// handleLogIn();
-			});
-		navigate('/home');
+				if (data !== undefined) {
+					navigate('/home');
+				}
+				handleLogIn();
+			})
+			.catch((error) => console.log(error));
 	};
 
 	return (

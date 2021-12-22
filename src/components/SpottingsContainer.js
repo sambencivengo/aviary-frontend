@@ -46,11 +46,11 @@ const SpottingsContainer = ({ currentUser }) => {
 	const handleShowMap = () => {
 		setShowMap(!showMap);
 	};
-	console.log(showMap);
+
 	const renderCards = spottings.map((spotting) => {
 		return (
 			<>
-				<Space size={[8, 16]} wrap>
+				<Space key={spotting.id} size={[8, 16]} wrap>
 					{new Array(1).fill(null).map((_, index) => (
 						// eslint-disable-next-line react/no-array-index-key
 						<SpottingCard

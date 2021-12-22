@@ -31,10 +31,8 @@ function App() {
 	}
 
 	const handleSignUpRender = () => {
-		console.log('signup button clicked');
 		setRenderSignUp(!renderSignUp);
 	};
-	console.log(renderSignUp);
 
 	const { Title } = Typography;
 
@@ -42,14 +40,15 @@ function App() {
 		fetch('/me')
 			.then((r) => r.json())
 			.then((data) => {
-				setCurrentUser(data);
-				if (data.id !== null) {
+				if (data) {
+					setCurrentUser(data);
 					setLoggedIn(true);
-				} else {
-					setLoggedIn(false);
 				}
 			})
-			.catch((error) => console.log(error, 'error'));
+			.catch((error) => {
+				console.log(error);
+				setLoggedIn(false);
+			});
 	}, []);
 
 	const handleLogIn = (formData) => {
@@ -68,7 +67,8 @@ function App() {
 					setCurrentUser(data);
 					setLoggedIn(true);
 				}
-			});
+			})
+			.catch((error) => console.log(error));
 	};
 
 	const handleLogOut = () => {
@@ -189,7 +189,7 @@ function App() {
 									onClick={() => {
 										handleLogOut();
 									}}
-									key="3"
+									key="5"
 								>
 									Log Out
 								</Menu.Item>
