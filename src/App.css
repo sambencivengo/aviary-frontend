@@ -19,7 +19,7 @@
 }
 
 .App-header {
-	background-color: #282c34;
+	background-color: #c8dbff;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -28,9 +28,7 @@
 	font-size: calc(10px + 2vmin);
 	color: white;
 }
-.ant-layout {
-	background-color: #406353;
-}
+
 .App-link {
 	color: #61dafb;
 }

@@ -13,11 +13,14 @@ import {
 	HomeOutlined,
 } from '@ant-design/icons';
 import SignUp from './components/SignUp';
+
 const { Header, Footer, Sider, Content } = Layout;
 
 const { SubMenu } = Menu;
 
 function App() {
+	const [spottingMode, setSpottingMode] = useState(false);
+	const [showAviary, setShowAviary] = useState(true);
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [currentUser, setCurrentUser] = useState({});
 	const [collapsed, setCollapsed] = useState(false);
@@ -150,13 +153,27 @@ function App() {
 							defaultSelectedKeys={['1']}
 							mode="inline"
 						>
-							<Menu.Item key="1" icon={<HomeOutlined />}>
+							{/* <Menu.Item key="1" icon={<HomeOutlined />}>
 								Home
-							</Menu.Item>
-							<Menu.Item key="2" icon={<DatabaseOutlined />}>
+							</Menu.Item> */}
+							<Menu.Item
+								key="2"
+								icon={<DatabaseOutlined />}
+								onClick={() => {
+									setShowAviary(true);
+									setSpottingMode(false);
+								}}
+							>
 								My Aviary
 							</Menu.Item>
-							<Menu.Item key="3" icon={<PlusCircleOutlined />}>
+							<Menu.Item
+								key="3"
+								icon={<PlusCircleOutlined />}
+								onClick={() => {
+									setSpottingMode(true);
+									setShowAviary(false);
+								}}
+							>
 								Spot a bird
 							</Menu.Item>
 							<Menu.Item key="4" icon={<TeamOutlined />}>
@@ -183,7 +200,11 @@ function App() {
 
 				<Content style={{ margin: '0 16px' }}>
 					{loggedIn ? (
-						<Home currentUser={currentUser} />
+						<Home
+							currentUser={currentUser}
+							spottingMode={spottingMode}
+							showAviary={showAviary}
+						/>
 					) : (
 						<Row
 							type="flex"
@@ -212,7 +233,7 @@ function App() {
 			</Layout>
 			<Footer style={{ textAlign: 'center' }} className="footer">
 				<Text italic>
-					Regular birdwatching is required to lead a healthy and
+					Regular birdwatching is necessary to lead a healthy and
 					fulfilling life.{' '}
 				</Text>
 			</Footer>
