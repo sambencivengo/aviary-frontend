@@ -9,6 +9,7 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 	const [spottings, setSpottings] = useState([]);
 	const [showEditForm, setShowEditForm] = useState(false);
 	const [spottingToEdit, setSpottingToEdit] = useState({});
+
 	function displayEditForm(spotting) {
 		setSpottingToEdit(spotting);
 		showEditForm ? setShowEditForm(false) : setShowEditForm(true);
@@ -76,21 +77,28 @@ const SpottingsContainer = ({ currentUser, editMode }) => {
 	return (
 		<>
 			<Button onClick={handleShowMap}>Show Map</Button>
-			<Row>
+			{showEditForm ? <EditCardForm spotting={spottingToEdit} /> : null}
+
+			<Row
+				type="flex"
+				justify="center"
+				align="center"
+				style={{ minHeight: '80vh' }}
+			>
 				{showMap ? (
-					<div id="map">
-						{' '}
-						<AviaryMap spottings={spottings} />
-					</div>
-				) : null}
-			</Row>
-			<Row>
+					<Col span={12}>{renderCards}</Col>
+				) : (
+					<Col span={24}>{renderCards}</Col>
+				)}
+
 				<Col span={12}>
-					{showEditForm ? (
-						<EditCardForm spotting={spottingToEdit} />
+					{showMap ? (
+						<div id="map">
+							{' '}
+							<AviaryMap spottings={spottings} />
+						</div>
 					) : null}
 				</Col>
-				<Col span={12}>{renderCards}</Col>
 			</Row>
 		</>
 	);

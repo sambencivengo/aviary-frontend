@@ -9,8 +9,8 @@ import {
 const AviaryMap = ({ spottings }) => {
 	// const [markers, setMarkers] = useState([]);
 	const mapStyles = {
-		height: '80vh',
-		width: '80vh',
+		height: '70vh',
+		width: '70vh',
 	};
 
 	const defaultCenter = {
@@ -43,13 +43,13 @@ const AviaryMap = ({ spottings }) => {
 						center={defaultCenter}
 					>
 						{markers}
+
 						{/* {locations.map((marker) => {
 					return <Marker key={marker.name} position={marker.location} />;
 				})} */}
 						{/* {renderMarkers} */}
 
 						{/* <Marker key={markers.name} position={markers.location} /> */}
-						{/* <InfoWindow>Testing</InfoWindow> */}
 					</GoogleMap>
 				</LoadScript>
 			</div>

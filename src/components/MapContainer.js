@@ -8,8 +8,8 @@ const MapContainer = ({ handleMarkerState }) => {
 		lng: -73.969749,
 	});
 	const mapStyles = {
-		height: '80vh',
-		width: '80vh',
+		height: '70vh',
+		width: '70vh',
 	};
 
 	const handleMarkerCreate = (e) => {

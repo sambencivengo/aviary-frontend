@@ -185,15 +185,15 @@ function App() {
 						>
 							{' '}
 							<Col>
-								<div
+								{/* <div
 									style={{
 										display: 'inline-flex',
 										justifyContent: 'center',
 										alignItems: 'center',
 									}}
-								>
-									<Login handleLogIn={handleLogIn} />
-								</div>
+								> */}
+								<Login handleLogIn={handleLogIn} />
+								{/* </div> */}
 							</Col>
 						</Row>
 					)}
