@@ -25,6 +25,7 @@ function App() {
 	const [currentUser, setCurrentUser] = useState({});
 	const [collapsed, setCollapsed] = useState(false);
 	const [renderSignUp, setRenderSignUp] = useState(false);
+	const [renderFeed, setRenderFeed] = useState(false);
 
 	function onCollapse() {
 		setCollapsed(!collapsed);
@@ -162,6 +163,7 @@ function App() {
 								onClick={() => {
 									setShowAviary(true);
 									setSpottingMode(false);
+									setRenderFeed(false);
 								}}
 							>
 								My Aviary
@@ -172,11 +174,20 @@ function App() {
 								onClick={() => {
 									setSpottingMode(true);
 									setShowAviary(false);
+									setRenderFeed(false);
 								}}
 							>
 								Spot a bird
 							</Menu.Item>
-							<Menu.Item key="4" icon={<TeamOutlined />}>
+							<Menu.Item
+								key="4"
+								icon={<TeamOutlined />}
+								onClick={() => {
+									setRenderFeed(true);
+									setShowAviary(false);
+									setSpottingMode(false);
+								}}
+							>
 								Feed
 							</Menu.Item>
 
@@ -201,6 +212,7 @@ function App() {
 				<Content style={{ margin: '0 16px' }}>
 					{loggedIn ? (
 						<Home
+							renderFeed={renderFeed}
 							currentUser={currentUser}
 							spottingMode={spottingMode}
 							showAviary={showAviary}

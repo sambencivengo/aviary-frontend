@@ -1,11 +1,12 @@
 import { Button } from 'antd';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Feed from './Feed';
 
 import SpottingForm from './SpottingForm';
 import SpottingsContainer from './SpottingsContainer';
 
-const Home = ({ currentUser, spottingMode, showAviary }) => {
+const Home = ({ currentUser, spottingMode, showAviary, renderFeed }) => {
 	useEffect(() => {
 		fetch('/spottings');
 	}, []);
@@ -18,6 +19,7 @@ const Home = ({ currentUser, spottingMode, showAviary }) => {
 			{showAviary ? (
 				<SpottingsContainer currentUser={currentUser} />
 			) : null}
+			{renderFeed ? <Feed /> : null}
 		</>
 	);
 };
