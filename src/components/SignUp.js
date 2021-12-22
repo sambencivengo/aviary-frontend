@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = ({ handleLogIn }) => {
+	const navigate = useNavigate();
 	const [formData, setFormdata] = useState({
 		email: '',
 		username: '',
@@ -27,6 +29,7 @@ const SignUp = ({ handleLogIn }) => {
 				console.log(data);
 				handleLogIn();
 			});
+		navigate('/home');
 	};
 
 	return (

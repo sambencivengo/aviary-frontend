@@ -12,6 +12,7 @@ import {
 	DatabaseOutlined,
 	HomeOutlined,
 } from '@ant-design/icons';
+import SignUp from './components/SignUp';
 const { Header, Footer, Sider, Content } = Layout;
 
 const { SubMenu } = Menu;
@@ -20,10 +21,17 @@ function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [currentUser, setCurrentUser] = useState({});
 	const [collapsed, setCollapsed] = useState(false);
+	const [renderSignUp, setRenderSignUp] = useState(false);
 
 	function onCollapse() {
 		setCollapsed(!collapsed);
 	}
+
+	const handleSignUpRender = () => {
+		console.log('signup button clicked');
+		setRenderSignUp(!renderSignUp);
+	};
+	console.log(renderSignUp);
 
 	const { Title } = Typography;
 
@@ -192,7 +200,10 @@ function App() {
 										alignItems: 'center',
 									}}
 								> */}
-								<Login handleLogIn={handleLogIn} />
+								<Login
+									handleLogIn={handleLogIn}
+									handleSignUpRender={handleSignUpRender}
+								/>
 								{/* </div> */}
 							</Col>
 						</Row>

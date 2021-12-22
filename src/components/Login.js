@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // const Login = ({ handleLogIn }) => {
 // 	// const [formData, setFormData] = useState({
@@ -42,8 +42,10 @@ import { Link } from 'react-router-dom';
 
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import ButtonGroup from 'antd/lib/button/button-group';
 
-const Login = ({ handleLogIn }) => {
+const Login = ({ handleLogIn, handleSignUpRender }) => {
+	const navigate = useNavigate();
 	const onFinish = () => {
 		handleLogIn(formData);
 	};
@@ -113,8 +115,15 @@ const Login = ({ handleLogIn }) => {
 					className="login-form-button"
 				>
 					Log in
+				</Button>{' '}
+				Or{' '}
+				<Button
+					onClick={() => {
+						navigate('/signup');
+					}}
+				>
+					Sign Up
 				</Button>
-				Or <a href="">sign up now!</a>
 			</Form.Item>
 		</Form>
 	);
