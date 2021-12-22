@@ -40,11 +40,12 @@ import { Link, useNavigate } from 'react-router-dom';
 
 // export default Login;
 
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, Typography } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import ButtonGroup from 'antd/lib/button/button-group';
 
 const Login = ({ handleLogIn, handleSignUpRender }) => {
+	const { Link } = Typography;
 	const navigate = useNavigate();
 	const onFinish = () => {
 		handleLogIn(formData);
@@ -117,6 +118,9 @@ const Login = ({ handleLogIn, handleSignUpRender }) => {
 					Log in
 				</Button>{' '}
 				Or{' '}
+				<Link href="https://ant.design" target="_blank">
+					Ant Design (Link)
+				</Link>
 				<Button
 					onClick={() => {
 						navigate('/signup');
