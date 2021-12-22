@@ -118,16 +118,14 @@ const Login = ({ handleLogIn, handleSignUpRender }) => {
 					Log in
 				</Button>{' '}
 				Or{' '}
-				<Link href="https://ant.design" target="_blank">
-					Ant Design (Link)
-				</Link>
-				<Button
+				<Link
 					onClick={() => {
 						navigate('/signup');
 					}}
+					target="_blank"
 				>
 					Sign Up
-				</Button>
+				</Link>
 			</Form.Item>
 		</Form>
 	);
