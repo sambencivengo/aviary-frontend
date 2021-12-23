@@ -4,6 +4,7 @@ const randomAvatar =
 	'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png';
 
 const FollowedFeed = ({ followedUsers }) => {
+  
 	const renderUserCards = followedUsers.map((user) => {
 		return (
 			<FeedCard
