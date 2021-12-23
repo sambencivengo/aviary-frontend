@@ -89,53 +89,10 @@ function App() {
 	// console.log('Are you logged in?', loggedIn);
 
 	return (
-		// <div className="App">
-		// 	<Layout>
-		// 		{loggedIn ? (
-		// 			<Sider className="sider">
-		// 				<Button
-		// 					type="primary"
-		// 					htmlType="submit"
-		// 					className="login-form-button"
-		// 					onClick={handleLogOut}
-		// 				>
-		// 					Log out
-		// 				</Button>{' '}
-		// 				<Button
-		// 					type="primary"
-		// 					htmlType="submit"
-		// 					className="login-form-button"
-		// 					onClick={handleLogOut}
-		// 				>
-		// 					Log out
-		// 				</Button>{' '}
-		// 				<Button
-		// 					type="primary"
-		// 					htmlType="submit"
-		// 					className="login-form-button"
-		// 					onClick={handleLogOut}
-		// 				>
-		// 					Log out
-		// 				</Button>
-		// 			</Sider>
-		// 		) : null}
-		// 		<Layout>
-		// 			<Header className="header">
-		// 				<Title style={{ color: 'white', fontSize: '50px' }}>
-		// 					Aviary
-		// 				</Title>{' '}
-		// 			</Header>
-		// 			<Content className="mainContent">
-		// 				{loggedIn ? (
-		// 					<Home currentUser={currentUser} />
-		// 				) : (
-		// 					<Login handleLogIn={handleLogIn} />
-		// 				)}
-		// 			</Content>
 		//
-		// 		</Layout>
-		// 	</Layout>
-		// </div>
+		//
+		//
+		//
 
 		<Layout style={{ minHeight: '100vh' }}>
 			{/* <Header
@@ -153,6 +110,12 @@ function App() {
 			<Layout>
 				{loggedIn ? (
 					<Sider
+						style={{
+							overflow: 'auto',
+							height: '100vh',
+							// position: 'fixed',
+							left: 0,
+						}}
 						collapsible
 						collapsed={collapsed}
 						onCollapse={onCollapse}

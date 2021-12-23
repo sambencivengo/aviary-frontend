@@ -1,19 +1,24 @@
+import { Col, Row } from 'antd';
 import { useEffect, useState } from 'react';
-import { Card, Avatar } from 'antd';
 
-import FeedCard from './FeedCard';
+import FollowedFeed from './FollowedFeed';
+import UnfollowedFeed from './UnfollowedFeed';
 
-const { Meta } = Card;
-const randomAvatar =
-	'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png';
 const Feed = ({ currentUser }) => {
 	const [users, setUsers] = useState([]);
+	const [followedUsers, setFollowedUsers] = useState([]);
 	useEffect(() => {
 		fetch('/feed')
 			.then((r) => r.json())
 			.then((users) => {
 				// console.log(users);
 				setUsers(users);
+			});
+		fetch('/followed')
+			.then((r) => r.json())
+			.then((followedUsers) => {
+				console.log(followedUsers);
+				setFollowedUsers(followedUsers);
 			});
 	}, []);
 
@@ -32,23 +37,25 @@ const Feed = ({ currentUser }) => {
 		})
 			.then((r) => r.json())
 			.then((users) => {
-				console.log()
+				console.log();
 				setUsers(users);
 			})
 			.catch((error) => console.log(error));
 	}
 
-	const renderUserCards = users.map((user) => {
-		return (
-			<FeedCard
-				key={user.id}
-				user={user}
-				avatar={randomAvatar}
-				handleFollow={handleFollow}
-			/>
-		);
-	});
-	return <>{renderUserCards}</>;
+	// RENDER 2 ROWS... FOLLOWED USERS AND OTHERS?
+	return (
+		<>
+			<Row>
+				<Col span={12}>
+					<FollowedFeed followedUsers={followedUsers} />
+				</Col>
+				<Col span={12}>
+					<UnfollowedFeed users={users} handleFollow={handleFollow} />
+				</Col>
+			</Row>
+		</>
+	);
 };
 
 export default Feed;
