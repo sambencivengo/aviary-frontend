@@ -25,7 +25,29 @@ const MapContainer = ({ handleMarkerState }) => {
 	// return <Marker key={marker.name} position={marker.location} />;
 	// });
 
-	// RESET CENTER STATE ON CLICK
+	// CURRENT LOCATION CODE
+	var options = {
+		enableHighAccuracy: true,
+		timeout: 5000,
+		maximumAge: 0,
+	};
+
+	function success(pos) {
+		var crd = pos.coords;
+
+		console.log('Your current position is:');
+		console.log(`Latitude : ${crd.latitude}`);
+		console.log(`Longitude: ${crd.longitude}`);
+		console.log(`More or less ${crd.accuracy} meters.`);
+	}
+
+	function error(err) {
+		console.warn(`ERROR(${err.code}): ${err.message}`);
+	}
+
+	navigator.geolocation.getCurrentPosition(success, error, options);
+	//
+
 	return (
 		<div className="map">
 			<LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
