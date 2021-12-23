@@ -1,4 +1,4 @@
-import { Card, Avatar } from 'antd';
+import { Card, Avatar, Typography } from 'antd';
 import {
 	EditOutlined,
 	EllipsisOutlined,
@@ -7,7 +7,7 @@ import {
 
 const { Meta } = Card;
 
-const FeedCard = ({ user, avatar }) => {
+const FeedCard = ({ user, avatar, handleFollow }) => {
 	return (
 		<>
 			<Card
@@ -19,7 +19,19 @@ const FeedCard = ({ user, avatar }) => {
 				// 		src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
 				// 	/>
 				// }
-				actions={['Follow', 'View Aviary']}
+				actions={[
+					<Typography
+						style={{ opacity: 0.6 }}
+						onClick={() => {
+							handleFollow(user);
+						}}
+					>
+						Follow
+					</Typography>,
+					<Typography style={{ opacity: 0.6 }}>
+						View Aviary
+					</Typography>,
+				]}
 			>
 				<Meta
 					avatar={<Avatar src={avatar} />}

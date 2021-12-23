@@ -19,7 +19,7 @@ const Home = ({ currentUser, spottingMode, showAviary, renderFeed }) => {
 			{showAviary ? (
 				<SpottingsContainer currentUser={currentUser} />
 			) : null}
-			{renderFeed ? <Feed /> : null}
+			{renderFeed ? <Feed currentUser={currentUser} /> : null}
 		</>
 	);
 };
