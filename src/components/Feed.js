@@ -11,7 +11,10 @@ const Feed = ({ currentUser }) => {
 	useEffect(() => {
 		fetch('/feed')
 			.then((r) => r.json())
-			.then((users) => setUsers(users));
+			.then((users) => {
+				// console.log(users);
+				setUsers(users);
+			});
 	}, []);
 
 	function handleFollow(user) {
@@ -28,7 +31,10 @@ const Feed = ({ currentUser }) => {
 			body: JSON.stringify(dataobj),
 		})
 			.then((r) => r.json())
-			.then((follow) => console.log(follow))
+			.then((users) => {
+				console.log()
+				setUsers(users);
+			})
 			.catch((error) => console.log(error));
 	}
 
