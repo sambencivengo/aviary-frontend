@@ -3,14 +3,14 @@ import { Card, Avatar } from 'antd';
 const randomAvatar =
 	'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png';
 
-const FollowedUsersContainer = ({ followedUsers }) => {
+const FollowedUsersContainer = ({ followedUsers, handleUnFollow }) => {
 	const renderUserCards = followedUsers.map((user) => {
 		return (
 			<FeedCard
 				key={user.id}
 				user={user}
 				avatar={randomAvatar}
-				// handleFollow={handleFollow}
+				handleUnFollow={handleUnFollow}
 			/>
 		);
 	});

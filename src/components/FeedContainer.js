@@ -43,12 +43,17 @@ const FeedContainer = ({ currentUser }) => {
 			.catch((error) => console.log(error));
 	}
 
+	const handleUnFollow = () => {};
+
 	// RENDER 2 ROWS... FOLLOWED USERS AND OTHERS?
 	return (
 		<>
 			<Row>
 				<Col span={12}>
-					<FollowedUsersContainer followedUsers={followedUsers} />
+					<FollowedUsersContainer
+						followedUsers={followedUsers}
+						handleUnFollow={handleUnFollow}
+					/>
 				</Col>
 				<Col span={12}>
 					<UnfollowedUsersContainer

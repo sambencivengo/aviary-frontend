@@ -1,14 +1,10 @@
-import { Card, Avatar, Typography } from 'antd';
-import {
-	EditOutlined,
-	EllipsisOutlined,
-	SettingOutlined,
-} from '@ant-design/icons';
+import { Card, Avatar, Typography, Button } from 'antd';
+import { UserOutlined, CheckOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 
 const { Meta } = Card;
 
-const FollowedFeedCard = ({ user, avatar, handleFollow }) => {
+const FollowedFeedCard = ({ user, avatar, handleUnFollow }) => {
 	return (
 		<>
 			<Card
@@ -21,14 +17,15 @@ const FollowedFeedCard = ({ user, avatar, handleFollow }) => {
 				// 	/>
 				// }
 				actions={[
-					<Typography
-						style={{ opacity: 0.6 }}
-						onClick={() => {
-							// handleUnfollow(user);
-						}}
+					<Button
+						onClick={handleUnFollow}
+						type="primary"
+						// shape="round"
+						icon={[<UserOutlined />, <CheckOutlined />]}
+						size="small"
 					>
-						Followed Icon Here
-					</Typography>,
+						{' '}
+					</Button>,
 					<Typography style={{ opacity: 0.6 }}>
 						View Aviary
 					</Typography>,
