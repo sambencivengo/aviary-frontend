@@ -18,7 +18,9 @@ const FollowedFeedCard = ({ user, avatar, handleUnFollow }) => {
 				// }
 				actions={[
 					<Button
-						onClick={handleUnFollow}
+						onClick={() => {
+							handleUnFollow(user);
+						}}
 						type="primary"
 						// shape="round"
 						icon={[<UserOutlined />, <CheckOutlined />]}

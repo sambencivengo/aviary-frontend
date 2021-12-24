@@ -43,7 +43,13 @@ const FeedContainer = ({ currentUser }) => {
 			.catch((error) => console.log(error));
 	}
 
-	const handleUnFollow = () => {};
+	const handleUnFollow = (user) => {
+		fetch('/follows', {
+			method: 'DELETE',
+		})
+			.then((r) => r.json())
+			.then((data) => console.log(data));
+	};
 
 	// RENDER 2 ROWS... FOLLOWED USERS AND OTHERS?
 	return (
