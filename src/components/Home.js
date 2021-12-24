@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import Feed from './Feed';
+import FeedContainer from './FeedContainer';
 
 import SpottingForm from './SpottingForm';
 import SpottingsContainer from './SpottingsContainer';
@@ -19,7 +19,7 @@ const Home = ({ currentUser, spottingMode, showAviary, renderFeed }) => {
 			{showAviary ? (
 				<SpottingsContainer currentUser={currentUser} />
 			) : null}
-			{renderFeed ? <Feed currentUser={currentUser} /> : null}
+			{renderFeed ? <FeedContainer currentUser={currentUser} /> : null}
 		</>
 	);
 };

@@ -1,14 +1,14 @@
-import FeedCard from './FeedCard';
 import { Card, Avatar } from 'antd';
+import UnfollowedFeedCard from './UnfollowedFeedCard';
 const randomAvatar =
 	'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png';
 
 const { Meta } = Card;
 
-const UnfollowedFeed = ({ users, handleFollow }) => {
+const UnfollowedUsersContainer = ({ users, handleFollow }) => {
 	const renderUserCards = users.map((user) => {
 		return (
-			<FeedCard
+			<UnfollowedFeedCard
 				key={user.id}
 				user={user}
 				avatar={randomAvatar}
@@ -24,4 +24,4 @@ const UnfollowedFeed = ({ users, handleFollow }) => {
 	);
 };
 
-export default UnfollowedFeed;
+export default UnfollowedUsersContainer;

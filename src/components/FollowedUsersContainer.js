@@ -1,10 +1,9 @@
-import FeedCard from './FeedCard';
+import FeedCard from './FollowedFeedCard';
 import { Card, Avatar } from 'antd';
 const randomAvatar =
 	'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png';
 
-const FollowedFeed = ({ followedUsers }) => {
-  
+const FollowedUsersContainer = ({ followedUsers }) => {
 	const renderUserCards = followedUsers.map((user) => {
 		return (
 			<FeedCard
@@ -23,4 +22,4 @@ const FollowedFeed = ({ followedUsers }) => {
 	);
 };
 
-export default FollowedFeed;
+export default FollowedUsersContainer;

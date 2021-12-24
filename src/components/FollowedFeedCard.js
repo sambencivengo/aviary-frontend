@@ -4,10 +4,11 @@ import {
 	EllipsisOutlined,
 	SettingOutlined,
 } from '@ant-design/icons';
+import { useState } from 'react';
 
 const { Meta } = Card;
 
-const FeedCard = ({ user, avatar, handleFollow }) => {
+const FollowedFeedCard = ({ user, avatar, handleFollow }) => {
 	return (
 		<>
 			<Card
@@ -23,10 +24,10 @@ const FeedCard = ({ user, avatar, handleFollow }) => {
 					<Typography
 						style={{ opacity: 0.6 }}
 						onClick={() => {
-							handleFollow(user);
+							// handleUnfollow(user);
 						}}
 					>
-						Follow
+						Followed Icon Here
 					</Typography>,
 					<Typography style={{ opacity: 0.6 }}>
 						View Aviary
@@ -43,4 +44,4 @@ const FeedCard = ({ user, avatar, handleFollow }) => {
 	);
 };
 
-export default FeedCard;
+export default FollowedFeedCard;

@@ -1,10 +1,10 @@
 import { Col, Row } from 'antd';
 import { useEffect, useState } from 'react';
 
-import FollowedFeed from './FollowedFeed';
-import UnfollowedFeed from './UnfollowedFeed';
+import FollowedUsersContainer from './FollowedUsersContainer';
+import UnfollowedUsersContainer from './UnfollowedUsersContainer';
 
-const Feed = ({ currentUser }) => {
+const FeedContainer = ({ currentUser }) => {
 	const [users, setUsers] = useState([]);
 	const [followedUsers, setFollowedUsers] = useState([]);
 	useEffect(() => {
@@ -48,14 +48,17 @@ const Feed = ({ currentUser }) => {
 		<>
 			<Row>
 				<Col span={12}>
-					<FollowedFeed followedUsers={followedUsers} />
+					<FollowedUsersContainer followedUsers={followedUsers} />
 				</Col>
 				<Col span={12}>
-					<UnfollowedFeed users={users} handleFollow={handleFollow} />
+					<UnfollowedUsersContainer
+						users={users}
+						handleFollow={handleFollow}
+					/>
 				</Col>
 			</Row>
 		</>
 	);
 };
 
-export default Feed;
+export default FeedContainer;
