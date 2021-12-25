@@ -17,10 +17,26 @@ const FeedContainer = ({ currentUser }) => {
 		fetch('/followings')
 			.then((r) => r.json())
 			.then((followedUsers) => {
-				console.log(followedUsers);
 				setFollowings(followedUsers);
 			});
 	}, []);
+
+	const stateReset = () => {
+		fetch('/feed')
+			.then((r) => r.json())
+			.then((users) => {
+				// console.log(users);
+				setUsers(users);
+			})
+			.catch((error) => console.log(error));
+		fetch('/followings')
+			.then((r) => r.json())
+			.then((followedUsers) => {
+				console.log('STATE RESET');
+				setFollowings(followedUsers);
+			})
+			.catch((error) => console.log(error));
+	};
 
 	function handleFollow(user) {
 		const dataobj = {
@@ -39,6 +55,7 @@ const FeedContainer = ({ currentUser }) => {
 			.then((users) => {
 				console.log();
 				setUsers(users);
+				stateReset();
 			})
 			.catch((error) => console.log(error));
 	}
@@ -52,6 +69,7 @@ const FeedContainer = ({ currentUser }) => {
 				setFollowings(follows);
 			});
 		success(follow.followed_user.username);
+		stateReset();
 	};
 
 	const success = (username) => {
