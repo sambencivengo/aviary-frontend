@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd';
+import { Col, message, Row } from 'antd';
 import { useEffect, useState } from 'react';
 
 import FollowedUsersContainer from './FollowedUsersContainer';
@@ -6,7 +6,7 @@ import UnfollowedUsersContainer from './UnfollowedUsersContainer';
 
 const FeedContainer = ({ currentUser }) => {
 	const [users, setUsers] = useState([]);
-	const [followedUsers, setFollowedUsers] = useState([]);
+	const [followings, setFollowings] = useState([]);
 	useEffect(() => {
 		fetch('/feed')
 			.then((r) => r.json())
@@ -14,11 +14,11 @@ const FeedContainer = ({ currentUser }) => {
 				// console.log(users);
 				setUsers(users);
 			});
-		fetch('/followed')
+		fetch('/followings')
 			.then((r) => r.json())
 			.then((followedUsers) => {
 				console.log(followedUsers);
-				setFollowedUsers(followedUsers);
+				setFollowings(followedUsers);
 			});
 	}, []);
 
@@ -43,21 +43,36 @@ const FeedContainer = ({ currentUser }) => {
 			.catch((error) => console.log(error));
 	}
 
-	const handleUnFollow = (user) => {
-		fetch('/follows', {
+	const handleUnFollow = (follow) => {
+		fetch(`/follows/${follow.id}`, {
 			method: 'DELETE',
 		})
 			.then((r) => r.json())
-			.then((data) => console.log(data));
+			.then((follows) => {
+				setFollowings(follows);
+			});
+		success(follow.followed_user.username);
 	};
 
+	const success = (username) => {
+		message.success({
+			content: `You have unfollowed ${username}.`,
+			className: 'custom-class',
+			style: {
+				marginTop: '20vh',
+			},
+		});
+	};
+	// setTimeout(() => {console.log("this is the first message")}, 5000)
+
+	//
 	// RENDER 2 ROWS... FOLLOWED USERS AND OTHERS?
 	return (
 		<>
 			<Row>
 				<Col span={12}>
 					<FollowedUsersContainer
-						followedUsers={followedUsers}
+						followings={followings}
 						handleUnFollow={handleUnFollow}
 					/>
 				</Col>

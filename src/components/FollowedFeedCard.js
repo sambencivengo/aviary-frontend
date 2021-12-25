@@ -4,11 +4,12 @@ import { useState } from 'react';
 
 const { Meta } = Card;
 
-const FollowedFeedCard = ({ user, avatar, handleUnFollow }) => {
+const FollowedFeedCard = ({ follow, avatar, handleUnFollow }) => {
+	console.log(follow.followed_user.username);
 	return (
 		<>
 			<Card
-				key={user.id}
+				key={follow.id}
 				style={{ width: 300 }}
 				// cover={
 				// 	<img
@@ -18,8 +19,9 @@ const FollowedFeedCard = ({ user, avatar, handleUnFollow }) => {
 				// }
 				actions={[
 					<Button
+						key={Math.floor(Math.random() * 100000) + 1}
 						onClick={() => {
-							handleUnFollow(user);
+							handleUnFollow(follow);
 						}}
 						type="primary"
 						// shape="round"
@@ -35,8 +37,8 @@ const FollowedFeedCard = ({ user, avatar, handleUnFollow }) => {
 			>
 				<Meta
 					avatar={<Avatar src={avatar} />}
-					title={user.username}
-					description={`Total Birds Spotted: ${user.spottings.length}`}
+					title={follow.followed_user.username}
+					// description={`Total Birds Spotted: ${user.spottings.length}`}
 				/>
 			</Card>
 		</>
