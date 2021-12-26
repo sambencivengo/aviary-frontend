@@ -40,7 +40,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 // export default Login;
 
-import { Form, Input, Button, Checkbox, Typography } from 'antd';
+import { Form, Input, Button, Checkbox, Typography, Space } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import ButtonGroup from 'antd/lib/button/button-group';
 
@@ -78,68 +78,89 @@ const Login = ({ handleLogIn, handleSignUpRender }) => {
 	};
 
 	return (
-		<Form
-			name="normal_login"
-			className="login-form"
-			// initialValues={{ remember: true }}
-			// onFinish={onFinish}
-			// onSubmit={logIn}
-		>
-			<Form.Item
-				rules={[
-					{ required: true, message: 'Please input your Username!' },
-				]}
+		<>
+			<Space
+				direction="horizontal"
+				style={{ width: '100%', justifyContent: 'center' }}
 			>
-				<Input
-					name="username"
-					prefix={<UserOutlined className="site-form-item-icon" />}
-					placeholder="Username"
-					onChange={handleChange}
-				/>
-			</Form.Item>
-			<Form.Item
-				rules={[
-					{ required: true, message: 'Please input your Password!' },
-				]}
-			>
-				<Input
-					prefix={<LockOutlined className="site-form-item-icon" />}
-					type="password"
-					placeholder="Password"
-					onChange={handleChange}
-					name="password"
-				/>
-			</Form.Item>
-			<Form.Item>
-				<Form.Item name="remember" valuePropName="checked" noStyle>
-					<Checkbox>Remember me</Checkbox>
-				</Form.Item>
+				<Form
+					name="normal_login"
+					className="login-form"
+					// initialValues={{ remember: true }}
+					// onFinish={onFinish}
+					// onSubmit={logIn}
+				>
+					<Form.Item
+						rules={[
+							{
+								required: true,
+								message: 'Please input your Username!',
+							},
+						]}
+					>
+						<Input
+							name="username"
+							prefix={
+								<UserOutlined className="site-form-item-icon" />
+							}
+							placeholder="Username"
+							onChange={handleChange}
+						/>
+					</Form.Item>
+					<Form.Item
+						rules={[
+							{
+								required: true,
+								message: 'Please input your Password!',
+							},
+						]}
+					>
+						<Input
+							prefix={
+								<LockOutlined className="site-form-item-icon" />
+							}
+							type="password"
+							placeholder="Password"
+							onChange={handleChange}
+							name="password"
+						/>
+					</Form.Item>
+					<Form.Item>
+						<Form.Item
+							name="remember"
+							valuePropName="checked"
+							noStyle
+						>
+							<Checkbox>Remember me</Checkbox>
+						</Form.Item>
 
-				{/* <a className="login-form-forgot" href="">
+						{/* <a className="login-form-forgot" href="">
 					Forgot password
 				</a> */}
-			</Form.Item>
+					</Form.Item>
 
-			<Form.Item>
-				<Button
-					type="primary"
-					htmlType="submit"
-					className="login-form-button"
-					onClick={() => logIn()}
-				>
-					Log in
-				</Button>{' '}
-				Or{' '}
-				<Link
-					onClick={() => {
-						navigate('/signup');
-					}}
-					target="_blank"
-				>
-					Sign Up
-				</Link>
-			</Form.Item>
-		</Form>
+					<Form.Item>
+						<Button
+							type="primary"
+							htmlType="submit"
+							className="login-form-button"
+							onClick={() => logIn()}
+						>
+							Log in
+						</Button>{' '}
+						Or{' '}
+						<Link
+							onClick={() => {
+								navigate('/signup');
+							}}
+							target="_blank"
+						>
+							Sign Up
+						</Link>
+					</Form.Item>
+				</Form>
+			</Space>
+		</>
 	);
 };
 

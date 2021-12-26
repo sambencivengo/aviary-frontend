@@ -1,4 +1,13 @@
-import { Button, Checkbox, Col, Form, Input, Row, Typography } from 'antd';
+import {
+	Button,
+	Checkbox,
+	Col,
+	Form,
+	Input,
+	Row,
+	Space,
+	Typography,
+} from 'antd';
 import Layout, { Header } from 'antd/lib/layout/layout';
 import Title from 'antd/lib/typography/Title';
 
@@ -41,111 +50,104 @@ const SignUp = ({ handleLogIn }) => {
 
 	return (
 		<>
-			<Layout>
-				<Row
-					type="flex"
-					justify="center"
-					align="center"
-					style={{ minHeight: '80vh', paddingTop: '10vh' }}
-				>
-					<Col>
-						<Form
-							name="basic"
-							labelCol={{ span: 9 }}
-							wrapperCol={{ span: 16 }}
-							initialValues={{ remember: true }}
-							// onFinish={onFinish}
+			<Space
+				direction="horizontal"
+				style={{ width: '100%', justifyContent: 'center' }}
+			>
+				<Layout>
+					<Form
+						name="basic"
+						labelCol={{ span: 9 }}
+						wrapperCol={{ span: 16 }}
+						initialValues={{ remember: true }}
+						// onFinish={onFinish}
 
-							autoComplete="off"
+						autoComplete="off"
+					>
+						<Form.Item
+							label="Username"
+							rules={[
+								{
+									required: true,
+									message: 'Please input your username!',
+								},
+							]}
 						>
-							<Form.Item
-								label="Username"
-								rules={[
-									{
-										required: true,
-										message: 'Please input your username!',
-									},
-								]}
+							<Input onChange={handleChange} name="username" />
+						</Form.Item>
+						<Form.Item
+							label="Email"
+							rules={[
+								{
+									required: true,
+									message: 'Please input your email!',
+								},
+							]}
+						>
+							<Input onChange={handleChange} name="email" />
+						</Form.Item>
+						<Form.Item
+							label="Password"
+							rules={[
+								{
+									required: true,
+									message: 'Please input your password!',
+								},
+							]}
+						>
+							<Input.Password
+								onChange={handleChange}
+								name="password"
+							/>
+						</Form.Item>
+						<Form.Item
+							label="Confirm Password"
+							rules={[
+								{
+									required: true,
+									message: 'Please Confirm your password!',
+								},
+							]}
+						>
+							{' '}
+							<Input.Password
+								name="password_confirmation"
+								onChange={handleChange}
+							/>
+						</Form.Item>
+						<Form.Item
+							name="remember"
+							valuePropName="checked"
+							wrapperCol={{ offset: 8, span: 16 }}
+						>
+							<Checkbox>Remember me</Checkbox>
+						</Form.Item>
+						<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+							<Button
+								onClick={handleSubmit}
+								type="primary"
+								htmlType="submit"
 							>
-								<Input
-									onChange={handleChange}
-									name="username"
-								/>
-							</Form.Item>
-							<Form.Item
-								label="Email"
-								rules={[
-									{
-										required: true,
-										message: 'Please input your email!',
-									},
-								]}
+								Submit
+							</Button>
+						</Form.Item>
+						<Form.Item style={{ textAlign: 'center' }}>
+							Have an account?{' '}
+							<Link
+								style={{ textAlign: 'center' }}
+								onClick={() => {
+									navigate('/login');
+								}}
+								target="_blank"
 							>
-								<Input onChange={handleChange} name="email" />
-							</Form.Item>
-							<Form.Item
-								label="Password"
-								rules={[
-									{
-										required: true,
-										message: 'Please input your password!',
-									},
-								]}
-							>
-								<Input.Password
-									onChange={handleChange}
-									name="password"
-								/>
-							</Form.Item>
-							<Form.Item
-								label="Confirm Password"
-								rules={[
-									{
-										required: true,
-										message:
-											'Please Confirm your password!',
-									},
-								]}
-							>
-								{' '}
-								<Input.Password
-									name="password_confirmation"
-									onChange={handleChange}
-								/>
-							</Form.Item>
-							<Form.Item
-								name="remember"
-								valuePropName="checked"
-								wrapperCol={{ offset: 8, span: 16 }}
-							>
-								<Checkbox>Remember me</Checkbox>
-							</Form.Item>
-							<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-								<Button
-									onClick={handleSubmit}
-									type="primary"
-									htmlType="submit"
-								>
-									Submit
-								</Button>
-							</Form.Item>
-							<Form.Item>
-								Have an account?{' '}
-								<Link
-									style={{ textAlign: 'center' }}
-									onClick={() => {
-										navigate('/login');
-									}}
-									target="_blank"
-								>
-									Log In
-								</Link>
-							</Form.Item>
-						</Form>
-					</Col>
-				</Row>
-				{/* OLD FORM */}
-			</Layout>
+								Log In
+							</Link>
+						</Form.Item>
+					</Form>
+
+					{/* OLD FORM */}
+				</Layout>
+			</Space>
 		</>
 	);
 };
