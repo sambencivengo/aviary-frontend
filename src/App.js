@@ -89,38 +89,18 @@ function App() {
 	// console.log('Are you logged in?', loggedIn);
 
 	return (
-		//
-		//
-		//
-		//
-
-		<Layout style={{ minHeight: '100vh' }}>
-			{/* <Header
-				className="site-layout-background"
-				style={{
-					padding: 0,
-					textAlign: 'center',
-					opacity: 0,
-				}}
-			>
-				<Title style={{ color: 'white', fontSize: '50px' }}>
-					Aviary{' '}
-				</Title>{' '}
-			</Header> */}
+		<>
 			<Layout>
 				{loggedIn ? (
 					<Sider
 						style={{
 							overflow: 'auto',
 							height: '100vh',
-							// position: 'fixed',
+							position: 'fixed',
 							left: 0,
 						}}
-						collapsible
-						collapsed={collapsed}
-						onCollapse={onCollapse}
-						// style={{ backgroundColor: '#406353' }}
 					>
+						<div className="logo" />
 						<Header>
 							<Title
 								style={{
@@ -192,48 +172,61 @@ function App() {
 						</Menu>
 					</Sider>
 				) : null}
-
-				<Content style={{ margin: '0 16px' }}>
-					{loggedIn ? (
-						<Home
-							renderFeed={renderFeed}
-							currentUser={currentUser}
-							spottingMode={spottingMode}
-							showAviary={showAviary}
-						/>
-					) : (
-						<Row
-							type="flex"
-							justify="center"
-							align="middle"
-							style={{ minHeight: '80vh' }}
+				<Layout className="site-layout" style={{ marginLeft: 200 }}>
+					<Content
+						style={{ margin: '24px 16px 0', overflow: 'initial' }}
+					>
+						<div
+							className="site-layout-background"
+							style={{ padding: 24, textAlign: 'center' }}
 						>
-							{' '}
-							<Col>
-								{/* <div
+							<Content style={{ margin: '0 16px' }}>
+								{loggedIn ? (
+									<Home
+										renderFeed={renderFeed}
+										currentUser={currentUser}
+										spottingMode={spottingMode}
+										showAviary={showAviary}
+									/>
+								) : (
+									<Row
+										type="flex"
+										justify="center"
+										align="middle"
+										style={{ minHeight: '80vh' }}
+									>
+										{' '}
+										<Col>
+											{/* <div
 									style={{
 										display: 'inline-flex',
 										justifyContent: 'center',
 										alignItems: 'center',
 									}}
 								> */}
-								<Login
-									handleLogIn={handleLogIn}
-									handleSignUpRender={handleSignUpRender}
-								/>
-								{/* </div> */}
-							</Col>
-						</Row>
-					)}
-				</Content>
+											<Login
+												handleLogIn={handleLogIn}
+												handleSignUpRender={
+													handleSignUpRender
+												}
+											/>
+											{/* </div> */}
+										</Col>
+									</Row>
+								)}
+							</Content>
+						</div>
+					</Content>
+					<Footer style={{ textAlign: 'center' }} className="footer">
+						<Text italic>
+							Regular birdwatching is necessary to lead a healthy
+							and fulfilling life.{' '}
+						</Text>
+					</Footer>
+				</Layout>
 			</Layout>
-			<Footer style={{ textAlign: 'center' }} className="footer">
-				<Text italic>
-					Regular birdwatching is necessary to lead a healthy and
-					fulfilling life.{' '}
-				</Text>
-			</Footer>
-		</Layout>
+			,
+		</>
 	);
 }
 
