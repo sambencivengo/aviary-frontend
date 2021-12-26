@@ -11,7 +11,7 @@ import SignUp from './components/SignUp';
 import SpottingsContainer from './components/SpottingsContainer';
 
 ReactDOM.render(
-	<React.StrictMode>
+	<React.StrictMode>	
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<App />} />

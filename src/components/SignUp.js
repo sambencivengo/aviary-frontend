@@ -106,7 +106,7 @@ const SignUp = ({ handleLogIn }) => {
 								{
 									required: true,
 									message: 'Please Confirm your password!',
-								},
+								},``
 							]}
 						>
 							{' '}
