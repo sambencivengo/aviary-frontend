@@ -42,16 +42,6 @@ const SignUp = ({ handleLogIn }) => {
 	return (
 		<>
 			<Layout>
-				<Header
-					className="site-layout-background"
-					style={{ padding: 0, textAlign: 'center' }}
-				>
-					<Title style={{ color: 'white', fontSize: '50px' }}>
-						Aviary
-					</Title>{' '}
-				</Header>
-				{/* NEW FORM */}
-
 				<Row
 					type="flex"
 					justify="center"
@@ -144,7 +134,7 @@ const SignUp = ({ handleLogIn }) => {
 								<Link
 									style={{ textAlign: 'center' }}
 									onClick={() => {
-										navigate('/home');
+										navigate('/login');
 									}}
 									target="_blank"
 								>

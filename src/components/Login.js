@@ -61,18 +61,29 @@ const Login = ({ handleLogIn, handleSignUpRender }) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
-	const logIn = (e) => {
-		e.preventDefault();
-		handleLogIn(formData);
+	const logIn = () => {
+		fetch('/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(formData),
+		})
+			.then((r) => r.json())
+			.then((data) => {
+				console.log(data);
+				navigate('/home');
+			})
+			.catch((error) => console.log(error));
 	};
 
 	return (
 		<Form
 			name="normal_login"
 			className="login-form"
-			initialValues={{ remember: true }}
-			onFinish={onFinish}
-			onSubmit={logIn}
+			// initialValues={{ remember: true }}
+			// onFinish={onFinish}
+			// onSubmit={logIn}
 		>
 			<Form.Item
 				rules={[
@@ -114,6 +125,7 @@ const Login = ({ handleLogIn, handleSignUpRender }) => {
 					type="primary"
 					htmlType="submit"
 					className="login-form-button"
+					onClick={() => logIn()}
 				>
 					Log in
 				</Button>{' '}
