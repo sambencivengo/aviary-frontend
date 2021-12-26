@@ -5,7 +5,7 @@ import { useState } from 'react';
 const { Meta } = Card;
 
 const FollowedFeedCard = ({ follow, avatar, handleUnFollow }) => {
-	console.log(follow.followed_user.username);
+	console.log(follow);
 	return (
 		<>
 			<Card
