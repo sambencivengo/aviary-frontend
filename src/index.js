@@ -6,19 +6,20 @@ import App from './App';
 import 'antd/dist/antd.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
-import Home from './components/Home';
 import SignUp from './components/SignUp';
+import Home from './components/Home';
 import SpottingsContainer from './components/SpottingsContainer';
 
 ReactDOM.render(
-	<React.StrictMode>	
+	<React.StrictMode>
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<App />} />
-				<Route path="/home" element={<App />} />
+				<Route path="/" element={<App />}>
+					<Route path="/home" element={<Home />} />
+					<Route path="/myaviary" element={<SpottingsContainer />} />
+				</Route>
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<SignUp />} />
-				<Route path="/myaviary" element={<SpottingsContainer />} />
 			</Routes>
 		</BrowserRouter>
 	</React.StrictMode>,

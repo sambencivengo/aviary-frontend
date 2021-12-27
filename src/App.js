@@ -14,7 +14,15 @@ import {
 	HomeOutlined,
 } from '@ant-design/icons';
 import SignUp from './components/SignUp';
-import { Navigate, useNavigate } from 'react-router-dom';
+import {
+	Link,
+	Navigate,
+	Outlet,
+	Route,
+	Routes,
+	useNavigate,
+} from 'react-router-dom';
+import SpottingsContainer from './components/SpottingsContainer';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -24,21 +32,11 @@ function App() {
 	const navigate = useNavigate();
 	const antIcon = <LoadingOutlined style={{ fontSize: 40 }} spin />;
 	const [theme, setTheme] = useState('light');
-	const [spottingMode, setSpottingMode] = useState(false);
-	const [showAviary, setShowAviary] = useState(true);
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [currentUser, setCurrentUser] = useState({});
 	const [collapsed, setCollapsed] = useState(false);
 	const [renderSignUp, setRenderSignUp] = useState(false);
 	const [renderFeed, setRenderFeed] = useState(false);
-
-	function onCollapse() {
-		setCollapsed(!collapsed);
-	}
-
-	const handleSignUpRender = () => {
-		setRenderSignUp(!renderSignUp);
-	};
 
 	const changeTheme = (value) => {
 		setTheme(value ? 'dark' : 'light');
@@ -94,7 +92,7 @@ function App() {
 	};
 
 	// console.log('Are you logged in?', loggedIn);
-
+	console.log('x');
 	return (
 		<>
 			<Layout>
@@ -127,37 +125,13 @@ function App() {
 						{/* <Menu.Item key="1" icon={<HomeOutlined />}>
 								Home
 							</Menu.Item> */}
-						<Menu.Item
-							key="2"
-							icon={<DatabaseOutlined />}
-							onClick={() => {
-								setShowAviary(true);
-								setSpottingMode(false);
-								setRenderFeed(false);
-							}}
-						>
-							My Aviary
+						<Menu.Item key="2" icon={<DatabaseOutlined />}>
+							<Link to="/myaviary">My Aviary</Link>
 						</Menu.Item>
-						<Menu.Item
-							key="3"
-							icon={<PlusCircleOutlined />}
-							onClick={() => {
-								setSpottingMode(true);
-								setShowAviary(false);
-								setRenderFeed(false);
-							}}
-						>
+						<Menu.Item key="3" icon={<PlusCircleOutlined />}>
 							Spot a bird
 						</Menu.Item>
-						<Menu.Item
-							key="4"
-							icon={<TeamOutlined />}
-							onClick={() => {
-								setRenderFeed(true);
-								setShowAviary(false);
-								setSpottingMode(false);
-							}}
-						>
+						<Menu.Item key="4" icon={<TeamOutlined />}>
 							Feed
 						</Menu.Item>
 						<SubMenu
@@ -186,14 +160,7 @@ function App() {
 							className="site-layout-background"
 							style={{ padding: 24, textAlign: 'center' }}
 						>
-							<Content style={{ margin: '0 16px' }}>
-								<Home
-									renderFeed={renderFeed}
-									currentUser={currentUser}
-									spottingMode={spottingMode}
-									showAviary={showAviary}
-								/>
-							</Content>
+							<Outlet />
 						</div>
 					</Content>
 					<Footer style={{ textAlign: 'center' }} className="footer">

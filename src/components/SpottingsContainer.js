@@ -6,6 +6,7 @@ import EditCardForm from './EditCardForm';
 import SpottingCard from './SpottingCard';
 
 const SpottingsContainer = ({ currentUser }) => {
+	console.log('spottingscontainer');
 	const [spottings, setSpottings] = useState([]);
 	const [showEditForm, setShowEditForm] = useState(false);
 	const [spottingToEdit, setSpottingToEdit] = useState({});
