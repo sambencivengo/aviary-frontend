@@ -9,6 +9,7 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
 import SpottingsContainer from './components/SpottingsContainer';
+import SpottingForm from './components/SpottingForm';
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.render(
 				<Route path="/" element={<App />}>
 					<Route path="/home" element={<Home />} />
 					<Route path="/myaviary" element={<SpottingsContainer />} />
+					<Route path="/spotabird" element={<SpottingForm />} />
 				</Route>
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<SignUp />} />

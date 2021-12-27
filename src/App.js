@@ -129,7 +129,7 @@ function App() {
 							<Link to="/myaviary">My Aviary</Link>
 						</Menu.Item>
 						<Menu.Item key="3" icon={<PlusCircleOutlined />}>
-							Spot a bird
+							<Link to="/spotabird">Spotting</Link>
 						</Menu.Item>
 						<Menu.Item key="4" icon={<TeamOutlined />}>
 							Feed

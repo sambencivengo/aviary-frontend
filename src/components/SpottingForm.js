@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react';
 
 import MapContainer from './MapContainer';
 
-const SpottingForm = ({ currentUser }) => {
+const SpottingForm = () => {
 	const [marker, setMarker] = useState({});
 
 	const { Option } = Select;
 	const [birds, setBirds] = useState([]);
+	const [currentUser, setCurrentUser] = useState({});
 	// const [formData, setFormdata] = useState({
 	// 	notes: '',
 	// 	user_id: currentUser.id,
@@ -26,6 +27,12 @@ const SpottingForm = ({ currentUser }) => {
 	const [notes, setNotes] = useState('');
 	//
 	console.log(bird_id, notes);
+
+	useEffect(() => {
+		fetch('/me')
+			.then((r) => r.json())
+			.then((data) => setCurrentUser(data));
+	}, []);
 
 	// fetch and render Option components for each bird?
 
