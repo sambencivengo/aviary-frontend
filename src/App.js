@@ -132,7 +132,7 @@ function App() {
 							<Link to="/spotabird">Spotting</Link>
 						</Menu.Item>
 						<Menu.Item key="4" icon={<TeamOutlined />}>
-							Feed
+							<Link to="/feed">Feed</Link>
 						</Menu.Item>
 						<SubMenu
 							key="sub1"

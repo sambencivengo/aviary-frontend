@@ -10,15 +10,17 @@ import SignUp from './components/SignUp';
 import Home from './components/Home';
 import SpottingsContainer from './components/SpottingsContainer';
 import SpottingForm from './components/SpottingForm';
+import FeedContainer from './components/FeedContainer';
 
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<App />}>
-					<Route path="/home" element={<Home />} />
+					<Route path="/home" element={<App />} />
 					<Route path="/myaviary" element={<SpottingsContainer />} />
 					<Route path="/spotabird" element={<SpottingForm />} />
+					<Route path="/feed" element={<FeedContainer />} />
 				</Route>
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<SignUp />} />

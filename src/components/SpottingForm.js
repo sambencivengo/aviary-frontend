@@ -1,12 +1,13 @@
 import { Button, Col, Form, Input, message, Row, Select } from 'antd';
 import Layout, { Content } from 'antd/lib/layout/layout';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import MapContainer from './MapContainer';
 
 const SpottingForm = () => {
 	const [marker, setMarker] = useState({});
-
+	const navigate = useNavigate();
 	const { Option } = Select;
 	const [birds, setBirds] = useState([]);
 	const [currentUser, setCurrentUser] = useState({});
@@ -31,7 +32,11 @@ const SpottingForm = () => {
 	useEffect(() => {
 		fetch('/me')
 			.then((r) => r.json())
-			.then((data) => setCurrentUser(data));
+			.then((data) => setCurrentUser(data))
+			.catch((error) => {
+				console.log('Error:', error);
+				navigate('/login');
+			});
 	}, []);
 
 	// fetch and render Option components for each bird?

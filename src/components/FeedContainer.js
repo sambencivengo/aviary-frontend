@@ -1,12 +1,16 @@
 import { Col, message, Row } from 'antd';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import FollowedUsersContainer from './FollowedUsersContainer';
 import UnfollowedUsersContainer from './UnfollowedUsersContainer';
 
-const FeedContainer = ({ currentUser }) => {
+const FeedContainer = () => {
+	const [currentUser, setCurrentUser] = useState({});
+
 	const [users, setUsers] = useState([]);
 	const [followings, setFollowings] = useState([]);
+	const navigate = useNavigate();
 	useEffect(() => {
 		fetch('/feed')
 			.then((r) => r.json())
@@ -18,6 +22,13 @@ const FeedContainer = ({ currentUser }) => {
 			.then((r) => r.json())
 			.then((followedUsers) => {
 				setFollowings(followedUsers);
+			});
+		fetch('/me')
+			.then((r) => r.json())
+			.then((data) => setCurrentUser(data))
+			.catch((error) => {
+				console.log('Error:', error);
+				navigate('/login');
 			});
 	}, []);
 
