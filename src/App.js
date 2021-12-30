@@ -1,9 +1,7 @@
 import './App.css';
-import { useEffect, useState } from 'react';
-import Home from './components/Home';
-import Login from './components/Login';
-import { Col, Row, Switch, Typography } from 'antd';
-import { Button, Layout, Menu, Breadcrumb, Spin } from 'antd';
+import { createContext, useEffect, useState } from 'react';
+import { Switch, Typography } from 'antd';
+import { Layout, Menu } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import { LoadingOutlined } from '@ant-design/icons';
 import {
@@ -11,18 +9,8 @@ import {
 	PlusCircleOutlined,
 	TeamOutlined,
 	DatabaseOutlined,
-	HomeOutlined,
 } from '@ant-design/icons';
-import SignUp from './components/SignUp';
-import {
-	Link,
-	Navigate,
-	Outlet,
-	Route,
-	Routes,
-	useNavigate,
-} from 'react-router-dom';
-import SpottingsContainer from './components/SpottingsContainer';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -61,6 +49,8 @@ function App() {
 				navigate('/login');
 			});
 	}, []);
+
+	const userContext = createContext(currentUser);
 
 	const handleLogIn = (formData) => {
 		fetch('/login', {
