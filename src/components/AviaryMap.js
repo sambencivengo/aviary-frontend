@@ -8,6 +8,8 @@ import {
 
 const AviaryMap = ({ spottings }) => {
 	// const [markers, setMarkers] = useState([]);
+	const [showInfoWindow, setShowInfoWindow] = useState(false);
+
 	const mapStyles = {
 		height: '70vh',
 		width: '70vh',
@@ -19,6 +21,7 @@ const AviaryMap = ({ spottings }) => {
 	};
 
 	const markers = spottings.map((spotting) => {
+		console.log(spotting);
 		const location = {
 			lat: spotting.lat,
 			lng: spotting.long,
@@ -26,10 +29,24 @@ const AviaryMap = ({ spottings }) => {
 
 		return (
 			<Marker
-				infoWindow={'test'}
 				key={spotting.id}
+				onClick={() => {
+					setShowInfoWindow(true);
+				}}
 				position={location}
-			></Marker>
+			>
+				{showInfoWindow === true && (
+					<InfoWindow
+						// position={location}
+						onClick={() => setShowInfoWindow(false)}
+					>
+						<divb>
+							<h3>{spotting.bird.common_name}</h3>
+							<p>{spotting.notes}</p>
+						</divb>
+					</InfoWindow>
+				)}
+			</Marker>
 		);
 	});
 	return (
