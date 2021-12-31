@@ -5,6 +5,7 @@ import {
 	Marker,
 	InfoWindow,
 } from '@react-google-maps/api';
+import AviaryMarker from './AviaryMarker';
 
 const AviaryMap = ({ spottings }) => {
 	// const [markers, setMarkers] = useState([]);
@@ -22,30 +23,10 @@ const AviaryMap = ({ spottings }) => {
 
 	const markers = spottings.map((spotting) => {
 		console.log(spotting);
-		const location = {
-			lat: spotting.lat,
-			lng: spotting.long,
-		};
-
-		return (
-			<Marker
-				key={spotting.id}
-				onClick={() => {
-					setShowInfoWindow(!showInfoWindow);
-				}}
-				position={location}
-			>
-				{showInfoWindow ? (
-					<InfoWindow onClick={() => setShowInfoWindow(false)}>
-						<divb>
-							<h3>{spotting.bird.common_name}</h3>
-							<p>{spotting.notes}</p>
-						</divb>
-					</InfoWindow>
-				) : null}
-			</Marker>
-		);
+		//
+		return <AviaryMarker key={spotting.id} spotting={spotting} />;
 	});
+
 	return (
 		<div className="map">
 			<div className="map">
