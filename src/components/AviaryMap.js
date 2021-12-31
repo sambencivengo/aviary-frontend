@@ -31,21 +31,18 @@ const AviaryMap = ({ spottings }) => {
 			<Marker
 				key={spotting.id}
 				onClick={() => {
-					setShowInfoWindow(true);
+					setShowInfoWindow(!showInfoWindow);
 				}}
 				position={location}
 			>
-				{showInfoWindow === true && (
-					<InfoWindow
-						// position={location}
-						onClick={() => setShowInfoWindow(false)}
-					>
+				{showInfoWindow ? (
+					<InfoWindow onClick={() => setShowInfoWindow(false)}>
 						<divb>
 							<h3>{spotting.bird.common_name}</h3>
 							<p>{spotting.notes}</p>
 						</divb>
 					</InfoWindow>
-				)}
+				) : null}
 			</Marker>
 		);
 	});
@@ -54,7 +51,6 @@ const AviaryMap = ({ spottings }) => {
 			<div className="map">
 				<LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
 					<GoogleMap
-						// onClick={handleMarkerCreate}
 						mapContainerStyle={mapStyles}
 						zoom={13}
 						center={defaultCenter}

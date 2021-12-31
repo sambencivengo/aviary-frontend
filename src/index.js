@@ -17,7 +17,7 @@ ReactDOM.render(
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<App />}>
-					<Route path="/home" element={<App />} />
+					<Route path="/home" element={<Home />} />
 					<Route path="/myaviary" element={<SpottingsContainer />} />
 					<Route path="/spotabird" element={<SpottingForm />} />
 					<Route path="/feed" element={<FeedContainer />} />

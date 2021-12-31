@@ -71,7 +71,6 @@ const Login = ({ handleLogIn, handleSignUpRender }) => {
 		})
 			.then((r) => r.json())
 			.then((data) => {
-				console.log(data);
 				navigate('/home');
 			})
 			.catch((error) => console.log(error));

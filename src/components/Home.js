@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Typography } from 'antd';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import FeedContainer from './FeedContainer';
@@ -13,13 +13,7 @@ const Home = ({ currentUser, spottingMode, showAviary, renderFeed }) => {
 
 	return (
 		<>
-			<h1>Hello, {currentUser.username}!</h1>
-
-			{spottingMode ? <SpottingForm currentUser={currentUser} /> : null}
-			{showAviary ? (
-				<SpottingsContainer currentUser={currentUser} />
-			) : null}
-			{renderFeed ? <FeedContainer currentUser={currentUser} /> : null}
+			<Typography>Welcome to Aviary!</Typography>
 		</>
 	);
 };

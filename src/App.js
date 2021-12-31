@@ -18,17 +18,8 @@ const { SubMenu } = Menu;
 
 function App() {
 	const navigate = useNavigate();
-	const antIcon = <LoadingOutlined style={{ fontSize: 40 }} spin />;
-	const [theme, setTheme] = useState('light');
-	const [loggedIn, setLoggedIn] = useState(false);
-	const [currentUser, setCurrentUser] = useState({});
-	const [collapsed, setCollapsed] = useState(false);
-	const [renderSignUp, setRenderSignUp] = useState(false);
-	const [renderFeed, setRenderFeed] = useState(false);
 
-	const changeTheme = (value) => {
-		setTheme(value ? 'dark' : 'light');
-	};
+	const [currentUser, setCurrentUser] = useState({});
 
 	const { Title } = Typography;
 
@@ -38,14 +29,13 @@ function App() {
 			.then((data) => {
 				if (data) {
 					setCurrentUser(data);
-					setLoggedIn(true);
 				} else {
 					navigate('/login');
 				}
 			})
 			.catch((error) => {
 				console.log(error);
-				setLoggedIn(false);
+
 				navigate('/login');
 			});
 	}, []);
@@ -63,10 +53,8 @@ function App() {
 			.then((r) => r.json())
 			.then((data) => {
 				if (data.username === undefined) {
-					setLoggedIn(false);
 				} else {
 					setCurrentUser(data);
-					setLoggedIn(true);
 				}
 			})
 			.catch((error) => console.log(error));
@@ -76,12 +64,10 @@ function App() {
 		fetch('/logout', { method: 'DELETE' })
 			.then((r) => r.json())
 			.catch((error) => {
-				setLoggedIn(false);
 				navigate('/login');
 			});
 	};
 
-	// console.log('Are you logged in?', loggedIn);
 	console.log('x');
 	return (
 		<>
@@ -138,7 +124,6 @@ function App() {
 								Log Out
 							</Menu.Item>
 						</SubMenu>
-						<Switch onChange={changeTheme} /> Change Style
 					</Menu>
 				</Sider>
 
