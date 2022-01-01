@@ -26,7 +26,9 @@ const AviaryMarker = ({ spotting }) => {
 		lat: spotting.lat,
 		lng: spotting.long,
 	};
-
+	const showInfo = () => {
+		console.log('test');
+	};
 	return (
 		<>
 			{/* <Marker key={spotting.id} position={location}></Marker> */}

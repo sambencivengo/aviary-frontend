@@ -7,9 +7,8 @@ import {
 } from '@react-google-maps/api';
 import AviaryMarker from './AviaryMarker';
 
-const AviaryMap = ({ spottings }) => {
+const AviaryMap = ({ spottings, showInfo }) => {
 	// const [markers, setMarkers] = useState([]);
-	const [showInfoWindow, setShowInfoWindow] = useState(false);
 
 	const mapStyles = {
 		height: '70vh',
@@ -24,7 +23,13 @@ const AviaryMap = ({ spottings }) => {
 	const markers = spottings.map((spotting) => {
 		console.log(spotting);
 		//
-		return <AviaryMarker key={spotting.id} spotting={spotting} />;
+		return (
+			<AviaryMarker
+				showInfo={showInfo}
+				key={spotting.id}
+				spotting={spotting}
+			/>
+		);
 	});
 
 	return (

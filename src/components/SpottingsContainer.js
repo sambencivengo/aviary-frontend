@@ -16,7 +16,6 @@ const SpottingsContainer = ({ currentUser }) => {
 		setSpottingToEdit(spotting);
 		showEditForm ? setShowEditForm(false) : setShowEditForm(true);
 	}
-
 	const [showMap, setShowMap] = useState(false);
 	console.log(spottings);
 
@@ -36,16 +35,22 @@ const SpottingsContainer = ({ currentUser }) => {
 			.then((newSpottings) => setSpottings(newSpottings));
 	};
 
-	const reFetch = () => {
-		fetch('/mybirds')
-			.then((r) => r.json())
-			.then((data) => {
-				setSpottings(data);
-			});
-	};
+	// const reFetch = () => {
+	// 	fetch('/mybirds')
+	// 		.then((r) => r.json())
+	// 		.then((data) => {
+	// 			setSpottings(data);
+	// 		});
+	// };
 
 	const handleShowMap = () => {
 		setShowMap(!showMap);
+		// showInfo();
+	};
+
+	const handleCardClick = (spotting) => {
+		console.log(spotting);
+		
 	};
 
 	const renderCards = spottings.map((spotting) => {
@@ -55,6 +60,7 @@ const SpottingsContainer = ({ currentUser }) => {
 					{new Array(1).fill(null).map((_, index) => (
 						// eslint-disable-next-line react/no-array-index-key
 						<SpottingCard
+							handleCardClick={handleCardClick}
 							handleDelete={handleDelete}
 							key={spotting.id}
 							spotting={spotting}
@@ -106,7 +112,10 @@ const SpottingsContainer = ({ currentUser }) => {
 					{showMap ? (
 						<div id="map">
 							{' '}
-							<AviaryMap spottings={spottings} />
+							<AviaryMap
+								// showInfo={showInfo}
+								spottings={spottings}
+							/>
 						</div>
 					) : null}
 				</Col>

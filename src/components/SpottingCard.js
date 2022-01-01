@@ -5,15 +5,18 @@ const { Meta } = Card;
 
 const SpottingCard = ({
 	spotting,
-	currentUser,
+	showInfo,
 	editMode,
-	displayEditForm,
+	handleCardClick,
 	handleDelete,
 }) => {
 	return (
 		<>
 			<Meta />
 			<Card
+				onClick={() => {
+					handleCardClick(spotting);
+				}}
 				title={spotting.bird.common_name}
 				description={spotting.bird.sci_name}
 				actions={
