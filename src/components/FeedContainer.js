@@ -1,4 +1,4 @@
-import { Col, message, Row } from 'antd';
+import { Col, message, Row, Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,6 +10,8 @@ const FeedContainer = () => {
 
 	const [users, setUsers] = useState([]);
 	const [followings, setFollowings] = useState([]);
+	const [followedLoaded, setFollowedLoaded] = useState(false);
+	const [notfollowedLoaded, setNotFollowedLoaded] = useState(false);
 	const navigate = useNavigate();
 	useEffect(() => {
 		fetch('/feed')
@@ -17,13 +19,15 @@ const FeedContainer = () => {
 			.then((users) => {
 				// console.log(users);
 				setUsers(users);
-			});
+			})
+			.finally(() => setNotFollowedLoaded(true));
 		fetch('/followings')
 			.then((r) => r.json())
 			.then((followedUsers) => {
 				// console.log(followedUsers);
 				setFollowings(followedUsers);
-			});
+			})
+			.finally(() => setFollowedLoaded(true));
 		fetch('/me')
 			.then((r) => r.json())
 			.then((data) => setCurrentUser(data))
@@ -80,9 +84,9 @@ const FeedContainer = () => {
 			.then((follows) => {
 				// setFollowings(follows);
 				console.log(follows);
+				stateReset();
 			});
 		// success(follow.followed_user.username);
-		stateReset();
 	};
 
 	const success = (username) => {
@@ -100,20 +104,24 @@ const FeedContainer = () => {
 	// RENDER 2 ROWS... FOLLOWED USERS AND OTHERS?
 	return (
 		<>
-			<Row>
-				<Col span={12}>
-					<FollowedUsersContainer
-						followings={followings}
-						handleUnFollow={handleUnFollow}
-					/>
-				</Col>
-				<Col span={12}>
-					<UnfollowedUsersContainer
-						users={users}
-						handleFollow={handleFollow}
-					/>
-				</Col>
-			</Row>
+			{followedLoaded && notfollowedLoaded ? (
+				<Row>
+					<Col span={12}>
+						<FollowedUsersContainer
+							followings={followings}
+							handleUnFollow={handleUnFollow}
+						/>
+					</Col>
+					<Col span={12}>
+						<UnfollowedUsersContainer
+							users={users}
+							handleFollow={handleFollow}
+						/>
+					</Col>
+				</Row>
+			) : (
+				<Spin size="large" />
+			)}
 		</>
 	);
 };
