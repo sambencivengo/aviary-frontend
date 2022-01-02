@@ -68,7 +68,6 @@ function App() {
 			});
 	};
 
-	console.log('x');
 	return (
 		<>
 			<Layout>

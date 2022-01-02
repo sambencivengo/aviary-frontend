@@ -1,11 +1,17 @@
 import { Card, Avatar, Typography, Button } from 'antd';
 import { UserOutlined, CheckOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const { Meta } = Card;
 
 const FollowedFeedCard = ({ follow, avatar, handleUnFollow }) => {
-	console.log(follow);
+	const followedUser = follow.followed_user.id;
+	console.log(followedUser);
+	useEffect(() => {
+		fetch(`/users/${followedUser}`)
+			.then((r) => r.json())
+			.then((data) => console.log(data));
+	}, []);
 	return (
 		<>
 			<Card
@@ -19,18 +25,21 @@ const FollowedFeedCard = ({ follow, avatar, handleUnFollow }) => {
 				// }
 				actions={[
 					<Button
-						key={Math.floor(Math.random() * 100000) + 1}
+						key={follow.id}
 						onClick={() => {
 							handleUnFollow(follow);
 						}}
 						type="primary"
 						// shape="round"
-						icon={[<UserOutlined />, <CheckOutlined />]}
+						icon={[
+							<UserOutlined key={follow.id} />,
+							<CheckOutlined key={follow.id * 100} />,
+						]}
 						size="small"
 					>
 						{' '}
 					</Button>,
-					<Typography style={{ opacity: 0.6 }}>
+					<Typography key={follow.id} style={{ opacity: 0.6 }}>
 						View Aviary
 					</Typography>,
 				]}

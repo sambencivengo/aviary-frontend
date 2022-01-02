@@ -5,7 +5,6 @@ const randomAvatar =
 
 const FollowedUsersContainer = ({ followings, handleUnFollow }) => {
 	const renderUserCards = followings.map((follow) => {
-		console.log(follow.followed_user);
 		return (
 			<FollowedFeedCard
 				key={follow.id}
