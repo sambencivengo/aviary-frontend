@@ -17,6 +17,7 @@ const SpottingsContainer = ({ currentUser }) => {
 	}
 	const [showMap, setShowMap] = useState(false);
 
+	const [enableCardClick, setEnableCardClick] = useState(false);
 	useEffect(() => {
 		fetch('/mybirds')
 			.then((r) => r.json())
@@ -43,15 +44,19 @@ const SpottingsContainer = ({ currentUser }) => {
 
 	const handleShowMap = () => {
 		setShowMap(!showMap);
+		setEnableCardClick(!enableCardClick);
 		// showInfo();
 	};
 
 	const handleCardClick = (spotting) => {
-		console.log(spotting);
-		if (cardInfo !== null) {
-			setCardInfo(null);
+		if (enableCardClick === false) {
+			return null;
 		} else {
-			setCardInfo(spotting.id);
+			if (cardInfo !== null) {
+				setCardInfo(null);
+			} else {
+				setCardInfo(spotting.id);
+			}
 		}
 	};
 
