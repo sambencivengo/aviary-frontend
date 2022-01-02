@@ -23,6 +23,7 @@ const SpottingsContainer = ({ currentUser }) => {
 			.then((r) => r.json())
 			.then((data) => {
 				setSpottings(data);
+				console.log(data);
 			});
 	}, []);
 
