@@ -21,6 +21,17 @@ ReactDOM.render(
 					<Route path="/myaviary" element={<SpottingsContainer />} />
 					<Route path="/spotabird" element={<SpottingForm />} />
 					<Route path="/feed" element={<FeedContainer />} />
+					{/* <Route path="/aviary" element={<UserAviaryContainer />}>
+						<Route path=":userId" element={<UserAviary />} />
+					</Route> */}
+					<Route
+						path="*"
+						element={
+							<main style={{ padding: '1rem' }}>
+								<p>There's nothing here!</p>
+							</main>
+						}
+					/>
 				</Route>
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<SignUp />} />
