@@ -5,12 +5,15 @@ import { useEffect, useState } from 'react';
 const { Meta } = Card;
 
 const FollowedFeedCard = ({ follow, avatar, handleUnFollow }) => {
-	const followedUser = follow.followed_user.id;
-	console.log(followedUser);
+	const [user, setUser] = useState('');
+	const followedUser = follow.followed_user;
 	useEffect(() => {
-		fetch(`/users/${followedUser}`)
+		fetch(`/users/${followedUser.id}`)
 			.then((r) => r.json())
-			.then((data) => console.log(data));
+			.then((user) => {
+				console.log(user);
+				setUser(user);
+			});
 	}, []);
 	return (
 		<>
@@ -46,8 +49,8 @@ const FollowedFeedCard = ({ follow, avatar, handleUnFollow }) => {
 			>
 				<Meta
 					avatar={<Avatar src={avatar} />}
-					title={follow.followed_user.username}
-					// description={`Total Birds Spotted: ${user.spottings.length}`}
+					title={user.username}
+					description={`Total Birds Spotted: ${user.spottings.length}`}
 				/>
 			</Card>
 		</>
