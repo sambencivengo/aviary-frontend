@@ -7,7 +7,7 @@ const UserAviaryContainer = () => {
 			<Button>
 				<Link to={'/feed'}>Back to Feed</Link>
 			</Button>
-			<h2>Aviary Containter</h2>
+
 			<Outlet />
 		</>
 	);

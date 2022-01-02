@@ -7,15 +7,16 @@ const UserAviary = () => {
 	let params = useParams();
 	const [loading, setLoading] = useState(false);
 	const [user, setUser] = useState({});
-	const [error, setError] = useState('');
+
 	useEffect(() => {
 		fetch(`/users/${params.userId}`)
 			.then((r) => r.json())
-			.then((data) => setUser(data))
-			.catch((err) => setError(err))
+			.then((data) => {
+				console.log(data);
+				setUser(data);
+			})
 			.finally(() => setLoading(true));
 	}, []);
-	console.log(user);
 
 	return (
 		<>
