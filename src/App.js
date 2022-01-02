@@ -27,8 +27,8 @@ function App() {
 		fetch('/me')
 			.then((r) => r.json())
 			.then((data) => {
-				if (data) {
-					setCurrentUser(data);
+				if (data.username !== undefined) {
+					console.log(data.username);
 				} else {
 					navigate('/login');
 				}

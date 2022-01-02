@@ -1,48 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
-// const Login = ({ handleLogIn }) => {
-// 	// const [formData, setFormData] = useState({
-// 	// 	username: '',
-// 	// 	password: '',
-// 	// });
-
-// 	// const handleChange = (e) => {
-// 	// 	console.log(e.target.name, ':', e.target.value);
-// 	// 	setFormData({ ...formData, [e.target.name]: e.target.value });
-// 	// };
-
-// 	// const logIn = (e) => {
-// 	// 	e.preventDefault();
-// 	// 	handleLogIn(formData);
-// 	// };
-
-// 	return (
-// 		// <>
-// 		// 	<form onSubmit={logIn}>
-// 		// 		<input
-// 		// 			onChange={handleChange}
-// 		// 			name="username"
-// 		// 			placeholder="username"
-// 		// 		></input>{' '}
-// 		// 		<input
-// 		// 			onChange={handleChange}
-// 		// 			name="password"
-// 		// 			placeholder="password"
-// 		// 		></input>{' '}
-// 		// 		<button>Submit</button>
-// 		// 	</form>
-
-// 		// 	<Link to="/signup">Don't have an account? Sign up!</Link>
-// 		// </>
-// 	);
-// };
-
-// export default Login;
-
 import { Form, Input, Button, Checkbox, Typography, Space } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import ButtonGroup from 'antd/lib/button/button-group';
 
 const Login = ({ handleLogIn, handleSignUpRender }) => {
 	const { Link } = Typography;
@@ -50,6 +9,25 @@ const Login = ({ handleLogIn, handleSignUpRender }) => {
 	const onFinish = () => {
 		handleLogIn(formData);
 	};
+
+	useEffect(() => {
+		fetch('/me').then((r) =>
+			r
+				.json()
+				.then((data) => {
+					if (data.username !== undefined) {
+						console.log(data.username);
+						navigate('/home');
+					} else {
+						navigate('/login');
+					}
+				})
+				.catch((error) => {
+					navigate('/login');
+					console.log(error);
+				})
+		);
+	}, []);
 
 	const [formData, setFormData] = useState({
 		username: '',
