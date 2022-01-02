@@ -6,18 +6,16 @@ import EditCardForm from './EditCardForm';
 import SpottingCard from './SpottingCard';
 
 const SpottingsContainer = ({ currentUser }) => {
-	console.log('spottingscontainer');
 	const [spottings, setSpottings] = useState([]);
 	const [showEditForm, setShowEditForm] = useState(false);
 	const [spottingToEdit, setSpottingToEdit] = useState({});
 	const [editMode, setEditMode] = useState(false);
-
+	const [cardInfo, setCardInfo] = useState(null);
 	function displayEditForm(spotting) {
 		setSpottingToEdit(spotting);
 		showEditForm ? setShowEditForm(false) : setShowEditForm(true);
 	}
 	const [showMap, setShowMap] = useState(false);
-	console.log(spottings);
 
 	useEffect(() => {
 		fetch('/mybirds')
@@ -50,7 +48,11 @@ const SpottingsContainer = ({ currentUser }) => {
 
 	const handleCardClick = (spotting) => {
 		console.log(spotting);
-		
+		if (cardInfo !== null) {
+			setCardInfo(null);
+		} else {
+			setCardInfo(spotting.id);
+		}
 	};
 
 	const renderCards = spottings.map((spotting) => {
@@ -115,6 +117,7 @@ const SpottingsContainer = ({ currentUser }) => {
 							<AviaryMap
 								// showInfo={showInfo}
 								spottings={spottings}
+								cardInfo={cardInfo}
 							/>
 						</div>
 					) : null}

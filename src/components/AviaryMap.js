@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
-import {
-	GoogleMap,
-	LoadScript,
-	Marker,
-	InfoWindow,
-} from '@react-google-maps/api';
+import React from 'react';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import AviaryMarker from './AviaryMarker';
 
-const AviaryMap = ({ spottings, showInfo }) => {
-	// const [markers, setMarkers] = useState([]);
-
+const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 	const mapStyles = {
 		height: '70vh',
 		width: '70vh',
@@ -25,7 +18,7 @@ const AviaryMap = ({ spottings, showInfo }) => {
 		//
 		return (
 			<AviaryMarker
-				showInfo={showInfo}
+				cardInfo={cardInfo}
 				key={spotting.id}
 				spotting={spotting}
 			/>

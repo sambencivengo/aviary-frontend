@@ -1,10 +1,12 @@
 import { Marker, InfoWindow } from '@react-google-maps/api';
 import { StrictMode, useState } from 'react';
 
-const AviaryMarker = ({ spotting }) => {
+const AviaryMarker = ({ spotting, cardInfo }) => {
 	const [showInfoWindow, setShowInfoWindow] = useState(false);
+	console.log(cardInfo);
+	console.log(spotting.id);
+	console.log(cardInfo === spotting.id);
 
-	console.log(spotting);
 	// return (
 	// 	<Marker
 	// 		key={spotting.id}
@@ -26,9 +28,7 @@ const AviaryMarker = ({ spotting }) => {
 		lat: spotting.lat,
 		lng: spotting.long,
 	};
-	const showInfo = () => {
-		console.log('test');
-	};
+
 	return (
 		<>
 			{/* <Marker key={spotting.id} position={location}></Marker> */}
@@ -41,6 +41,15 @@ const AviaryMarker = ({ spotting }) => {
 				}}
 				position={location}
 			>
+				{spotting.id === cardInfo ? (
+					<InfoWindow onClick={() => setShowInfoWindow(false)}>
+						<div>
+							<h3>{spotting.bird.common_name}</h3>
+							<img src={spotting.bird.image} />
+							<p>{spotting.notes}</p>
+						</div>
+					</InfoWindow>
+				) : null}
 				{showInfoWindow ? (
 					<InfoWindow onClick={() => setShowInfoWindow(false)}>
 						<div>
