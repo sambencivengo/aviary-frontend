@@ -1,6 +1,7 @@
 import { Card, Avatar, Typography, Button } from 'antd';
 import { UserOutlined, CheckOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const { Meta } = Card;
 
@@ -40,7 +41,11 @@ const FollowedFeedCard = ({ follow, avatar, handleUnFollow }) => {
 						{' '}
 					</Button>,
 					<Typography key={follow.id} style={{ opacity: 0.6 }}>
-						View Aviary
+						<Link
+							to={`/aviary/${follow.user_obj.followed_user.id}`}
+						>
+							View Aviary
+						</Link>
 					</Typography>,
 				]}
 			>

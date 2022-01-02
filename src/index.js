@@ -11,6 +11,8 @@ import Home from './components/Home';
 import SpottingsContainer from './components/SpottingsContainer';
 import SpottingForm from './components/SpottingForm';
 import FeedContainer from './components/FeedContainer';
+import UserAviary from './components/UserAviary';
+import UserAviaryContainer from './components/UserAviaryContainer';
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -21,18 +23,19 @@ ReactDOM.render(
 					<Route path="/myaviary" element={<SpottingsContainer />} />
 					<Route path="/spotabird" element={<SpottingForm />} />
 					<Route path="/feed" element={<FeedContainer />} />
-					{/* <Route path="/aviary" element={<UserAviaryContainer />}>
+					<Route path="/aviary" element={<UserAviaryContainer />}>
 						<Route path=":userId" element={<UserAviary />} />
-					</Route> */}
-					<Route
-						path="*"
-						element={
-							<main style={{ padding: '1rem' }}>
-								<p>There's nothing here!</p>
-							</main>
-						}
-					/>
+					</Route>
 				</Route>
+
+				<Route
+					path="*"
+					element={
+						<main style={{ padding: '1rem' }}>
+							<p>There's nothing here!</p>
+						</main>
+					}
+				/>
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<SignUp />} />
 			</Routes>
