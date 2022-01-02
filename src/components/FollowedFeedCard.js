@@ -5,32 +5,29 @@ import { useEffect, useState } from 'react';
 const { Meta } = Card;
 
 const FollowedFeedCard = ({ follow, avatar, handleUnFollow }) => {
-	const [user, setUser] = useState('');
-	const followedUser = follow.followed_user;
-	useEffect(() => {
-		fetch(`/users/${followedUser.id}`)
-			.then((r) => r.json())
-			.then((user) => {
-				console.log(user);
-				setUser(user);
-			});
-	}, []);
+	console.log(follow);
+	// const [user, setUser] = useState('');
+	const user = follow.user_obj;
+	console.log(user);
+
+	// useEffect(() => {
+	// 	fetch(`/users/${followedUser.id}`)
+	// 		.then((r) => r.json())
+	// 		.then((user) => {
+	// 			console.log(user);
+	// 			setUser(user);
+	// 		});
+	// }, []);
 	return (
 		<>
 			<Card
 				key={follow.id}
 				style={{ width: 300 }}
-				// cover={
-				// 	<img
-				// 		alt="example"
-				// 		src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-				// 	/>
-				// }
 				actions={[
 					<Button
 						key={follow.id}
 						onClick={() => {
-							handleUnFollow(follow);
+							handleUnFollow(follow.id);
 						}}
 						type="primary"
 						// shape="round"
@@ -49,7 +46,7 @@ const FollowedFeedCard = ({ follow, avatar, handleUnFollow }) => {
 			>
 				<Meta
 					avatar={<Avatar src={avatar} />}
-					title={user.username}
+					title={user.followed_user.username}
 					description={`Total Birds Spotted: ${user.spottings.length}`}
 				/>
 			</Card>

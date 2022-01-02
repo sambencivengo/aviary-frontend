@@ -4,11 +4,12 @@ const randomAvatar =
 	'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png';
 
 const FollowedUsersContainer = ({ followings, handleUnFollow }) => {
-	const renderUserCards = followings.map((follow) => {
+	console.log(followings);
+	const renderUserCards = followings.map((followedUser) => {
 		return (
 			<FollowedFeedCard
-				key={follow.id}
-				follow={follow}
+				key={followedUser.id}
+				follow={followedUser}
 				avatar={randomAvatar}
 				handleUnFollow={handleUnFollow}
 			/>

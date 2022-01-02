@@ -21,6 +21,7 @@ const FeedContainer = () => {
 		fetch('/followings')
 			.then((r) => r.json())
 			.then((followedUsers) => {
+				// console.log(followedUsers);
 				setFollowings(followedUsers);
 			});
 		fetch('/me')
@@ -72,14 +73,15 @@ const FeedContainer = () => {
 	}
 
 	const handleUnFollow = (follow) => {
-		fetch(`/follows/${follow.id}`, {
+		fetch(`/follows/${follow}`, {
 			method: 'DELETE',
 		})
 			.then((r) => r.json())
 			.then((follows) => {
-				setFollowings(follows);
+				// setFollowings(follows);
+				console.log(follows);
 			});
-		success(follow.followed_user.username);
+		// success(follow.followed_user.username);
 		stateReset();
 	};
 
