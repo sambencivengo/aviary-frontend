@@ -82,11 +82,9 @@ const FeedContainer = () => {
 		})
 			.then((r) => r.json())
 			.then((follows) => {
-				// setFollowings(follows);
 				console.log(follows);
 				stateReset();
 			});
-		// success(follow.followed_user.username);
 	};
 
 	const success = (username) => {
