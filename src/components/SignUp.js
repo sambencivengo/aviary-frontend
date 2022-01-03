@@ -40,9 +40,7 @@ const SignUp = () => {
 		})
 			.then((r) => r.json())
 			.then((data) => {
-				if (data !== undefined) {
-					navigate('/home');
-				}
+				navigate('/login');
 			})
 			.catch((error) => console.log(error));
 	};
