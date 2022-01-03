@@ -1,9 +1,12 @@
 import { Button, Col, Row, Space } from 'antd';
 import { useState } from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AviaryMap from './AviaryMap';
 import EditCardForm from './EditCardForm';
 import SpottingCard from './SpottingCard';
+import { UserContext } from './UserProvider';
 
 const SpottingsContainer = () => {
 	const [spottings, setSpottings] = useState([]);
@@ -18,6 +21,12 @@ const SpottingsContainer = () => {
 	const [showMap, setShowMap] = useState(false);
 
 	const [enableCardClick, setEnableCardClick] = useState(false);
+	const navigate = useNavigate();
+
+	const { currentUser } = useContext(UserContext);
+	// if (!currentUser) {
+	// 	navigate('/login');
+	// }
 
 	useEffect(() => {
 		fetch('/mybirds')

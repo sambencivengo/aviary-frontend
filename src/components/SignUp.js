@@ -10,13 +10,16 @@ import {
 } from 'antd';
 import Layout, { Header } from 'antd/lib/layout/layout';
 import Title from 'antd/lib/typography/Title';
+import { useContext } from 'react';
 
 import { useState } from 'react';
+import { UserContext } from './UserProvider';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
 	const { Link } = Typography;
-
+	const { currentUser } = useContext(UserContext);
+	console.log(currentUser);
 	const navigate = useNavigate();
 	const [formData, setFormdata] = useState({
 		email: '',
@@ -104,7 +107,6 @@ const SignUp = () => {
 									required: true,
 									message: 'Please Confirm your password!',
 								},
-								``,
 							]}
 						>
 							{' '}

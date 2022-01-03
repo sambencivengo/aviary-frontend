@@ -18,8 +18,6 @@ const UserProvider = ({ children }) => {
 				.then((user) => {
 					if (user.username !== undefined) {
 						setCurrentUser(user);
-					} else {
-						navigate('/login');
 					}
 				})
 				.catch((error) => {
