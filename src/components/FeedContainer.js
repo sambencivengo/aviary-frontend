@@ -1,18 +1,20 @@
 import { Col, message, Row, Spin } from 'antd';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import FollowedUsersContainer from './FollowedUsersContainer';
 import UnfollowedUsersContainer from './UnfollowedUsersContainer';
+import { UserContext } from './UserProvider';
 
 const FeedContainer = () => {
-	const [currentUser, setCurrentUser] = useState({});
-
 	const [users, setUsers] = useState([]);
 	const [followings, setFollowings] = useState([]);
 	const [followedLoaded, setFollowedLoaded] = useState(false);
 	const [notfollowedLoaded, setNotFollowedLoaded] = useState(false);
 	const navigate = useNavigate();
+
+	const { currentUser } = useContext(UserContext);
+	console.log(currentUser);
 	useEffect(() => {
 		fetch('/feed')
 			.then((r) => r.json())
@@ -28,13 +30,6 @@ const FeedContainer = () => {
 				setFollowings(followedUsers);
 			})
 			.finally(() => setFollowedLoaded(true));
-		fetch('/me')
-			.then((r) => r.json())
-			.then((data) => setCurrentUser(data))
-			.catch((error) => {
-				console.log('Error:', error);
-				navigate('/login');
-			});
 	}, []);
 
 	const stateReset = () => {

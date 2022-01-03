@@ -4,14 +4,10 @@ import { Form, Input, Button, Checkbox, Typography, Space } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { UserContext } from './UserProvider';
 
-const Login = ({ handleLogIn, handleSignUpRender }) => {
+const Login = () => {
 	const { Link } = Typography;
 	const navigate = useNavigate();
-	const onFinish = () => {
-		handleLogIn(formData);
-	};
 	const { login } = useContext(UserContext);
-	console.log(value);
 
 	const [formData, setFormData] = useState({
 		username: '',
@@ -90,7 +86,7 @@ const Login = ({ handleLogIn, handleSignUpRender }) => {
 							type="primary"
 							htmlType="submit"
 							className="login-form-button"
-							onClick={() => logIn()}
+							onClick={() => login(formData)}
 						>
 							Log in
 						</Button>{' '}

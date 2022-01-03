@@ -6,7 +6,7 @@ import FeedContainer from './FeedContainer';
 import SpottingForm from './SpottingForm';
 import SpottingsContainer from './SpottingsContainer';
 
-const Home = ({ currentUser, spottingMode, showAviary, renderFeed }) => {
+const Home = () => {
 	useEffect(() => {
 		fetch('/spottings');
 	}, []);

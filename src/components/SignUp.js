@@ -14,7 +14,7 @@ import Title from 'antd/lib/typography/Title';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SignUp = ({ handleLogIn }) => {
+const SignUp = () => {
 	const { Link } = Typography;
 
 	const navigate = useNavigate();
@@ -43,7 +43,6 @@ const SignUp = ({ handleLogIn }) => {
 				if (data !== undefined) {
 					navigate('/home');
 				}
-				handleLogIn();
 			})
 			.catch((error) => console.log(error));
 	};
@@ -106,7 +105,8 @@ const SignUp = ({ handleLogIn }) => {
 								{
 									required: true,
 									message: 'Please Confirm your password!',
-								},``
+								},
+								``,
 							]}
 						>
 							{' '}

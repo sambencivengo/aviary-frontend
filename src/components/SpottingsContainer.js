@@ -5,7 +5,7 @@ import AviaryMap from './AviaryMap';
 import EditCardForm from './EditCardForm';
 import SpottingCard from './SpottingCard';
 
-const SpottingsContainer = ({ currentUser }) => {
+const SpottingsContainer = () => {
 	const [spottings, setSpottings] = useState([]);
 	const [showEditForm, setShowEditForm] = useState(false);
 	const [spottingToEdit, setSpottingToEdit] = useState({});
@@ -72,7 +72,6 @@ const SpottingsContainer = ({ currentUser }) => {
 							handleDelete={handleDelete}
 							key={spotting.id}
 							spotting={spotting}
-							currentUser={currentUser}
 							editMode={editMode}
 							displayEditForm={displayEditForm}
 						/>

@@ -1,5 +1,5 @@
 import './App.css';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { Switch, Typography } from 'antd';
 import { Layout, Menu } from 'antd';
 import Text from 'antd/lib/typography/Text';
@@ -10,43 +10,17 @@ import {
 	TeamOutlined,
 	DatabaseOutlined,
 } from '@ant-design/icons';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
+import { UserContext } from './components/UserProvider';
 
 const { Header, Footer, Sider, Content } = Layout;
 
 const { SubMenu } = Menu;
 
 function App() {
-	const navigate = useNavigate();
-
-	const [currentUser, setCurrentUser] = useState({});
+	const { logout } = useContext(UserContext);
 
 	const { Title } = Typography;
-
-	useEffect(() => {
-		fetch('/me')
-			.then((r) => r.json())
-			.then((data) => {
-				if (data.username !== undefined) {
-					console.log(data.username);
-				} else {
-					navigate('/login');
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-
-				navigate('/login');
-			});
-	}, []);
-
-	const handleLogOut = () => {
-		fetch('/logout', { method: 'DELETE' })
-			.then((r) => r.json())
-			.catch((error) => {
-				navigate('/login');
-			});
-	};
 
 	return (
 		<>
@@ -94,12 +68,7 @@ function App() {
 							icon={<DashOutlined />}
 							title="Account"
 						>
-							<Menu.Item
-								onClick={() => {
-									handleLogOut();
-								}}
-								key="5"
-							>
+							<Menu.Item onClick={logout} key="5">
 								Log Out
 							</Menu.Item>
 						</SubMenu>

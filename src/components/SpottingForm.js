@@ -1,16 +1,14 @@
 import { Button, Col, Form, Input, message, Row, Select } from 'antd';
 import Layout, { Content } from 'antd/lib/layout/layout';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 
 import MapContainer from './MapContainer';
+import { UserContext } from './UserProvider';
 
 const SpottingForm = () => {
-	const [marker, setMarker] = useState({});
-	const navigate = useNavigate();
 	const { Option } = Select;
 	const [birds, setBirds] = useState([]);
-	const [currentUser, setCurrentUser] = useState({});
+
 	// const [formData, setFormdata] = useState({
 	// 	notes: '',
 	// 	user_id: currentUser.id,
@@ -20,24 +18,14 @@ const SpottingForm = () => {
 	// 	long: '',
 	// });
 	// REFACTOR WHEN YOU CAN! EXTREMELY NOT DRY
-	const [bird_id, setBird_Id] = useState('');
-	const user_id = currentUser.id;
+	const [birdId, setBirdId] = useState(null);
 	const [image, setImage] = useState('');
 	const [lat, setLat] = useState('');
 	const [long, setLong] = useState('');
 	const [notes, setNotes] = useState('');
-	//
-	console.log(bird_id, notes);
+	const { currentUser } = useContext(UserContext);
 
-	useEffect(() => {
-		fetch('/me')
-			.then((r) => r.json())
-			.then((data) => setCurrentUser(data))
-			.catch((error) => {
-				console.log('Error:', error);
-				navigate('/login');
-			});
-	}, []);
+	console.log(birdId, notes);
 
 	// fetch and render Option components for each bird?
 
@@ -51,7 +39,14 @@ const SpottingForm = () => {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ bird_id, user_id, notes, image, lat, long }),
+			body: JSON.stringify({
+				bird_id: birdId,
+				user_id: currentUser.id,
+				notes,
+				image,
+				lat,
+				long,
+			}),
 		})
 			.then((r) => r.json())
 			.then((data) => {
@@ -110,7 +105,7 @@ const SpottingForm = () => {
 							<Form.Item>
 								<Select
 									onChange={(value) => {
-										setBird_Id(value);
+										setBirdId(value);
 									}}
 									showSearch
 									style={{ width: 300 }}
