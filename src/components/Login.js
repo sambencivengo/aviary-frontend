@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, Typography, Space } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserContext } from './UserProvider';
 
 const Login = ({ handleLogIn, handleSignUpRender }) => {
 	const { Link } = Typography;
@@ -9,25 +10,8 @@ const Login = ({ handleLogIn, handleSignUpRender }) => {
 	const onFinish = () => {
 		handleLogIn(formData);
 	};
-
-	useEffect(() => {
-		fetch('/me').then((r) =>
-			r
-				.json()
-				.then((data) => {
-					if (data.username !== undefined) {
-						console.log(data.username);
-						navigate('/home');
-					} else {
-						navigate('/login');
-					}
-				})
-				.catch((error) => {
-					navigate('/login');
-					console.log(error);
-				})
-		);
-	}, []);
+	const { login } = useContext(UserContext);
+	console.log(value);
 
 	const [formData, setFormData] = useState({
 		username: '',
@@ -37,21 +21,6 @@ const Login = ({ handleLogIn, handleSignUpRender }) => {
 	const handleChange = (e) => {
 		console.log(e.target.name, ':', e.target.value);
 		setFormData({ ...formData, [e.target.name]: e.target.value });
-	};
-
-	const logIn = () => {
-		fetch('/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(formData),
-		})
-			.then((r) => r.json())
-			.then((data) => {
-				navigate('/home');
-			})
-			.catch((error) => console.log(error));
 	};
 
 	return (

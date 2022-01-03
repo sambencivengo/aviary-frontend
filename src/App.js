@@ -40,26 +40,6 @@ function App() {
 			});
 	}, []);
 
-	const userContext = createContext(currentUser);
-
-	const handleLogIn = (formData) => {
-		fetch('/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(formData),
-		})
-			.then((r) => r.json())
-			.then((data) => {
-				if (data.username === undefined) {
-				} else {
-					setCurrentUser(data);
-				}
-			})
-			.catch((error) => console.log(error));
-	};
-
 	const handleLogOut = () => {
 		fetch('/logout', { method: 'DELETE' })
 			.then((r) => r.json())

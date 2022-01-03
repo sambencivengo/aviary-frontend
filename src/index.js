@@ -13,10 +13,12 @@ import SpottingForm from './components/SpottingForm';
 import FeedContainer from './components/FeedContainer';
 import UserAviary from './components/UserAviary';
 import UserAviaryContainer from './components/UserAviaryContainer';
+import UserProvider from './components/UserProvider';
 
 ReactDOM.render(
-	<React.StrictMode>
-		<BrowserRouter>
+	// <React.StrictMode>
+	<BrowserRouter>
+		<UserProvider>
 			<Routes>
 				<Route path="/" element={<App />}>
 					<Route path="/home" element={<Home />} />
@@ -39,8 +41,9 @@ ReactDOM.render(
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<SignUp />} />
 			</Routes>
-		</BrowserRouter>
-	</React.StrictMode>,
+		</UserProvider>
+	</BrowserRouter>,
+	// </React.StrictMode>,
 	document.getElementById('root')
 );
 
