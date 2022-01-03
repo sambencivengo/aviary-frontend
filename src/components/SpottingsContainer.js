@@ -18,6 +18,7 @@ const SpottingsContainer = () => {
 	const [showMap, setShowMap] = useState(false);
 
 	const [enableCardClick, setEnableCardClick] = useState(false);
+
 	useEffect(() => {
 		fetch('/mybirds')
 			.then((r) => r.json())
@@ -110,7 +111,17 @@ const SpottingsContainer = () => {
 				style={{ minHeight: '80vh' }}
 			>
 				{showMap ? (
-					<Col span={12}>{renderCards}</Col>
+					<Col span={12}>
+						<div
+							style={{
+								maxHeight: '75vh',
+								overflowY: 'scroll',
+								// boxShadow: '10px 5px 5px 10px red;',
+							}}
+						>
+							{renderCards}
+						</div>
+					</Col>
 				) : (
 					<Col span={24}>{renderCards}</Col>
 				)}

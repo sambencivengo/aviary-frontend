@@ -24,10 +24,11 @@ function App() {
 
 	return (
 		<>
-			<Layout>
+			<Layout style={{ minHeight: '100vh' }}>
 				<Sider
 					style={{
 						overflow: 'auto',
+
 						height: '100vh',
 						position: 'fixed',
 						left: 0,
@@ -75,7 +76,10 @@ function App() {
 					</Menu>
 				</Sider>
 
-				<Layout className="site-layout" style={{ marginLeft: 200 }}>
+				<Layout
+					className="site-layout"
+					style={{ marginLeft: 200, minHeight: '100%' }}
+				>
 					<Content
 						style={{ margin: '24px 16px 0', overflow: 'initial' }}
 					>
@@ -94,7 +98,6 @@ function App() {
 					</Footer>
 				</Layout>
 			</Layout>
-			,
 		</>
 	);
 }
