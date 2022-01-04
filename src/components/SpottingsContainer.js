@@ -1,9 +1,10 @@
-import { Button, Col, Row, Space } from 'antd';
+import { Button, Col, Row, Space, Drawer } from 'antd';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AviaryMap from './AviaryMap';
+
 import EditCardForm from './EditCardForm';
 import SpottingCard from './SpottingCard';
 import { UserContext } from './UserProvider';
@@ -14,16 +15,17 @@ const SpottingsContainer = () => {
 	const [spottingToEdit, setSpottingToEdit] = useState({});
 	const [editMode, setEditMode] = useState(false);
 	const [cardInfo, setCardInfo] = useState(null);
+	const [drawerVisible, setDrawerVisible] = useState(false);
 	function displayEditForm(spotting) {
 		setSpottingToEdit(spotting);
 		showEditForm ? setShowEditForm(false) : setShowEditForm(true);
 	}
 	const [showMap, setShowMap] = useState(false);
-
+	const [spotting, setSpotting] = useState(spottings[1]);
 	const [enableCardClick, setEnableCardClick] = useState(false);
 	const navigate = useNavigate();
+	console.log(spotting);
 
-	const { currentUser } = useContext(UserContext);
 	// if (!currentUser) {
 	// 	navigate('/login');
 	// }
@@ -58,8 +60,17 @@ const SpottingsContainer = () => {
 		// showInfo();
 	};
 
+	const showDrawer = (spotting) => {
+		setDrawerVisible(true);
+	};
+	const onClose = () => {
+		setDrawerVisible(false);
+	};
+	const [drawerBird, setDrawerBird] = useState({});
 	const handleCardClick = (spotting) => {
-		if (enableCardClick === false) {
+		if (showMap === false) {
+			setDrawerBird(spotting.bird.id);
+			showDrawer(spotting);
 			return null;
 		} else {
 			if (cardInfo !== null) {
@@ -97,7 +108,7 @@ const SpottingsContainer = () => {
 	// MAP IDEAS
 	// map conatiner might not be the way to render the
 	// map if each marker is customized to the fetch
-
+	// console.log(drawerBird.bird);
 	return (
 		<>
 			<Button
@@ -132,9 +143,22 @@ const SpottingsContainer = () => {
 						</div>
 					</Col>
 				) : (
-					<Space size="large" wrap>
-						{renderCards}
-					</Space>
+					<div>
+						<Space size="large" wrap>
+							{renderCards}
+						</Space>
+						{/* <Drawer
+							// title={drawerBird.bird.common_name}
+							placement="right"
+							onClose={onClose}
+							visible={drawerVisible}
+							size="medium"
+						>
+							<>
+								<p>...</p>
+							</>
+						</Drawer> */}
+					</div>
 				)}
 				<Col span={12}>
 					{showMap ? (
