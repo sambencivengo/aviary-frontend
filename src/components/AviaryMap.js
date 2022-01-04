@@ -12,8 +12,7 @@ const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 	const [currentLng, setCurrentLng] = useLocalStorage('lng', null);
 	console.log(currentLat, currentLng);
 
-
-	const [zoom, setZoom] = useState(8);
+	const [zoom, setZoom] = useState(10);
 
 	// const [initialCenter, setInitialCenter] = useState(defaultCenter);
 	const mapStyles = {
@@ -21,10 +20,7 @@ const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 		width: '70vh',
 	};
 
-	const [center, setCenter] = useState({
-		lat: currentLat,
-		lng: currentLng,
-	});
+	const [center, setCenter] = useState({ lat: 40.7128, lng: -74.006 });
 
 	// function setLocation() {
 	// 	setCenter({ lat: currentLat, lng: currentLng });
@@ -62,19 +58,21 @@ const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 				};
 				setCurrentLat(locObj.lat);
 				setCurrentLng(locObj.lng);
+				setCenter({
+					lat: position.coords.latitude,
+					lng: position.coords.longitude,
+				});
 			});
 		}
 	};
 
 	useEffect(() => {
-		if (currentLng || currentLat === null) {
-			setCenter({ lat: 42.6602, lng: -73.969749 });
+		if (currentLng || currentLat) {
+			setCenter({ lat: currentLat, lng: currentLng });
+			setZoom(13);
 		}
-
-		setCenter({ lat: currentLat, lng: currentLng });
-		setZoom(13);
 	}, []);
-
+	console.log(center);
 	return (
 		<div className="map">
 			<div className="map">
