@@ -1,4 +1,5 @@
-import { Col, message, Row, Spin } from 'antd';
+import { Col, message, Row, Space, Spin } from 'antd';
+import Sider from 'antd/lib/layout/Sider';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -99,13 +100,15 @@ const FeedContainer = () => {
 		<>
 			{followedLoaded && notfollowedLoaded ? (
 				<Row>
-					<Col span={12}>
+					<Col span={18}>
 						<FollowedUsersContainer
 							followings={followings}
 							handleUnFollow={handleUnFollow}
 						/>
 					</Col>
-					<Col span={12}>
+					{/* <Col span={6}></Col> */}
+
+					<Col span={6}>
 						<UnfollowedUsersContainer
 							users={users}
 							handleFollow={handleFollow}

@@ -1,4 +1,4 @@
-import { Card, Avatar } from 'antd';
+import { Card, Avatar, Space } from 'antd';
 import UnfollowedFeedCard from './UnfollowedFeedCard';
 const randomAvatar =
 	'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png';
@@ -19,7 +19,20 @@ const UnfollowedUsersContainer = ({ users, handleFollow }) => {
 	return (
 		<>
 			<h1>Unfollowed Users</h1>
-			{renderUserCards}
+
+			<Card
+				style={{
+					maxHeight: '75vh',
+					overflowY: 'scroll',
+					backgroundColor: '#D3D3D3',
+					paddingTop: '20px',
+					paddingBottom: '20px',
+				}}
+			>
+				<Space size="large" direction="vertical">
+					{renderUserCards}
+				</Space>
+			</Card>
 		</>
 	);
 };

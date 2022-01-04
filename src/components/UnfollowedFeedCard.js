@@ -13,7 +13,7 @@ const UnfollowedFeedCard = ({ user, avatar, handleFollow }) => {
 		<>
 			<Card
 				key={user.id}
-				style={{ width: 300 }}
+				style={{ width: 190 }}
 				// cover={
 				// 	<img
 				// 		alt="example"
@@ -36,7 +36,6 @@ const UnfollowedFeedCard = ({ user, avatar, handleFollow }) => {
 				]}
 			>
 				<Meta
-					avatar={<Avatar src={avatar} />}
 					title={user.username}
 					description={`Total Birds Spotted: ${user.spottings.length}`}
 				/>

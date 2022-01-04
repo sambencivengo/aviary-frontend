@@ -23,12 +23,8 @@ const SpottingsContainer = () => {
 	const [showMap, setShowMap] = useState(false);
 	const [spotting, setSpotting] = useState(spottings[1]);
 	const [enableCardClick, setEnableCardClick] = useState(false);
-	const navigate = useNavigate();
-	console.log(spotting);
 
-	// if (!currentUser) {
-	// 	navigate('/login');
-	// }
+	console.log(spotting);
 
 	useEffect(() => {
 		fetch('/mybirds')
@@ -38,26 +34,15 @@ const SpottingsContainer = () => {
 			});
 	}, []);
 
-	// GET STATE TO UPDATE!!!
-
 	const handleDelete = (bird) => {
 		fetch(`/spottings/${bird.id}`, { method: 'DELETE' })
 			.then((r) => r.json())
 			.then((newSpottings) => setSpottings(newSpottings));
 	};
 
-	// const reFetch = () => {
-	// 	fetch('/mybirds')
-	// 		.then((r) => r.json())
-	// 		.then((data) => {
-	// 			setSpottings(data);
-	// 		});
-	// };
-
 	const handleShowMap = () => {
 		setShowMap(!showMap);
 		setEnableCardClick(!enableCardClick);
-		// showInfo();
 	};
 
 	const showDrawer = (spotting) => {
@@ -88,9 +73,9 @@ const SpottingsContainer = () => {
 					{new Array(1).fill(null).map((_, index) => (
 						// eslint-disable-next-line react/no-array-index-key
 						<SpottingCard
+							key={spotting.id}
 							handleCardClick={handleCardClick}
 							handleDelete={handleDelete}
-							key={spotting.id}
 							spotting={spotting}
 							editMode={editMode}
 							displayEditForm={displayEditForm}
