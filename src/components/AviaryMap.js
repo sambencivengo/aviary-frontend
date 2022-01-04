@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import AviaryMarker from './AviaryMarker';
 import { Button } from 'antd';
+import { UserContext } from './UserProvider';
 
 const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
+	const { currentUser } = useContext(UserContext);
+	console.log(currentUser);
+
 	const defaultCenter = {
 		lat: 44.6602,
 		lng: -73.969749,
@@ -25,7 +29,6 @@ const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 	console.log(currentLocation);
 
 	const markers = spottings.map((spotting) => {
-		console.log(spotting);
 		//
 		return (
 			<AviaryMarker
@@ -36,14 +39,27 @@ const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 		);
 	});
 
-	const getCurrentLocation = () => {
-		console.log('clicked');
+	async function patchUserLoc(url = '', data = {}) {
+		const response = await fetch(url, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		});
+		return response.json();
+	}
 
+	const getCurrentLocation = () => {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
-				let lat = position.coords.latitude;
-				let lng = position.coords.longitude;
-				setCurrentLocation({ lat: lat, lng: lng });
+				const locObj = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude,
+				};
+				patchUserLoc(`/users/${currentUser.id}`, locObj).then((data) =>
+					console.log(data.lat, data.lng)
+				);
 			});
 		}
 	};
