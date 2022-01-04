@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import AviaryMarker from './AviaryMarker';
+import { Button } from 'antd';
 
 const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
+	const defaultCenter = {
+		lat: 44.6602,
+		lng: -73.969749,
+	};
+
+	// save current location in backend!!!!
+
+	const [initialCenter, setInitialCenter] = useState(defaultCenter);
+	// {
+	// 	lat: null,
+	// 	lng: null,
+	// }
+	const [currentLocation, setCurrentLocation] = useState(defaultCenter);
 	const mapStyles = {
 		height: '70vh',
 		width: '70vh',
 	};
 
-	const defaultCenter = {
-		lat: 40.6602,
-		lng: -73.969749,
-	};
+	console.log(currentLocation);
 
 	const markers = spottings.map((spotting) => {
 		console.log(spotting);
@@ -25,6 +36,18 @@ const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 		);
 	});
 
+	const getCurrentLocation = () => {
+		console.log('clicked');
+
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition((position) => {
+				let lat = position.coords.latitude;
+				let lng = position.coords.longitude;
+				setCurrentLocation({ lat: lat, lng: lng });
+			});
+		}
+	};
+
 	return (
 		<div className="map">
 			<div className="map">
@@ -32,8 +55,14 @@ const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 					<GoogleMap
 						mapContainerStyle={mapStyles}
 						zoom={13}
-						center={defaultCenter}
+						center={currentLocation}
 					>
+						<Button
+							style={{ marginTop: '10px' }}
+							onClick={() => getCurrentLocation()}
+						>
+							Pan To Current Location
+						</Button>
 						{markers}
 
 						{/* {locations.map((marker) => {

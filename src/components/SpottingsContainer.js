@@ -125,26 +125,30 @@ const SpottingsContainer = () => {
 							style={{
 								maxHeight: '75vh',
 								overflowY: 'scroll',
-								// boxShadow: '10px 5px 5px 10px red;',
 							}}
 						>
-							{renderCards}
+							<Space size="large" align="center" wrap>
+								{renderCards}
+							</Space>
 						</div>
 					</Col>
 				) : (
-					<Col span={24}>{renderCards}</Col>
+					<Space size="large" wrap>
+						{renderCards}
+					</Space>
 				)}
-
 				<Col span={12}>
 					{showMap ? (
-						<div id="map">
-							{' '}
-							<AviaryMap
-								// showInfo={showInfo}
-								spottings={spottings}
-								cardInfo={cardInfo}
-							/>
-						</div>
+						<Space size="large" wrap>
+							<div style={{ paddingTop: '30px' }} id="map">
+								{' '}
+								<AviaryMap
+									// showInfo={showInfo}
+									spottings={spottings}
+									cardInfo={cardInfo}
+								/>
+							</div>
+						</Space>
 					) : null}
 				</Col>
 			</Row>
