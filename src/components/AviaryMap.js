@@ -8,11 +8,14 @@ import { useLocalStorage } from 'react-use';
 const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 	const { currentUser } = useContext(UserContext);
 
-	const [currentLat, setCurrentLat] = useLocalStorage('lat', null);
-	const [currentLng, setCurrentLng] = useLocalStorage('lng', null);
-	console.log(currentLat, currentLng);
+	// const [currentLat, setCurrentLat] = useLocalStorage('lat', null);
+	// const [currentLng, setCurrentLng] = useLocalStorage('lng', null);
 
-	const [zoom, setZoom] = useState(10);
+	const [savedLocation, setSavedLocation] = useLocalStorage(
+		'saved-location',
+		null
+	);
+	console.log(savedLocation);
 
 	// const [initialCenter, setInitialCenter] = useState(defaultCenter);
 	const mapStyles = {
@@ -21,6 +24,7 @@ const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 	};
 
 	const [center, setCenter] = useState({ lat: 40.7128, lng: -74.006 });
+	const [zoom, setZoom] = useState(10);
 
 	// function setLocation() {
 	// 	setCenter({ lat: currentLat, lng: currentLng });
@@ -52,26 +56,26 @@ const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 	const getCurrentLocation = () => {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
-				const locObj = {
+				setSavedLocation({
 					lat: position.coords.latitude,
 					lng: position.coords.longitude,
-				};
-				setCurrentLat(locObj.lat);
-				setCurrentLng(locObj.lng);
+				});
 				setCenter({
 					lat: position.coords.latitude,
 					lng: position.coords.longitude,
 				});
+				setZoom(15);
 			});
 		}
 	};
 
 	useEffect(() => {
-		if (currentLng || currentLat) {
-			setCenter({ lat: currentLat, lng: currentLng });
-			setZoom(13);
+		if (savedLocation) {
+			setZoom(15);
+			setCenter(savedLocation);
 		}
 	}, []);
+	
 	console.log(center);
 	return (
 		<div className="map">

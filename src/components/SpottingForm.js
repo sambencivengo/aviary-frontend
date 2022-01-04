@@ -141,6 +141,7 @@ const SpottingForm = () => {
 									// prefix={
 									// 	<SmallDashOutlined className="site-form-item-icon" />
 									// }
+									required
 									placeholder="Field notes"
 									onChange={(e) => {
 										setNotes(e.target.value);
