@@ -3,9 +3,6 @@ import { StrictMode, useState } from 'react';
 
 const AviaryMarker = ({ spotting, cardInfo }) => {
 	const [showInfoWindow, setShowInfoWindow] = useState(false);
-	console.log(cardInfo);
-	console.log(spotting.id);
-	console.log(cardInfo === spotting.id);
 
 	// return (
 	// 	<Marker
