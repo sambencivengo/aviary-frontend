@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { Button } from 'antd';
+import { useLocalStorage } from 'react-use';
 
 const MapContainer = ({ handleMarkerState }) => {
 	const [marker, setMarker] = useState({});
-	const [center, setCenter] = useState({
-		lat: 40.6602,
-		lng: -73.969749,
-	});
+
 	const mapStyles = {
 		height: '70vh',
 		width: '70vh',
 	};
+	const [savedLocation, setSavedLocation] = useLocalStorage(
+		'saved-location',
+		null
+	);
 
 	const handleMarkerCreate = (e) => {
 		const locationObj = {
@@ -26,27 +29,33 @@ const MapContainer = ({ handleMarkerState }) => {
 	// });
 
 	// CURRENT LOCATION CODE
-	var options = {
-		enableHighAccuracy: true,
-		timeout: 5000,
-		maximumAge: 0,
+
+	const [center, setCenter] = useState({ lat: 40.7128, lng: -74.006 });
+	const [zoom, setZoom] = useState(10);
+
+	//
+	const getCurrentLocation = () => {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition((position) => {
+				setSavedLocation({
+					lat: position.coords.latitude,
+					lng: position.coords.longitude,
+				});
+				setCenter({
+					lat: position.coords.latitude,
+					lng: position.coords.longitude,
+				});
+				setZoom(15);
+			});
+		}
 	};
 
-	function success(pos) {
-		var crd = pos.coords;
-
-		console.log('Your current position is:');
-		console.log(`Latitude : ${crd.latitude}`);
-		console.log(`Longitude: ${crd.longitude}`);
-		console.log(`More or less ${crd.accuracy} meters.`);
-	}
-
-	function error(err) {
-		console.warn(`ERROR(${err.code}): ${err.message}`);
-	}
-
-	navigator.geolocation.getCurrentPosition(success, error, options);
-	//
+	useEffect(() => {
+		if (savedLocation) {
+			setZoom(15);
+			setCenter(savedLocation);
+		}
+	}, []);
 
 	return (
 		<div className="map">
@@ -54,13 +63,17 @@ const MapContainer = ({ handleMarkerState }) => {
 				<GoogleMap
 					onClick={handleMarkerCreate}
 					mapContainerStyle={mapStyles}
-					zoom={13}
+					zoom={zoom}
 					center={center}
 				>
-					{/* {locations.map((marker) => {
-					return <Marker key={marker.name} position={marker.location} />;
-				})} */}
-					{/* {renderMarkers} */}
+					<Button
+						style={{ color: 'black', marginTop: '10px' }}
+						onClick={() => getCurrentLocation()}
+						size="small"
+					>
+						Current Location
+					</Button>
+
 					<Marker key={marker.name} position={marker.location} />
 				</GoogleMap>
 			</LoadScript>

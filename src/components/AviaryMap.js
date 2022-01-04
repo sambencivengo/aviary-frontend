@@ -75,7 +75,7 @@ const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 			setCenter(savedLocation);
 		}
 	}, []);
-	
+
 	console.log(center);
 	return (
 		<div className="map">
