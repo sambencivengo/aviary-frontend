@@ -1,4 +1,14 @@
-import { Button, Col, Form, Input, message, Row, Select } from 'antd';
+import {
+	Button,
+	Col,
+	DatePicker,
+	Form,
+	Input,
+	message,
+	Row,
+	Select,
+} from 'antd';
+import moment from 'moment';
 import Layout, { Content } from 'antd/lib/layout/layout';
 import { useContext, useEffect, useState } from 'react';
 
@@ -24,15 +34,9 @@ const SpottingForm = () => {
 	const [long, setLong] = useState('');
 	const [notes, setNotes] = useState('');
 	const { currentUser } = useContext(UserContext);
+	const [date, setDate] = useState('');
 
-	console.log(birdId, notes);
-
-	// fetch and render Option components for each bird?
-
-	// const handleChange = (e) => {
-	// 	console.log(e.target.name, ':', e.target.value);
-	// 	setFormdata({ ...formData, [e.target.name]: e.target.value });
-	// };
+	const { RangePicker } = DatePicker;
 	const handleSubmit = () => {
 		fetch('/spottings', {
 			method: 'POST',
@@ -46,11 +50,11 @@ const SpottingForm = () => {
 				image,
 				lat,
 				long,
+				date,
 			}),
 		})
 			.then((r) => r.json())
 			.then((data) => {
-				console.log(data);
 				success();
 			});
 	};
@@ -59,7 +63,6 @@ const SpottingForm = () => {
 		setLat(location.location.lat);
 		setLong(location.location.lng);
 	};
-	console.log(lat, long);
 
 	const success = () => {
 		message.success({
@@ -93,7 +96,17 @@ const SpottingForm = () => {
 		);
 	});
 
-	//
+	function handleDateChange(date, dateString) {
+		console.log(date, dateString);
+		setDate(dateString);
+	}
+
+	console.log(date);
+
+	function disabledDate(current) {
+		// Can not select days before today and today
+		return current && current > moment().endOf('day');
+	}
 
 	return (
 		<>
@@ -102,6 +115,11 @@ const SpottingForm = () => {
 					<Col span={12}>
 						<h3>What did you see?</h3>
 						<Form onFinish={handleSubmit} name="spotting-form">
+							<img
+								src="/spottingBird3.png"
+								style={{ maxWidth: '65vh' }}
+							/>
+
 							<Form.Item>
 								<Select
 									onChange={(value) => {
@@ -126,6 +144,13 @@ const SpottingForm = () => {
 								>
 									{renderOptions}
 								</Select>
+							</Form.Item>
+							<Form.Item onChange={handleDateChange}>
+								<DatePicker
+									disabledDate={disabledDate}
+									onChange={handleDateChange}
+									style={{ width: 300 }}
+								/>
 							</Form.Item>
 							<Form.Item
 							// rules={[

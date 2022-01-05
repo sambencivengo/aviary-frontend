@@ -1,4 +1,4 @@
-import { Button, Col, Row, Space, Drawer } from 'antd';
+import { Button, Col, Row, Space, Drawer, DatePicker } from 'antd';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useEffect } from 'react';
@@ -24,6 +24,8 @@ const SpottingsContainer = () => {
 
 	const [enableCardClick, setEnableCardClick] = useState(false);
 
+	const { RangePicker } = DatePicker;
+	//
 	useEffect(() => {
 		fetch('/mybirds')
 			.then((r) => r.json())
@@ -54,14 +56,13 @@ const SpottingsContainer = () => {
 	};
 
 	const handleCardClick = (spotting) => {
+		console.log(spotting);
 		setSelectedSpotting(spotting);
 
 		if (showMap === false) {
 			showDrawer();
 		}
 	};
-
-	console.log({ selectedSpotting });
 
 	const renderCards = spottings.map((spotting) => {
 		return (
@@ -82,15 +83,6 @@ const SpottingsContainer = () => {
 			</>
 		);
 	});
-	// console.log(spottings[0].lat, spottings[0].long);
-	// set spottings into an array
-	// pass them to the google maps component
-	// iterate through them (lat & long) to create Markers
-
-	// MAP IDEAS
-	// map conatiner might not be the way to render the
-	// map if each marker is customized to the fetch
-	// console.log(drawerBird.bird);
 	return (
 		<>
 			<Button
@@ -104,6 +96,8 @@ const SpottingsContainer = () => {
 			</Button>
 			<Button onClick={handleShowMap}>Show Map</Button>
 			{showEditForm ? <EditCardForm spotting={spottingToEdit} /> : null}
+
+			<RangePicker />
 
 			<Row
 				type="flex"
