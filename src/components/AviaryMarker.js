@@ -38,7 +38,7 @@ const AviaryMarker = ({ spotting, isSelected, onClick, onCloseClick }) => {
 							style={{ maxWidth: '40vh' }}
 							src={spotting.bird.image}
 						/>
-						<p>{spotting.notes}</p>
+						{/* <p>{spotting}</p> */}
 					</div>
 				</InfoWindow>
 			) : null}

@@ -23,11 +23,11 @@ const Home = () => {
 
 	return (
 		<>
-			<Title>Welcome to Aviary!</Title>
+			{/* <Title>Welcome to Aviary!</Title> */}
 			<img
 				className="birdIcon"
-				src="/logoBird4.png"
-				style={{ paddingTop: '50px', maxHeight: '50vh' }}
+				src="/largeBird.png"
+				style={{ paddingTop: '10px', maxHeight: '100%' }}
 			/>
 		</>
 	);

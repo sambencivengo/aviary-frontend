@@ -1,15 +1,16 @@
 .birdIcon {
-	animation: zoom-in-zoom-out 1s ease infinite;
+	animation: zoom-in-zoom-out 3s ease infinite;
 }
 
 @keyframes zoom-in-zoom-out {
 	0% {
-		transform: scale(1, 1);
+		transform: scale(0.1, 0.1);
 	}
-	50% {
-		transform: scale(1.5, 1.5);
+	25% {
+		transform: scale(0.25, 0.25);
 	}
+
 	100% {
-		transform: scale(1, 1);
+		transform: scale(1.25, 1.25);
 	}
 }

@@ -142,8 +142,10 @@ const SpottingsContainer = () => {
 					<Col span={12}>
 						<div
 							style={{
+								backgroundColor: 'green',
 								maxHeight: '75vh',
 								overflowY: 'scroll',
+								padding: '5px',
 							}}
 						>
 							<Space size="large" align="center" wrap>

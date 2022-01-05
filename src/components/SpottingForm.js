@@ -108,6 +108,15 @@ const SpottingForm = () => {
 		return current && current > moment().endOf('day');
 	}
 
+	const [birdImage, setBirdImage] = useState('/bird3.png');
+	const handleBirdPic = () => {
+		console.log('changing bird');
+		setBirdImage('/spottingBird3.png');
+	};
+	const resetBirdPic = () => {
+		setBirdImage('/bird3.png');
+	};
+
 	return (
 		<>
 			<Layout>
@@ -116,8 +125,14 @@ const SpottingForm = () => {
 						<h3>What did you see?</h3>
 						<Form onFinish={handleSubmit} name="spotting-form">
 							<img
-								src="/spottingBird3.png"
+								src={birdImage}
 								style={{ maxWidth: '65vh' }}
+								// onMouseOver={(e) =>
+								// 	(e.currentTarget.src = '/spottingBird3.png')
+								// }
+								// onMouseOut={(e) =>
+								// 	(e.currentTarget.src = '/bird3.png')
+								// }
 							/>
 
 							<Form.Item>
@@ -209,7 +224,11 @@ const SpottingForm = () => {
 					<Col span={12}>
 						{' '}
 						<h3>Where did you see it?</h3>
-						<div id="map">
+						<div
+							id="map"
+							onMouseOver={handleBirdPic}
+							onMouseOut={resetBirdPic}
+						>
 							<MapContainer
 								handleMarkerState={handleMarkerState}
 							/>

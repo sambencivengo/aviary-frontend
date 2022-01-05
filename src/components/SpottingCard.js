@@ -49,8 +49,14 @@ const SpottingCard = ({
 					<h3>{spotting.bird.common_name}</h3>
 					<Divider></Divider>
 					<p style={{ textAlign: 'left' }}>{spotting.notes}</p>
-					<p style={{ fontStyle: 'italic', textAlign: 'left' }}>
-						Date seen: {legibleDate}
+					<p
+						style={{
+							fontSize: '10px',
+							fontStyle: 'italic',
+							textAlign: 'left',
+						}}
+					>
+						Spotted: {legibleDate}
 					</p>
 				</Card>
 			</div>
