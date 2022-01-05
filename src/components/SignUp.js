@@ -28,6 +28,9 @@ const SignUp = () => {
 		password_confirmation: '',
 	});
 
+	if (currentUser) {	
+		navigate('/home');
+	}
 	const handleChange = (e) => {
 		setFormdata({ ...formData, [e.target.name]: e.target.value });
 	};

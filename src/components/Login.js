@@ -23,6 +23,10 @@ const Login = () => {
 		username: '',
 		password: '',
 	});
+	const { currentUser } = useContext(UserContext);
+	if (currentUser) {
+		navigate('/home');
+	}
 
 	const handleChange = (e) => {
 		console.log(e.target.name, ':', e.target.value);
