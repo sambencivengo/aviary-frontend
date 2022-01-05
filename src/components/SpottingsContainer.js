@@ -13,12 +13,13 @@ import Title from 'antd/lib/typography/Title';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import AviaryMap from './AviaryMap';
 
 import EditCardForm from './EditCardForm';
 import SpottingCard from './SpottingCard';
 import { UserContext } from './UserProvider';
+import { useNavigate } from 'react-router-dom';
 
 const SpottingsContainer = () => {
 	const [spottings, setSpottings] = useState([]);
@@ -36,7 +37,7 @@ const SpottingsContainer = () => {
 	const [enableCardClick, setEnableCardClick] = useState(false);
 	const { Title } = Typography;
 	const { RangePicker } = DatePicker;
-	//
+
 	useEffect(() => {
 		fetch('/mybirds')
 			.then((r) => r.json())
@@ -44,7 +45,7 @@ const SpottingsContainer = () => {
 				setSpottings(data);
 			});
 	}, []);
-
+	const { currentUser } = useContext(UserContext);
 	const handleDelete = (bird) => {
 		fetch(`/spottings/${bird.id}`, { method: 'DELETE' })
 			.then((r) => r.json())
@@ -99,6 +100,7 @@ const SpottingsContainer = () => {
 			</>
 		);
 	});
+
 	return (
 		<>
 			<Button

@@ -1,8 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, Input, Button, Checkbox, Typography, Space } from 'antd';
+import {
+	Form,
+	Input,
+	Button,
+	Checkbox,
+	Typography,
+	Space,
+	Row,
+	Col,
+} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { UserContext } from './UserProvider';
+import Title from 'antd/lib/typography/Title';
 
 const Login = () => {
 	const { Link } = Typography;
@@ -21,10 +31,16 @@ const Login = () => {
 
 	return (
 		<>
-			<Space
-				direction="horizontal"
-				style={{ width: '100%', justifyContent: 'center' }}
+			<Row
+				type="flex"
+				justify="center"
+				align="middle"
+				style={{ minHeight: '90vh' }}
 			>
+				{/* <Space
+					direction="horizontal"
+					style={{ width: '100%', justifyContent: 'center' }}
+				> */}
 				<Form
 					name="normal_login"
 					className="login-form"
@@ -32,6 +48,18 @@ const Login = () => {
 					// onFinish={onFinish}
 					// onSubmit={logIn}
 				>
+					<Form.Item>
+						<img
+							// className="birdIcon"
+							src="/logoBird4.png"
+							style={{ maxHeight: '30vh' }}
+						/>
+					</Form.Item>
+					<Form.Item>
+						<Title level={3} style={{ textAlign: 'center' }}>
+							Welcome to Aviary!
+						</Title>
+					</Form.Item>
 					<Form.Item
 						rules={[
 							{
@@ -80,28 +108,30 @@ const Login = () => {
 					Forgot password
 				</a> */}
 					</Form.Item>
-
-					<Form.Item>
-						<Button
-							type="primary"
-							htmlType="submit"
-							className="login-form-button"
-							onClick={() => login(formData)}
-						>
-							Log in
-						</Button>{' '}
-						Or{' '}
-						<Link
-							onClick={() => {
-								navigate('/signup');
-							}}
-							target="_blank"
-						>
-							Sign Up
-						</Link>
-					</Form.Item>
+					<Row type="flex" justify="center" align="middle">
+						<Form.Item>
+							<Button
+								type="primary"
+								htmlType="submit"
+								className="login-form-button"
+								onClick={() => login(formData)}
+							>
+								Log in
+							</Button>{' '}
+							Or{' '}
+							<Link
+								onClick={() => {
+									navigate('/signup');
+								}}
+								target="_blank"
+							>
+								Sign Up
+							</Link>
+						</Form.Item>
+					</Row>
 				</Form>
-			</Space>
+				{/* </Space> */}
+			</Row>
 		</>
 	);
 };
