@@ -14,17 +14,15 @@ const SpottingsContainer = () => {
 	const [showEditForm, setShowEditForm] = useState(false);
 	const [spottingToEdit, setSpottingToEdit] = useState({});
 	const [editMode, setEditMode] = useState(false);
-	const [cardInfo, setCardInfo] = useState(null);
+	const [selectedSpotting, setSelectedSpotting] = useState(null);
 	const [drawerVisible, setDrawerVisible] = useState(false);
 	function displayEditForm(spotting) {
 		setSpottingToEdit(spotting);
 		showEditForm ? setShowEditForm(false) : setShowEditForm(true);
 	}
 	const [showMap, setShowMap] = useState(false);
-	const [spotting, setSpotting] = useState(spottings[1]);
-	const [enableCardClick, setEnableCardClick] = useState(false);
 
-	console.log(spotting);
+	const [enableCardClick, setEnableCardClick] = useState(false);
 
 	useEffect(() => {
 		fetch('/mybirds')
@@ -41,30 +39,29 @@ const SpottingsContainer = () => {
 	};
 
 	const handleShowMap = () => {
+		setSelectedSpotting(null);
 		setShowMap(!showMap);
 		setEnableCardClick(!enableCardClick);
 	};
 
-	const showDrawer = (spotting) => {
+	const showDrawer = () => {
 		setDrawerVisible(true);
 	};
-	const onClose = () => {
+
+	const closeDrawer = () => {
+		setSelectedSpotting(null);
 		setDrawerVisible(false);
 	};
-	const [drawerBird, setDrawerBird] = useState({});
+
 	const handleCardClick = (spotting) => {
+		setSelectedSpotting(spotting);
+
 		if (showMap === false) {
-			setDrawerBird(spotting.bird.id);
-			showDrawer(spotting);
-			return null;
-		} else {
-			if (cardInfo !== null) {
-				setCardInfo(null);
-			} else {
-				setCardInfo(spotting.id);
-			}
+			showDrawer();
 		}
 	};
+
+	console.log({ selectedSpotting });
 
 	const renderCards = spottings.map((spotting) => {
 		return (
@@ -74,7 +71,7 @@ const SpottingsContainer = () => {
 						// eslint-disable-next-line react/no-array-index-key
 						<SpottingCard
 							key={spotting.id}
-							handleCardClick={handleCardClick}
+							onClick={handleCardClick}
 							handleDelete={handleDelete}
 							spotting={spotting}
 							editMode={editMode}
@@ -132,17 +129,28 @@ const SpottingsContainer = () => {
 						<Space size="large" wrap>
 							{renderCards}
 						</Space>
-						{/* <Drawer
-							// title={drawerBird.bird.common_name}
-							placement="right"
-							onClose={onClose}
-							visible={drawerVisible}
-							size="medium"
-						>
-							<>
-								<p>...</p>
-							</>
-						</Drawer> */}
+						{selectedSpotting && (
+							<Drawer
+								// title={drawerBird.bird.common_name}
+								placement="right"
+								onClose={closeDrawer}
+								visible={drawerVisible}
+								size="large"
+								// destroyOnClose={true}
+							>
+								<>
+									<Space align="center">
+										<img
+											style={{ maxWidth: '90vh' }}
+											src={selectedSpotting.bird.image}
+										/>
+									</Space>
+									<h1>{selectedSpotting.bird.common_name}</h1>
+
+									<p>{selectedSpotting.bird.description}</p>
+								</>
+							</Drawer>
+						)}
 					</div>
 				)}
 				<Col span={12}>
@@ -151,9 +159,14 @@ const SpottingsContainer = () => {
 							<div style={{ paddingTop: '30px' }} id="map">
 								{' '}
 								<AviaryMap
-									// showInfo={showInfo}
 									spottings={spottings}
-									cardInfo={cardInfo}
+									selectedSpotting={selectedSpotting}
+									onMarkerClicked={(spotting) =>
+										setSelectedSpotting(spotting)
+									}
+									onMarkerCloseClicked={() =>
+										setSelectedSpotting(null)
+									}
 								/>
 							</div>
 						</Space>

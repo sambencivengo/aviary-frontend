@@ -7,16 +7,14 @@ const SpottingCard = ({
 	spotting,
 	showInfo,
 	editMode,
-	handleCardClick,
+	onClick,
 	handleDelete,
 }) => {
 	return (
 		<>
 			<Meta />
 			<Card
-				onClick={() => {
-					handleCardClick(spotting);
-				}}
+				onClick={() => onClick(spotting)}
 				title={spotting.bird.common_name}
 				description={spotting.bird.sci_name}
 				actions={

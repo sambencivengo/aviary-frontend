@@ -1,9 +1,7 @@
 import { Marker, InfoWindow } from '@react-google-maps/api';
 import { StrictMode, useState } from 'react';
 
-const AviaryMarker = ({ spotting, cardInfo }) => {
-	const [showInfoWindow, setShowInfoWindow] = useState(false);
-
+const AviaryMarker = ({ spotting, isSelected, onClick, onCloseClick }) => {
 	// return (
 	// 	<Marker
 	// 		key={spotting.id}
@@ -27,37 +25,24 @@ const AviaryMarker = ({ spotting, cardInfo }) => {
 	};
 
 	return (
-		<>
-			{/* <Marker key={spotting.id} position={location}></Marker> */}
-			<Marker
-				key={spotting.id}
-				onClick={() => {
-					setShowInfoWindow(!showInfoWindow);
-					showInfoWindow &&
-						setTimeout(setShowInfoWindow(false), 5000);
-				}}
-				position={location}
-			>
-				{spotting.id === cardInfo ? (
-					<InfoWindow onClick={() => setShowInfoWindow(false)}>
-						<div>
-							<h3>{spotting.bird.common_name}</h3>
-							<img src={spotting.bird.image} />
-							<p>{spotting.notes}</p>
-						</div>
-					</InfoWindow>
-				) : null}
-				{showInfoWindow ? (
-					<InfoWindow onClick={() => setShowInfoWindow(false)}>
-						<div>
-							<h3>{spotting.bird.common_name}</h3>
-							<img src={spotting.bird.image} />
-							<p>{spotting.notes}</p>
-						</div>
-					</InfoWindow>
-				) : null}
-			</Marker>
-		</>
+		<Marker
+			key={spotting.id}
+			onClick={() => onClick(spotting)}
+			position={location}
+		>
+			{spotting && isSelected ? (
+				<InfoWindow onCloseClick={() => onCloseClick()}>
+					<div>
+						<h3>{spotting.bird.common_name}</h3>
+						<img
+							style={{ maxWidth: '40vh' }}
+							src={spotting.bird.image}
+						/>
+						<p>{spotting.notes}</p>
+					</div>
+				</InfoWindow>
+			) : null}
+		</Marker>
 	);
 };
 

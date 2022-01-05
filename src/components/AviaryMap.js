@@ -5,11 +5,13 @@ import { Button } from 'antd';
 import { UserContext } from './UserProvider';
 import { useLocalStorage } from 'react-use';
 
-const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
+const AviaryMap = ({
+	spottings,
+	selectedSpotting,
+	onMarkerClicked,
+	onMarkerCloseClicked,
+}) => {
 	const { currentUser } = useContext(UserContext);
-
-	// const [currentLat, setCurrentLat] = useLocalStorage('lat', null);
-	// const [currentLng, setCurrentLng] = useLocalStorage('lng', null);
 
 	const [savedLocation, setSavedLocation] = useLocalStorage(
 		'saved-location',
@@ -35,9 +37,13 @@ const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 	const markers = spottings.map((spotting) => {
 		return (
 			<AviaryMarker
-				cardInfo={cardInfo}
+				isSelected={
+					selectedSpotting && selectedSpotting.id === spotting.id
+				}
 				key={spotting.id}
 				spotting={spotting}
+				onClick={onMarkerClicked}
+				onCloseClick={onMarkerCloseClicked}
 			/>
 		);
 	});
@@ -94,13 +100,6 @@ const AviaryMap = ({ spottings, showInfo, cardInfo }) => {
 							Current Location
 						</Button>
 						{markers}
-
-						{/* {locations.map((marker) => {
-					return <Marker key={marker.name} position={marker.location} />;
-				})} */}
-						{/* {renderMarkers} */}
-
-						{/* <Marker key={markers.name} position={markers.location} /> */}
 					</GoogleMap>
 				</LoadScript>
 			</div>
