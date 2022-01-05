@@ -10,6 +10,8 @@ import {
 	Affix,
 	BackTop,
 } from 'antd';
+import moment from 'moment';
+
 import { EnvironmentOutlined } from '@ant-design/icons';
 import Text from 'antd/lib/typography/Text';
 import Title from 'antd/lib/typography/Title';
@@ -89,9 +91,14 @@ const SpottingsContainer = () => {
 	console.log(startDate, endDate);
 
 	console.log(spottings);
+	const [range, setRange] = useState();
+
 	const filteredSpottings = spottings.filter((spotting) => {
 		let spottingDate = new Date(spotting.date);
-		return spottingDate >= startDate && spottingDate <= endDate;
+		if (range) {
+			return spottingDate >= startDate && spottingDate <= endDate;
+		}
+		return spotting;
 	});
 	console.log(filteredSpottings);
 	const renderCards = filteredSpottings.map((spotting) => {
@@ -113,10 +120,16 @@ const SpottingsContainer = () => {
 			</>
 		);
 	});
+	console.log(range);
+
 	const [top, setTop] = useState(10);
 	const [bottom, setBottom] = useState(10);
 
 	console.log(startDate, endDate);
+
+	function disabledDate(current) {
+		return current && current > moment().endOf('day');
+	}
 	return (
 		<>
 			<Affix offsetTop={top}>
@@ -141,16 +154,28 @@ const SpottingsContainer = () => {
 			{/* <Button onClick={handleShowMap}>Show Map</Button> */}
 			{showEditForm ? <EditCardForm spotting={spottingToEdit} /> : null}
 
-			<RangePicker
-				defaultValue={[startDate, endDate]}
-				defaultValue={null}
+			{/* <RangePicker
 				onCalendarChange={(e) => {
-					if (e === null) {
-						setSpottings(spottings);
-					} else {
-						setStartDate(e[0]['_d']);
-						setEndDate(e[1]['_d']);
-					}
+				
+				}}
+			/> */}
+			{/* <RangePicker
+				// value={hackValue || value}
+				disabledDate={disabledDate}
+				onCalendarChange={(val) => {
+				
+				}}
+				// onChange={(val) => setValue(val)}
+				// onOpenChange={onOpenChange}
+			/> */}
+
+			<RangePicker
+				value={range}
+				disabledDate={(current) => current > moment.now()}
+				onChange={(val) => {
+					setRange(val);
+					setStartDate(val[0]['_d']);
+					setEndDate(val[1]['_d']);
 				}}
 			/>
 			<Divider></Divider>

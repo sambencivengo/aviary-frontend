@@ -10,7 +10,7 @@ import {
 	TeamOutlined,
 	DatabaseOutlined,
 } from '@ant-design/icons';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { UserContext } from './components/UserProvider';
 import Home from './components/Home';
 
@@ -19,10 +19,15 @@ const { Header, Footer, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
 function App() {
+	const navigate = useNavigate();
+
 	const { logout } = useContext(UserContext);
 
 	const { Title } = Typography;
 
+	useEffect(() => {
+		navigate('/home');
+	}, []);
 	return (
 		<>
 			<Layout style={{ minHeight: '100vh' }}>
