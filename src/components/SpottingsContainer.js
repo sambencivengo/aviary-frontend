@@ -47,7 +47,9 @@ const SpottingsContainer = () => {
 	};
 
 	const showDrawer = () => {
-		setDrawerVisible(true);
+		if (!editMode) {
+			setDrawerVisible(true);
+		}
 	};
 
 	const closeDrawer = () => {
@@ -56,9 +58,12 @@ const SpottingsContainer = () => {
 	};
 
 	const handleCardClick = (spotting) => {
-		console.log(spotting);
-		setSelectedSpotting(spotting);
-
+		if (editMode === true) {
+			setSelectedSpotting(null);
+		} else {
+			console.log(spotting);
+			setSelectedSpotting(spotting);
+		}
 		if (showMap === false) {
 			showDrawer();
 		}
@@ -123,15 +128,16 @@ const SpottingsContainer = () => {
 						<Space size="large" wrap>
 							{renderCards}
 						</Space>
-						{selectedSpotting && (
-							<Drawer
-								// title={drawerBird.bird.common_name}
-								placement="right"
-								onClose={closeDrawer}
-								visible={drawerVisible}
-								size="large"
-								// destroyOnClose={true}
-							>
+
+						<Drawer
+							// title={drawerBird.bird.common_name}
+							placement="right"
+							onClose={closeDrawer}
+							visible={drawerVisible}
+							size="large"
+							destroyOnClose={true}
+						>
+							{selectedSpotting && (
 								<>
 									<Space align="center">
 										<img
@@ -143,8 +149,8 @@ const SpottingsContainer = () => {
 
 									<p>{selectedSpotting.bird.description}</p>
 								</>
-							</Drawer>
-						)}
+							)}
+						</Drawer>
 					</div>
 				)}
 				<Col span={12}>
