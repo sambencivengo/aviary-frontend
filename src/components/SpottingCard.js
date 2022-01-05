@@ -1,6 +1,6 @@
-import { Button, Card } from 'antd';
-import { EditOutlined, DeleteTwoTone } from '@ant-design/icons';
-import { useEffect } from 'react';
+import { Card, Divider } from 'antd';
+import { DeleteTwoTone } from '@ant-design/icons';
+import { Typography } from 'antd';
 const { Meta } = Card;
 
 const SpottingCard = ({
@@ -10,12 +10,17 @@ const SpottingCard = ({
 	onClick,
 	handleDelete,
 }) => {
+	console.log(spotting.date);
+	const date = spotting.date;
+	const legibleDate = new Date(date).toDateString();
+	console.log(legibleDate);
+	const { Text } = Typography;
 	return (
 		<>
 			<Meta />
 			<Card
 				onClick={() => onClick(spotting)}
-				title={spotting.bird.common_name}
+				// title={spotting.bird.common_name}
 				description={spotting.bird.sci_name}
 				actions={
 					editMode
@@ -40,7 +45,12 @@ const SpottingCard = ({
 				style={{ width: 240 }}
 				cover={<img alt="example" src={spotting.bird.image} />}
 			>
-				<p>{spotting.notes}</p>
+				<h3>{spotting.bird.common_name}</h3>
+				<Divider></Divider>
+				<p style={{ textAlign: 'left' }}>{spotting.notes}</p>
+				<p style={{ fontStyle: 'italic', textAlign: 'left' }}>
+					Date seen: {legibleDate}
+				</p>
 			</Card>
 		</>
 	);

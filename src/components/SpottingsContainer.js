@@ -7,7 +7,9 @@ import {
 	DatePicker,
 	Typography,
 	Divider,
+	Affix,
 } from 'antd';
+import { EnvironmentOutlined } from '@ant-design/icons';
 import Text from 'antd/lib/typography/Text';
 import Title from 'antd/lib/typography/Title';
 import { useState } from 'react';
@@ -100,19 +102,31 @@ const SpottingsContainer = () => {
 			</>
 		);
 	});
+	const [top, setTop] = useState(10);
+	const [bottom, setBottom] = useState(10);
 
 	return (
 		<>
+			<Affix offsetTop={top}>
+				<Button
+					style={{ float: 'right' }}
+					type="primary"
+					onClick={handleShowMap}
+				>
+					Map <EnvironmentOutlined />
+				</Button>
+			</Affix>
 			<Button
 				value={'small'}
 				danger
+				style={{ float: 'left' }}
 				onClick={() => {
 					setEditMode(!editMode);
 				}}
 			>
 				Edit Aviary
 			</Button>
-			<Button onClick={handleShowMap}>Show Map</Button>
+			{/* <Button onClick={handleShowMap}>Show Map</Button> */}
 			{showEditForm ? <EditCardForm spotting={spottingToEdit} /> : null}
 
 			<RangePicker />
