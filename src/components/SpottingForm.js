@@ -7,6 +7,7 @@ import {
 	message,
 	Row,
 	Select,
+	Space,
 	Typography,
 } from 'antd';
 import moment from 'moment';
@@ -58,7 +59,16 @@ const SpottingForm = () => {
 		})
 			.then((r) => r.json())
 			.then((data) => {
-				success();
+				console.log(data);
+				if (data.bird) {
+					success();
+				} else {
+					errorMessage();
+				}
+			})
+			.catch((err) => {
+				errorMessage();
+				console.log(err);
 			});
 	};
 
@@ -70,6 +80,16 @@ const SpottingForm = () => {
 	const success = () => {
 		message.success({
 			content: 'Good eye! This bird has been added to your aviary.',
+			className: 'custom-class',
+			style: {
+				marginTop: '20vh',
+			},
+		});
+	};
+	const errorMessage = () => {
+		message.error({
+			content:
+				'Please make sure you have filled out the required fields and marked the bird on your map!',
 			className: 'custom-class',
 			style: {
 				marginTop: '20vh',
@@ -104,8 +124,6 @@ const SpottingForm = () => {
 		setDate(dateString);
 	}
 
-	console.log(date);
-
 	function disabledDate(current) {
 		// Can not select days before today and today
 		return current && current > moment().endOf('day');
@@ -113,7 +131,6 @@ const SpottingForm = () => {
 
 	const [birdImage, setBirdImage] = useState('/bird3.png');
 	const handleBirdPic = () => {
-		console.log('changing bird');
 		setBirdImage('/spottingBird3.png');
 	};
 	const resetBirdPic = () => {
@@ -184,7 +201,7 @@ const SpottingForm = () => {
 									// prefix={
 									// 	<SmallDashOutlined className="site-form-item-icon" />
 									// }
-									required
+
 									placeholder="Field notes"
 									onChange={(e) => {
 										setNotes(e.target.value);
@@ -226,9 +243,19 @@ const SpottingForm = () => {
 
 					<Col span={12}>
 						{' '}
-						<Title>Where did you see it?</Title>
+						<Space align="center">
+							<Title
+								style={{
+									textAlign: 'center',
+									marginRight: '40px',
+								}}
+							>
+								Where did you see it?
+							</Title>
+						</Space>
 						<div
 							id="map"
+							style={{ paddingLeft: '20px' }}
 							onMouseOver={handleBirdPic}
 							onMouseOut={resetBirdPic}
 						>
