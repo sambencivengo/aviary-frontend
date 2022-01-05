@@ -130,6 +130,7 @@ const SpottingsContainer = () => {
 			{showEditForm ? <EditCardForm spotting={spottingToEdit} /> : null}
 
 			<RangePicker />
+			<Divider></Divider>
 
 			<Row
 				type="flex"
@@ -152,8 +153,8 @@ const SpottingsContainer = () => {
 					</Col>
 				) : (
 					<div>
-						<Space size="large" wrap>
-							{renderCards}
+						<Space size="large" align="center" wrap>
+							<Col>{renderCards}</Col>
 						</Space>
 
 						<Drawer

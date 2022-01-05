@@ -92,12 +92,12 @@ function App() {
 							{/* <Home /> */}
 						</div>
 					</Content>
-					<Footer style={{ textAlign: 'center' }} className="footer">
+					{/* <Footer style={{ textAlign: 'center' }} className="footer">
 						<Text italic>
 							Regular birdwatching is necessary to lead a healthy
 							and fulfilling life.{' '}
 						</Text>
-					</Footer>
+					</Footer> */}
 				</Layout>
 			</Layout>
 		</>
