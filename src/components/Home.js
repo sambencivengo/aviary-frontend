@@ -2,6 +2,7 @@ import { Button, Typography } from 'antd';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../logo.css';
 import FeedContainer from './FeedContainer';
 
 import SpottingForm from './SpottingForm';
@@ -24,8 +25,9 @@ const Home = () => {
 		<>
 			<Title>Welcome to Aviary!</Title>
 			<img
+				className="birdIcon"
 				src="/logoBird4.png"
-				style={{ paddingTop: '30px', maxHeight: '60vh' }}
+				style={{ paddingTop: '50px', maxHeight: '50vh' }}
 			/>
 		</>
 	);
