@@ -8,6 +8,7 @@ import {
 	Typography,
 	Divider,
 	Affix,
+	BackTop,
 } from 'antd';
 import { EnvironmentOutlined } from '@ant-design/icons';
 import Text from 'antd/lib/typography/Text';
@@ -140,23 +141,28 @@ const SpottingsContainer = () => {
 			>
 				{showMap ? (
 					<Col span={12}>
+						{/* <div
+						
+								paddingLeft: '15px',
+							}}
+						> */}
+
 						<div
 							style={{
-								backgroundColor: 'green',
 								maxHeight: '75vh',
 								overflowY: 'scroll',
-								padding: '5px',
+								paddingBottom: '20px',
 							}}
 						>
-							<Space size="large" align="center" wrap>
-								{renderCards}
-							</Space>
+							{renderCards}
+							<Affix offsetBottom={bottom}></Affix>
 						</div>
 					</Col>
 				) : (
 					<div>
 						<Space size="large" align="center" wrap>
 							<Col>{renderCards}</Col>
+							<BackTop />
 						</Space>
 
 						<Drawer

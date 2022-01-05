@@ -47,17 +47,19 @@ const SpottingCard = ({
 					cover={<img alt="example" src={spotting.bird.image} />}
 				>
 					<h3>{spotting.bird.common_name}</h3>
-					<Divider></Divider>
-					<p style={{ textAlign: 'left' }}>{spotting.notes}</p>
 					<p
 						style={{
 							fontSize: '10px',
 							fontStyle: 'italic',
-							textAlign: 'left',
+							textAlign: 'center',
 						}}
 					>
 						Spotted: {legibleDate}
 					</p>
+					<Divider></Divider>
+					<div style={{ overflowY: 'scroll', maxHeight: '15vh' }}>
+						<p style={{ textAlign: 'left' }}>{spotting.notes}</p>
+					</div>
 				</Card>
 			</div>
 		</>

@@ -7,6 +7,7 @@ import {
 	message,
 	Row,
 	Select,
+	Typography,
 } from 'antd';
 import moment from 'moment';
 import Layout, { Content } from 'antd/lib/layout/layout';
@@ -14,6 +15,8 @@ import { useContext, useEffect, useState } from 'react';
 
 import MapContainer from './MapContainer';
 import { UserContext } from './UserProvider';
+
+const { Title } = Typography;
 
 const SpottingForm = () => {
 	const { Option } = Select;
@@ -122,7 +125,7 @@ const SpottingForm = () => {
 			<Layout>
 				<Row>
 					<Col span={12}>
-						<h3>What did you see?</h3>
+						<Title>What did you see?</Title>
 						<Form onFinish={handleSubmit} name="spotting-form">
 							<img
 								src={birdImage}
@@ -223,7 +226,7 @@ const SpottingForm = () => {
 
 					<Col span={12}>
 						{' '}
-						<h3>Where did you see it?</h3>
+						<Title>Where did you see it?</Title>
 						<div
 							id="map"
 							onMouseOver={handleBirdPic}
