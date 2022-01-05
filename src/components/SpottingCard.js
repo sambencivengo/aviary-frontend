@@ -10,10 +10,9 @@ const SpottingCard = ({
 	onClick,
 	handleDelete,
 }) => {
-	console.log(spotting.date);
 	const date = spotting.date;
 	const legibleDate = new Date(date).toDateString();
-	console.log(legibleDate);
+
 	const { Text } = Typography;
 	return (
 		<>

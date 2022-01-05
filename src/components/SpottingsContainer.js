@@ -84,7 +84,17 @@ const SpottingsContainer = () => {
 		}
 	};
 
-	const renderCards = spottings.map((spotting) => {
+	const [startDate, setStartDate] = useState();
+	const [endDate, setEndDate] = useState();
+	console.log(startDate, endDate);
+
+	console.log(spottings);
+	const filteredSpottings = spottings.filter((spotting) => {
+		let spottingDate = new Date(spotting.date);
+		return spottingDate >= startDate && spottingDate <= endDate;
+	});
+	console.log(filteredSpottings);
+	const renderCards = filteredSpottings.map((spotting) => {
 		return (
 			<>
 				<Space key={spotting.id} size={[8, 16]} wrap>
@@ -106,6 +116,7 @@ const SpottingsContainer = () => {
 	const [top, setTop] = useState(10);
 	const [bottom, setBottom] = useState(10);
 
+	console.log(startDate, endDate);
 	return (
 		<>
 			<Affix offsetTop={top}>
@@ -130,7 +141,18 @@ const SpottingsContainer = () => {
 			{/* <Button onClick={handleShowMap}>Show Map</Button> */}
 			{showEditForm ? <EditCardForm spotting={spottingToEdit} /> : null}
 
-			<RangePicker />
+			<RangePicker
+				defaultValue={[startDate, endDate]}
+				defaultValue={null}
+				onCalendarChange={(e) => {
+					if (e === null) {
+						setSpottings(spottings);
+					} else {
+						setStartDate(e[0]['_d']);
+						setEndDate(e[1]['_d']);
+					}
+				}}
+			/>
 			<Divider></Divider>
 
 			<Row
