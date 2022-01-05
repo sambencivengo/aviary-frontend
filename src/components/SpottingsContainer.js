@@ -263,7 +263,7 @@ const SpottingsContainer = () => {
 							<div style={{ paddingTop: '30px' }} id="map">
 								{' '}
 								<AviaryMap
-									spottings={spottings}
+									spottings={filteredSpottings}
 									selectedSpotting={selectedSpotting}
 									onMarkerClicked={(spotting) =>
 										setSelectedSpotting(spotting)

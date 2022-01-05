@@ -10,7 +10,13 @@ import {
 	TeamOutlined,
 	DatabaseOutlined,
 } from '@ant-design/icons';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import {
+	Link,
+	Outlet,
+	useLocation,
+	useNavigate,
+	useParams,
+} from 'react-router-dom';
 import { UserContext } from './components/UserProvider';
 import Home from './components/Home';
 
@@ -19,15 +25,19 @@ const { Header, Footer, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
 function App() {
+	const location = useLocation();
+
 	const navigate = useNavigate();
+	useEffect(() => {
+		if (location.pathname === '/') {
+			navigate('/home');
+		}
+	}, []);
 
 	const { logout } = useContext(UserContext);
 
 	const { Title } = Typography;
 
-	useEffect(() => {
-		navigate('/home');
-	}, []);
 	return (
 		<>
 			<Layout style={{ minHeight: '100vh' }}>
@@ -67,9 +77,9 @@ function App() {
 						<Menu.Item key="3" icon={<PlusCircleOutlined />}>
 							<Link to="/spotabird">Spotting</Link>
 						</Menu.Item>
-						<Menu.Item key="4" icon={<TeamOutlined />}>
+						{/* <Menu.Item key="4" icon={<TeamOutlined />}>
 							<Link to="/feed">Feed</Link>
-						</Menu.Item>
+						</Menu.Item> */}
 						<SubMenu
 							key="sub1"
 							icon={<DashOutlined />}
