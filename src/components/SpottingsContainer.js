@@ -197,7 +197,7 @@ const SpottingsContainer = () => {
 									</Divider>
 									<div
 										style={{
-											backgroundColor: '#f8edeb',
+											backgroundColor: '#E8E8E4',
 											padding: '10px',
 										}}
 									>
