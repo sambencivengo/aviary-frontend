@@ -1,4 +1,15 @@
-import { Button, Col, Row, Space, Drawer, DatePicker } from 'antd';
+import {
+	Button,
+	Col,
+	Row,
+	Space,
+	Drawer,
+	DatePicker,
+	Typography,
+	Divider,
+} from 'antd';
+import Text from 'antd/lib/typography/Text';
+import Title from 'antd/lib/typography/Title';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useEffect } from 'react';
@@ -23,7 +34,7 @@ const SpottingsContainer = () => {
 	const [showMap, setShowMap] = useState(false);
 
 	const [enableCardClick, setEnableCardClick] = useState(false);
-
+	const { Title } = Typography;
 	const { RangePicker } = DatePicker;
 	//
 	useEffect(() => {
@@ -134,20 +145,41 @@ const SpottingsContainer = () => {
 							placement="right"
 							onClose={closeDrawer}
 							visible={drawerVisible}
-							size="large"
 							destroyOnClose={true}
+							size="large"
 						>
 							{selectedSpotting && (
 								<>
 									<Space align="center">
 										<img
-											style={{ maxWidth: '90vh' }}
+											style={{
+												maxWidth: '100%',
+												// maxWidth: '90vh',
+											}}
 											src={selectedSpotting.bird.image}
 										/>
 									</Space>
-									<h1>{selectedSpotting.bird.common_name}</h1>
-
-									<p>{selectedSpotting.bird.description}</p>
+									<Title
+										level={2}
+										style={{ paddingTop: '15px' }}
+									>
+										{selectedSpotting.bird.common_name}
+									</Title>
+									<Divider orientation="left">
+										<Text italic>
+											{selectedSpotting.bird.sci_name}
+										</Text>
+									</Divider>
+									<div
+										style={{
+											backgroundColor: '#f8edeb',
+											padding: '10px',
+										}}
+									>
+										<Text>
+											{selectedSpotting.bird.description}
+										</Text>
+									</div>
 								</>
 							)}
 						</Drawer>

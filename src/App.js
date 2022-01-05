@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons';
 import { Link, Outlet } from 'react-router-dom';
 import { UserContext } from './components/UserProvider';
+import Home from './components/Home';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -88,6 +89,7 @@ function App() {
 							style={{ padding: 24, textAlign: 'center' }}
 						>
 							<Outlet />
+							{/* <Home /> */}
 						</div>
 					</Content>
 					<Footer style={{ textAlign: 'center' }} className="footer">

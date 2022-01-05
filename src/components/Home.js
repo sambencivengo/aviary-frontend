@@ -7,6 +7,7 @@ import FeedContainer from './FeedContainer';
 import SpottingForm from './SpottingForm';
 import SpottingsContainer from './SpottingsContainer';
 
+const { Title } = Typography;
 const Home = () => {
 	const navigate = useNavigate();
 	useEffect(() => {
@@ -21,8 +22,11 @@ const Home = () => {
 
 	return (
 		<>
-			<Typography>Welcome to Aviary!</Typography>
-			<img src="/logoBird4.png" style={{ maxHeight: '50vh' }} />
+			<Title>Welcome to Aviary!</Title>
+			<img
+				src="/logoBird4.png"
+				style={{ paddingTop: '30px', maxHeight: '60vh' }}
+			/>
 		</>
 	);
 };

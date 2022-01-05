@@ -14,7 +14,9 @@ import FeedContainer from './components/FeedContainer';
 import UserAviary from './components/UserAviary';
 import UserAviaryContainer from './components/UserAviaryContainer';
 import UserProvider from './components/UserProvider';
+import { Space, Typography } from 'antd';
 
+const { Title } = Typography;
 ReactDOM.render(
 	// <React.StrictMode>
 	<BrowserRouter>
@@ -33,9 +35,41 @@ ReactDOM.render(
 				<Route
 					path="*"
 					element={
-						<main style={{ padding: '1rem' }}>
-							<p>There's nothing here!</p>
-						</main>
+						<>
+							<main
+							// style={{
+							// 	justifyContent: 'center',
+							// 	padding: '1rem',
+							// }}
+							>
+								<Space
+									direction="horizontal"
+									style={{
+										width: '100%',
+										justifyContent: 'center',
+									}}
+								>
+									<img
+										src="/logoBird4.png"
+										style={{
+											paddingTop: '20vh',
+											maxHeight: '60vh',
+										}}
+									/>
+								</Space>
+								<Space
+									direction="horizontal"
+									style={{
+										width: '100%',
+										justifyContent: 'center',
+									}}
+								>
+									<Title level={3}>
+										Whoops! There is nothing here!
+									</Title>
+								</Space>
+							</main>
+						</>
 					}
 				/>
 				<Route path="/login" element={<Login />} />
