@@ -95,40 +95,28 @@ const Login = () => {
 							name="password"
 						/>
 					</Form.Item>
-					<Form.Item>
-						<Form.Item
-							name="remember"
-							valuePropName="checked"
-							noStyle
-						>
-							<Checkbox>Remember me</Checkbox>
-						</Form.Item>
 
-						{/* <a className="login-form-forgot" href="">
-					Forgot password
-				</a> */}
+					{/* <Row type="flex" justify="center" align="middle"> */}
+					<Form.Item style={{ textAlign: 'center' }}>
+						<Button
+							type="primary"
+							htmlType="submit"
+							className="login-form-button"
+							onClick={() => login(formData)}
+						>
+							Log in
+						</Button>{' '}
+						Or{' '}
+						<Link
+							onClick={() => {
+								navigate('/signup');
+							}}
+							target="_blank"
+						>
+							Sign Up
+						</Link>
 					</Form.Item>
-					<Row type="flex" justify="center" align="middle">
-						<Form.Item>
-							<Button
-								type="primary"
-								htmlType="submit"
-								className="login-form-button"
-								onClick={() => login(formData)}
-							>
-								Log in
-							</Button>{' '}
-							Or{' '}
-							<Link
-								onClick={() => {
-									navigate('/signup');
-								}}
-								target="_blank"
-							>
-								Sign Up
-							</Link>
-						</Form.Item>
-					</Row>
+					{/* </Row> */}
 				</Form>
 				{/* </Space> */}
 			</Row>

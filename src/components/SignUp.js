@@ -50,78 +50,103 @@ const SignUp = () => {
 
 	return (
 		<>
-			<Space
+			{/* <Space
 				direction="horizontal"
 				style={{ width: '100%', justifyContent: 'center' }}
 			>
-				<Layout>
-					<Form
-						name="basic"
-						labelCol={{ span: 9 }}
-						wrapperCol={{ span: 16 }}
-						initialValues={{ remember: true }}
-						// onFinish={onFinish}
+				<Layout> */}
+			<Row
+				type="flex"
+				justify="center"
+				align="middle"
+				style={{ minHeight: '90vh' }}
+			>
+				<Form
+					name="basic"
+					labelCol={{ span: 9 }}
+					wrapperCol={{ span: 16 }}
+					initialValues={{ remember: true }}
+					// onFinish={onFinish}
 
-						autoComplete="off"
+					autoComplete="off"
+				>
+					<Row type="flex" justify="center" align="middle">
+						<Form.Item>
+							<img
+								style={{ maxHeight: '20vh' }}
+								src="/spottingBirdHalf2.png"
+							/>
+						</Form.Item>
+						<Row type="flex" justify="center" align="middle">
+							<Form.Item>
+								<Title
+									level={3}
+									style={{ textAlign: 'center' }}
+								>
+									Signup for Aviary:
+								</Title>
+							</Form.Item>
+						</Row>
+					</Row>
+					<Form.Item
+						label="Username"
+						rules={[
+							{
+								required: true,
+								message: 'Please input your username!',
+							},
+						]}
 					>
-						<Form.Item
-							label="Username"
-							rules={[
-								{
-									required: true,
-									message: 'Please input your username!',
-								},
-							]}
-						>
-							<Input onChange={handleChange} name="username" />
-						</Form.Item>
-						<Form.Item
-							label="Email"
-							rules={[
-								{
-									required: true,
-									message: 'Please input your email!',
-								},
-							]}
-						>
-							<Input onChange={handleChange} name="email" />
-						</Form.Item>
-						<Form.Item
-							label="Password"
-							rules={[
-								{
-									required: true,
-									message: 'Please input your password!',
-								},
-							]}
-						>
-							<Input.Password
-								onChange={handleChange}
-								name="password"
-							/>
-						</Form.Item>
-						<Form.Item
-							label="Confirm Password"
-							rules={[
-								{
-									required: true,
-									message: 'Please Confirm your password!',
-								},
-							]}
-						>
-							{' '}
-							<Input.Password
-								name="password_confirmation"
-								onChange={handleChange}
-							/>
-						</Form.Item>
-						<Form.Item
-							name="remember"
-							valuePropName="checked"
-							wrapperCol={{ offset: 8, span: 16 }}
-						>
-							<Checkbox>Remember me</Checkbox>
-						</Form.Item>
+						<Input onChange={handleChange} name="username" />
+					</Form.Item>
+					<Form.Item
+						label="Email"
+						rules={[
+							{
+								required: true,
+								message: 'Please input your email!',
+							},
+						]}
+					>
+						<Input onChange={handleChange} name="email" />
+					</Form.Item>
+					<Form.Item
+						label="Password"
+						rules={[
+							{
+								required: true,
+								message: 'Please input your password!',
+							},
+						]}
+					>
+						<Input.Password
+							onChange={handleChange}
+							name="password"
+						/>
+					</Form.Item>
+					<Form.Item
+						label="Confirm Password"
+						rules={[
+							{
+								required: true,
+								message: 'Please Confirm your password!',
+							},
+						]}
+					>
+						{' '}
+						<Input.Password
+							name="password_confirmation"
+							onChange={handleChange}
+						/>
+					</Form.Item>
+					{/* <Form.Item
+						name="remember"
+						valuePropName="checked"
+						wrapperCol={{ offset: 8, span: 16 }}
+					>
+						<Checkbox>Remember me</Checkbox>
+					</Form.Item> */}
+					<Row type="flex" justify="center" align="middle">
 						<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
 							<Button
 								onClick={handleSubmit}
@@ -131,10 +156,11 @@ const SignUp = () => {
 								Submit
 							</Button>
 						</Form.Item>
+					</Row>
+					<Row type="flex" justify="center">
 						<Form.Item style={{ textAlign: 'center' }}>
 							Have an account?{' '}
 							<Link
-								style={{ textAlign: 'center' }}
 								onClick={() => {
 									navigate('/login');
 								}}
@@ -143,11 +169,13 @@ const SignUp = () => {
 								Log In
 							</Link>
 						</Form.Item>
-					</Form>
+					</Row>
+				</Form>
 
-					{/* OLD FORM */}
-				</Layout>
-			</Space>
+				{/* OLD FORM */}
+				{/* </Layout>
+			</Space> */}
+			</Row>
 		</>
 	);
 };
