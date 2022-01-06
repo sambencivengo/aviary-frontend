@@ -31,10 +31,18 @@ function App() {
 	const { logout, currentUser } = useContext(UserContext);
 
 	useEffect(() => {
-		currentUser ? navigate('/home') : navigate('/login');
+		fetch('/me').then((r) =>
+			r
+				.json()
+				.then((user) => {
+					console.log(user);
+				})
+				.catch((error) => {
+					navigate('/login');
+					console.log(error);
+				})
+		);
 	}, []);
-
-	console.log(currentUser);
 
 	const { Title } = Typography;
 
