@@ -10,7 +10,6 @@ import { useState } from 'react';
 import { useLocalStorage } from 'react-use';
 
 const FeedMap = ({ spottings, handleInfoWindow, selectedSpotting }) => {
-
 	const [savedLocation, setSavedLocation] = useLocalStorage(
 		'saved-location',
 		null
@@ -43,7 +42,8 @@ const FeedMap = ({ spottings, handleInfoWindow, selectedSpotting }) => {
 			lat: spotting.lat,
 			lng: spotting.long,
 		};
-
+		const date = spotting.date;
+		const legibleDate = new Date(date).toDateString();
 		return (
 			<Marker
 				key={spotting.id}
@@ -62,6 +62,14 @@ const FeedMap = ({ spottings, handleInfoWindow, selectedSpotting }) => {
 						<div>
 							<h3>{spotting.bird.common_name}</h3>
 							<h4>Spotted by: {spotting.user.username}</h4>
+							<p
+								style={{
+									fontSize: '10px',
+									fontStyle: 'italic',
+								}}
+							>
+								{legibleDate}
+							</p>
 							<img
 								style={{ maxHeight: '30vh' }}
 								src={spotting.bird.image}
@@ -76,7 +84,6 @@ const FeedMap = ({ spottings, handleInfoWindow, selectedSpotting }) => {
 	return (
 		<>
 			{' '}
-			
 			<LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
 				<GoogleMap
 					mapContainerStyle={mapStyles}

@@ -1,5 +1,6 @@
 import { Col, DatePicker, Divider, message, Row, Space, Spin } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
+import Title from 'antd/lib/typography/Title';
 import moment from 'moment';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -165,18 +166,19 @@ const FeedContainer = () => {
 					</Col>{' '} */}
 						{/* */}
 					</Row>
+					<Title level={4}>Check out what users are spotting!</Title>
 					<RangePicker
 						value={range}
 						disabledDate={(current) => current > moment.now()}
-						// onChange={(val) => {
-						// 	setRange(val);
-						// 	setStartDate(val[0]['_d']);
-						// 	setEndDate(val[1]['_d']);
-						// }}
+						onChange={(val) => {
+							setRange(val);
+							setStartDate(val[0]['_d']);
+							setEndDate(val[1]['_d']);
+						}}
 					/>
 					<Divider></Divider>
-					<FeedMap	
-						spottings={spottings}
+					<FeedMap
+						spottings={filteredSpottings}
 						handleInfoWindow={handleInfoWindow}
 						selectedSpotting={selectedSpotting}
 					/>
