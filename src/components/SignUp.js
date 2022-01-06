@@ -18,8 +18,7 @@ import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
 	const { Link } = Typography;
-	const { currentUser } = useContext(UserContext);
-	console.log(currentUser);
+	// const { currentUser } = useContext(UserContext);
 	const navigate = useNavigate();
 	const [formData, setFormdata] = useState({
 		email: '',
@@ -28,9 +27,6 @@ const SignUp = () => {
 		password_confirmation: '',
 	});
 
-	if (currentUser) {	
-		navigate('/home');
-	}
 	const handleChange = (e) => {
 		setFormdata({ ...formData, [e.target.name]: e.target.value });
 	};
@@ -152,6 +148,7 @@ const SignUp = () => {
 					<Row type="flex" justify="center" align="middle">
 						<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
 							<Button
+								style={{ marginLeft: '60px' }}
 								onClick={handleSubmit}
 								type="primary"
 								htmlType="submit"
@@ -159,9 +156,10 @@ const SignUp = () => {
 								Submit
 							</Button>
 						</Form.Item>
-					</Row>
-					<Row type="flex" justify="center">
-						<Form.Item style={{ textAlign: 'center' }}>
+
+						<Form.Item
+							style={{ paddingLeft: '60px', textAlign: 'center' }}
+						>
 							Have an account?{' '}
 							<Link
 								onClick={() => {
