@@ -17,16 +17,20 @@ import Title from 'antd/lib/typography/Title';
 const Login = () => {
 	const { Link } = Typography;
 	const navigate = useNavigate();
+	const { loggedIn } = useContext(UserContext);
 	const { login } = useContext(UserContext);
-
+	console.log(loggedIn);
 	const [formData, setFormData] = useState({
 		username: '',
 		password: '',
 	});
 	const { currentUser } = useContext(UserContext);
-	if (currentUser) {
-		navigate('/home');
-	}
+
+	// useEffect(() => {
+	// 	if (currentUser !== null) {
+	// 		navigate('/home');
+	// 	}
+	// }, []);
 
 	const handleChange = (e) => {
 		console.log(e.target.name, ':', e.target.value);

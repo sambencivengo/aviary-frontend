@@ -5,6 +5,7 @@ export const UserContext = createContext({
 	logout: () => {},
 	login: () => {},
 	currentUser: null,
+	loggedIn: false,
 });
 
 const UserProvider = ({ children }) => {
@@ -16,8 +17,12 @@ const UserProvider = ({ children }) => {
 			r
 				.json()
 				.then((user) => {
-					if (user.username !== undefined) {
+					if (user) {
+						console.log(user);
 						setCurrentUser(user);
+						setLoggedIn(true);
+					} else {
+						setLoggedIn(false);
 					}
 				})
 				.catch((error) => {
@@ -26,6 +31,7 @@ const UserProvider = ({ children }) => {
 				})
 		);
 	}, []);
+	const [loggedIn, setLoggedIn] = useState(false);
 
 	const login = (formData) => {
 		fetch('/login', {
