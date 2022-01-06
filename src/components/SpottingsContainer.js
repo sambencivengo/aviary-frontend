@@ -205,6 +205,15 @@ const SpottingsContainer = () => {
 				align="center"
 				style={{ minHeight: '80vh' }}
 			>
+				{/* {spottings.length < 1 ? (
+					<>
+						<Title>You don't have any birds in your aviary!</Title>
+						<img
+							style={{ maxWidth: '80vh' }}
+							src="spottingBird3.png"
+						/>
+					</>
+				) : null} */}
 				{showMap ? (
 					<Col span={12}>
 						{/* <div

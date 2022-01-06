@@ -4,6 +4,7 @@ import {
 	Col,
 	Form,
 	Input,
+	message,
 	Row,
 	Space,
 	Typography,
@@ -42,9 +43,35 @@ const SignUp = () => {
 		})
 			.then((r) => r.json())
 			.then((data) => {
-				navigate('/login');
+				console.log(data);
+				if (data.errors) {
+					// navigate('/signup');
+					errorMessage(data);
+				} else {
+					success();
+				}
 			})
 			.catch((error) => console.log(error));
+	};
+
+	const success = () => {
+		message.success({
+			content:
+				'Account created! Please head back to the login page and start spotting some birds!',
+			className: 'custom-class',
+			style: {
+				marginTop: '20vh',
+			},
+		});
+	};
+	const errorMessage = (data) => {
+		message.error({
+			content: `${data.errors[0]}`,
+			className: 'custom-class',
+			style: {
+				marginTop: '20vh',
+			},
+		});
 	};
 
 	return (

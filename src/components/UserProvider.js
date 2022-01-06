@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,6 +32,7 @@ const UserProvider = ({ children }) => {
 				})
 		);
 	}, []);
+
 	const [loggedIn, setLoggedIn] = useState(false);
 
 	const login = (formData) => {
@@ -43,8 +45,14 @@ const UserProvider = ({ children }) => {
 		})
 			.then((r) => r.json())
 			.then((user) => {
-				setCurrentUser(user);
-				navigate('/home');
+				console.log(user);
+				if (user) {
+					setCurrentUser(user);
+				} else {
+					console.log(user);
+					errorMessage(user);
+					// navigate('/home');
+				}
 			})
 			.catch((error) => console.log(error));
 	};
@@ -57,6 +65,25 @@ const UserProvider = ({ children }) => {
 			});
 	};
 
+	const success = () => {
+		message.success({
+			content: 'Good eye! This bird has been added to your aviary.',
+			className: 'custom-class',
+			style: {
+				marginTop: '20vh',
+			},
+		});
+	};
+	const errorMessage = (user) => {
+		console.log('error');
+		message.error({
+			content: `testing`,
+			className: 'custom-class',
+			style: {
+				marginTop: '20vh',
+			},
+		});
+	};
 	return (
 		<UserContext.Provider value={{ login, logout, currentUser }}>
 			{children}

@@ -42,6 +42,25 @@ const SpottingForm = () => {
 
 	const { RangePicker } = DatePicker;
 	const handleSubmit = () => {
+		const success = () => {
+			message.success({
+				content: 'Good eye! This bird has been added to your aviary.',
+				className: 'custom-class',
+				style: {
+					marginTop: '20vh',
+				},
+			});
+		};
+		const errorMessage = () => {
+			message.error({
+				content:
+					'Please make sure you have filled out the required fields and marked the bird on your map!',
+				className: 'custom-class',
+				style: {
+					marginTop: '20vh',
+				},
+			});
+		};
 		fetch('/spottings', {
 			method: 'POST',
 			headers: {
