@@ -29,11 +29,12 @@ function App() {
 
 	const navigate = useNavigate();
 	const { logout, currentUser } = useContext(UserContext);
+
 	useEffect(() => {
-		if (location.pathname === '/') {
-			navigate('/home');
-		}
+		currentUser ? navigate('/home') : navigate('/login');
 	}, []);
+
+	console.log(currentUser);
 
 	const { Title } = Typography;
 
