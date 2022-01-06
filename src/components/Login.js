@@ -19,19 +19,24 @@ const Login = () => {
 	const navigate = useNavigate();
 	const { loggedIn } = useContext(UserContext);
 	const { login } = useContext(UserContext);
-	console.log(loggedIn);
+
 	const [formData, setFormData] = useState({
 		username: '',
 		password: '',
 	});
 	const { currentUser } = useContext(UserContext);
 
-	// useEffect(() => {
-	// 	if (currentUser !== null) {
-	// 		navigate('/home');
-	// 	}
-	// }, []);
-
+	fetch('/me').then((r) =>
+		r.json().then((user) => {
+			// if (location.pathname === '/') {
+			// 	console.log('empty pathname');
+			// 	navigate('/home');
+			// }
+			if (user.username !== undefined) {
+				navigate('/home');
+			}
+		})
+	);
 	const handleChange = (e) => {
 		console.log(e.target.name, ':', e.target.value);
 		setFormData({ ...formData, [e.target.name]: e.target.value });

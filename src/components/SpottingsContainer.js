@@ -25,6 +25,7 @@ import EditCardForm from './EditCardForm';
 import SpottingCard from './SpottingCard';
 import { UserContext } from './UserProvider';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-use';
 
 const SpottingsContainer = () => {
 	const [spottings, setSpottings] = useState([]);
@@ -43,13 +44,31 @@ const SpottingsContainer = () => {
 	const { Title } = Typography;
 	const { RangePicker } = DatePicker;
 
+	const navigate = useNavigate();
+	const location = useLocation();
 	useEffect(() => {
+		// fetch('/me').then((r) =>
+		// 	r
+		// 		.json()
+		// 		.then((user) => {
+		// 			if (user.username !== undefined && location('/myaviary')) {
+		// 				navigate('/home');
+		// 			} else {
+		// 				navigate('/login');
+		// 			}
+		// 		})
+		// 		.catch((error) => {
+		// 			navigate('/login');
+		// 			console.log(error);
+		// 		})
+		// );
 		fetch('/mybirds')
 			.then((r) => r.json())
 			.then((data) => {
 				setSpottings(data);
 			});
 	}, []);
+
 	const { currentUser } = useContext(UserContext);
 	const handleDelete = (bird) => {
 		fetch(`/spottings/${bird.id}`, { method: 'DELETE' })

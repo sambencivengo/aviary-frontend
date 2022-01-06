@@ -28,6 +28,7 @@ function App() {
 	const location = useLocation();
 
 	const navigate = useNavigate();
+
 	const { logout, currentUser } = useContext(UserContext);
 
 	useEffect(() => {
@@ -35,7 +36,15 @@ function App() {
 			r
 				.json()
 				.then((user) => {
-					console.log(user);
+					// if (location.pathname === '/') {
+					// 	console.log('empty pathname');
+					// 	navigate('/home');
+					// }
+					if (user.username !== undefined) {
+						navigate(location);
+					} else {
+						navigate('/login');
+					}
 				})
 				.catch((error) => {
 					navigate('/login');
