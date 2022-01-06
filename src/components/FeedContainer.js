@@ -18,6 +18,14 @@ const FeedContainer = () => {
 
 	const { currentUser } = useContext(UserContext);
 	console.log(currentUser);
+	const [spottings, setSpottings] = useState([]);
+
+	const [selectedSpotting, setSelectedSpotting] = useState({});
+	const handleInfoWindow = (spotting) => {
+		setSelectedSpotting(spotting);
+		console.log(spotting);
+	};
+
 	useEffect(() => {
 		fetch('/feed')
 			.then((r) => r.json())
@@ -33,6 +41,12 @@ const FeedContainer = () => {
 				setFollowings(followedUsers);
 			})
 			.finally(() => setFollowedLoaded(true));
+		fetch('/spottings')
+			.then((r) => r.json())
+			.then((spottings) => {
+				console.log(spottings);
+				setSpottings(spottings);
+			});
 	}, []);
 
 	const stateReset = () => {
@@ -98,7 +112,6 @@ const FeedContainer = () => {
 
 	//
 	// RENDER 2 ROWS... FOLLOWED USERS AND OTHERS?
-	const [spottings, setSpottings] = useState([]);
 
 	// const markers = spottings.map((spotting) => {
 	// 	return (
@@ -134,7 +147,11 @@ const FeedContainer = () => {
 					</Col>{' '} */}
 						{/* */}
 					</Row>
-					<FeedMap spottings={spottings} />
+					<FeedMap
+						spottings={spottings}
+						handleInfoWindow={handleInfoWindow}
+						selectedSpotting={selectedSpotting}
+					/>
 				</>
 			) : (
 				<Spin size="large" />

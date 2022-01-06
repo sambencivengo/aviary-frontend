@@ -1,9 +1,14 @@
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import {
+	GoogleMap,
+	LoadScript,
+	Marker,
+	InfoWindow,
+} from '@react-google-maps/api';
 import { Button } from 'antd';
 import { useState } from 'react';
 import { useLocalStorage } from 'react-use';
 
-const FeedMap = ({ markers }) => {
+const FeedMap = ({ spottings, handleInfoWindow, selectedSpotting }) => {
 	const [savedLocation, setSavedLocation] = useLocalStorage(
 		'saved-location',
 		null
@@ -24,13 +29,48 @@ const FeedMap = ({ markers }) => {
 		}
 	};
 	const mapStyles = {
-		height: '50vh',
+		height: '70vh',
 		maxWidth: '100%',
 	};
 	const [zoom, setZoom] = useState(10);
 
 	const [center, setCenter] = useState({ lat: 40.7128, lng: -74.006 });
 
+	const renderSpottings = spottings.map((spotting) => {
+		const location = {
+			lat: spotting.lat,
+			lng: spotting.long,
+		};
+
+		return (
+			<Marker
+				key={spotting.id}
+				onClick={() => {
+					handleInfoWindow(spotting);
+				}}
+				position={location}
+			>
+				{selectedSpotting.id === spotting.id ? (
+					<InfoWindow
+						style={{ maxHeight: '70vh' }}
+						onCloseClick={() => {
+							// onCloseClick();
+						}}
+					>
+						<div>
+							<h3>{spotting.bird.common_name}</h3>
+							<h4>Spotted by: {spotting.user.username}</h4>
+							<img
+								style={{ maxHeight: '30vh' }}
+								src={spotting.bird.image}
+							/>
+							{/* <p>{spotting}</p> */}
+						</div>
+					</InfoWindow>
+				) : null}
+			</Marker>
+		);
+	});
 	return (
 		<>
 			{' '}
@@ -47,7 +87,7 @@ const FeedMap = ({ markers }) => {
 					>
 						Current Location
 					</Button>
-					{markers}
+					{renderSpottings}
 				</GoogleMap>
 			</LoadScript>
 		</>
