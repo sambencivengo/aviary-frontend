@@ -4,11 +4,13 @@ import {
 	Marker,
 	InfoWindow,
 } from '@react-google-maps/api';
-import { Button } from 'antd';
+import { Button, DatePicker, Divider } from 'antd';
+import moment from 'moment';
 import { useState } from 'react';
 import { useLocalStorage } from 'react-use';
 
 const FeedMap = ({ spottings, handleInfoWindow, selectedSpotting }) => {
+
 	const [savedLocation, setSavedLocation] = useLocalStorage(
 		'saved-location',
 		null
@@ -74,6 +76,7 @@ const FeedMap = ({ spottings, handleInfoWindow, selectedSpotting }) => {
 	return (
 		<>
 			{' '}
+			
 			<LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
 				<GoogleMap
 					mapContainerStyle={mapStyles}

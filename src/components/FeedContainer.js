@@ -1,5 +1,6 @@
-import { Col, message, Row, Space, Spin } from 'antd';
+import { Col, DatePicker, Divider, message, Row, Space, Spin } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
+import moment from 'moment';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FeedMap from './FeedMap';
@@ -125,7 +126,24 @@ const FeedContainer = () => {
 	// 			onCloseClick={onMarkerCloseClicked}
 	// 		/>
 	// 	);
+	const { RangePicker } = DatePicker;
+
 	// });
+	const [startDate, setStartDate] = useState();
+	const [endDate, setEndDate] = useState();
+	console.log(startDate, endDate);
+
+	console.log(spottings);
+	const [range, setRange] = useState();
+
+	const filteredSpottings = spottings.filter((spotting) => {
+		let spottingDate = new Date(spotting.date);
+		if (range) {
+			return spottingDate >= startDate && spottingDate <= endDate;
+		}
+		return spotting;
+	});
+	console.log(filteredSpottings);
 
 	return (
 		<>
@@ -147,7 +165,17 @@ const FeedContainer = () => {
 					</Col>{' '} */}
 						{/* */}
 					</Row>
-					<FeedMap
+					<RangePicker
+						value={range}
+						disabledDate={(current) => current > moment.now()}
+						// onChange={(val) => {
+						// 	setRange(val);
+						// 	setStartDate(val[0]['_d']);
+						// 	setEndDate(val[1]['_d']);
+						// }}
+					/>
+					<Divider></Divider>
+					<FeedMap	
 						spottings={spottings}
 						handleInfoWindow={handleInfoWindow}
 						selectedSpotting={selectedSpotting}
