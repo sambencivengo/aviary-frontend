@@ -25,8 +25,9 @@ const AviaryMap = ({
 		width: '70vh',
 	};
 
-	const [center, setCenter] = useState({ lat: 40.7128, lng: -74.006 });
 	const [zoom, setZoom] = useState(10);
+
+	const [center, setCenter] = useState({ lat: 40.7128, lng: -74.006 });
 
 	// function setLocation() {
 	// 	setCenter({ lat: currentLat, lng: currentLng });

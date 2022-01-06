@@ -214,6 +214,7 @@ const SpottingsContainer = () => {
 						/>
 					</>
 				) : null} */}
+
 				{showMap ? (
 					<Col span={12}>
 						{/* <div

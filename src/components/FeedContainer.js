@@ -2,8 +2,10 @@ import { Col, message, Row, Space, Spin } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import FeedMap from './FeedMap';
 
 import FollowedUsersContainer from './FollowedUsersContainer';
+
 import UnfollowedUsersContainer from './UnfollowedUsersContainer';
 import { UserContext } from './UserProvider';
 
@@ -96,25 +98,44 @@ const FeedContainer = () => {
 
 	//
 	// RENDER 2 ROWS... FOLLOWED USERS AND OTHERS?
+	const [spottings, setSpottings] = useState([]);
+
+	// const markers = spottings.map((spotting) => {
+	// 	return (
+	// 		<AviaryMarker
+	// 			isSelected={
+	// 				selectedSpotting && selectedSpotting.id === spotting.id
+	// 			}
+	// 			key={spotting.id}
+	// 			spotting={spotting}
+	// 			onClick={onMarkerClicked}
+	// 			onCloseClick={onMarkerCloseClicked}
+	// 		/>
+	// 	);
+	// });
+
 	return (
 		<>
 			{followedLoaded && notfollowedLoaded ? (
-				<Row>
-					<Col span={18}>
+				<>
+					<Row>
+						{/* <Col span={18}>
 						<FollowedUsersContainer
 							followings={followings}
 							handleUnFollow={handleUnFollow}
 						/>
 					</Col>
 					{/* <Col span={6}></Col> */}
-
-					<Col span={6}>
+						{/* <Col span={6}>
 						<UnfollowedUsersContainer
 							users={users}
 							handleFollow={handleFollow}
 						/>
-					</Col>
-				</Row>
+					</Col>{' '} */}
+						{/* */}
+					</Row>
+					<FeedMap spottings={spottings} />
+				</>
 			) : (
 				<Spin size="large" />
 			)}

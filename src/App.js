@@ -94,9 +94,9 @@ function App() {
 						<Menu.Item key="3" icon={<PlusCircleOutlined />}>
 							<Link to="/spotabird">Spotting</Link>
 						</Menu.Item>
-						{/* <Menu.Item key="4" icon={<TeamOutlined />}>
+						<Menu.Item key="4" icon={<TeamOutlined />}>
 							<Link to="/feed">Feed</Link>
-						</Menu.Item> */}
+						</Menu.Item>
 						<SubMenu
 							key="sub1"
 							icon={<DashOutlined />}
