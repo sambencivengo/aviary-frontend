@@ -31,7 +31,7 @@ const FeedMap = ({ spottings, handleInfoWindow, selectedSpotting }) => {
 	};
 	const mapStyles = {
 		height: '70vh',
-		maxWidth: '100%',
+		maxWidth: '95%',
 	};
 	const [zoom, setZoom] = useState(10);
 

@@ -1,4 +1,5 @@
 import {
+	Card,
 	Col,
 	DatePicker,
 	Divider,
@@ -8,6 +9,7 @@ import {
 	Row,
 	Space,
 	Spin,
+	Typography,
 } from 'antd';
 import Sider, { SiderContext } from 'antd/lib/layout/Sider';
 import Title from 'antd/lib/typography/Title';
@@ -29,34 +31,30 @@ const FeedContainer = () => {
 	const navigate = useNavigate();
 
 	const { currentUser } = useContext(UserContext);
-	console.log(currentUser);
+
 	const [spottings, setSpottings] = useState([]);
 
 	const [selectedSpotting, setSelectedSpotting] = useState({});
 	const handleInfoWindow = (spotting) => {
 		setSelectedSpotting(spotting);
-		console.log(spotting);
 	};
 
 	useEffect(() => {
 		fetch('/feed')
 			.then((r) => r.json())
 			.then((users) => {
-				// console.log(users);
 				setUsers(users);
 			})
 			.finally(() => setNotFollowedLoaded(true));
 		fetch('/followings')
 			.then((r) => r.json())
 			.then((followedUsers) => {
-				// console.log(followedUsers);
 				setFollowings(followedUsers);
 			})
 			.finally(() => setFollowedLoaded(true));
 		fetch('/spottings')
 			.then((r) => r.json())
 			.then((spottings) => {
-				console.log(spottings);
 				setSpottings(spottings);
 			});
 	}, []);
@@ -65,25 +63,41 @@ const FeedContainer = () => {
 		fetch('/feed')
 			.then((r) => r.json())
 			.then((users) => {
-				// console.log(users);
 				setUsers(users);
 			})
 			.catch((error) => console.log(error));
 		fetch('/followings')
 			.then((r) => r.json())
 			.then((followedUsers) => {
-				console.log('STATE RESET');
 				setFollowings(followedUsers);
 			})
 			.catch((error) => console.log(error));
 	};
+	const { Text } = Typography;
+
+	const listOfSpottings = spottings.slice(0, 20).map((spotting) => {
+		// let spottingDate = new Date(spotting.date);
+
+		return (
+			<>
+				<Card style={{ width: '100%' }}>
+					<Row>
+						<Text>{spotting.bird.common_name}</Text>
+					</Row>
+					<Row>
+						<Text>Seen by: {spotting.user.username}</Text>
+					</Row>
+				</Card>
+			</>
+		);
+	});
 
 	function handleFollow(user) {
 		const dataobj = {
 			follower_id: currentUser.id,
 			followed_user_id: user.id,
 		};
-		console.log(dataobj);
+
 		fetch('/follows', {
 			method: 'POST',
 			headers: {
@@ -93,7 +107,6 @@ const FeedContainer = () => {
 		})
 			.then((r) => r.json())
 			.then((users) => {
-				console.log();
 				setUsers(users);
 				stateReset();
 			})
@@ -106,7 +119,6 @@ const FeedContainer = () => {
 		})
 			.then((r) => r.json())
 			.then((follows) => {
-				console.log(follows);
 				stateReset();
 			});
 	};
@@ -120,31 +132,13 @@ const FeedContainer = () => {
 			},
 		});
 	};
-	// setTimeout(() => {console.log("this is the first message")}, 5000)
 
-	//
-	// RENDER 2 ROWS... FOLLOWED USERS AND OTHERS?
-
-	// const markers = spottings.map((spotting) => {
-	// 	return (
-	// 		<AviaryMarker
-	// 			isSelected={
-	// 				selectedSpotting && selectedSpotting.id === spotting.id
-	// 			}
-	// 			key={spotting.id}
-	// 			spotting={spotting}
-	// 			onClick={onMarkerClicked}
-	// 			onCloseClick={onMarkerCloseClicked}
-	// 		/>
-	// 	);
 	const { RangePicker } = DatePicker;
 
 	// });
 	const [startDate, setStartDate] = useState();
 	const [endDate, setEndDate] = useState();
-	console.log(startDate, endDate);
 
-	console.log(spottings);
 	const [range, setRange] = useState();
 
 	const filteredSpottings = spottings.filter((spotting) => {
@@ -154,7 +148,6 @@ const FeedContainer = () => {
 		}
 		return spotting;
 	});
-	console.log(filteredSpottings);
 
 	return (
 		<>
@@ -201,7 +194,22 @@ const FeedContainer = () => {
 								selectedSpotting={selectedSpotting}
 							/>
 						</Col>
-						<Col span={6}>container for recent spottings</Col>
+						<Col span={6}>
+							<div
+								style={{
+									padding: '20px',
+									overflowY: 'scroll',
+									backgroundColor: '#E7E7E7',
+									color: 'white',
+									height: '70vh',
+									borderRadius: '2px 2px 2px 2px',
+								}}
+							>
+								<Space direction="vertical">
+									{listOfSpottings}
+								</Space>
+							</div>
+						</Col>
 					</Row>
 				</>
 			) : (
