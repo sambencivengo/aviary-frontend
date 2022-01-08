@@ -1,5 +1,15 @@
-import { Col, DatePicker, Divider, message, Row, Space, Spin } from 'antd';
-import Sider from 'antd/lib/layout/Sider';
+import {
+	Col,
+	DatePicker,
+	Divider,
+	Form,
+	Input,
+	message,
+	Row,
+	Space,
+	Spin,
+} from 'antd';
+import Sider, { SiderContext } from 'antd/lib/layout/Sider';
 import Title from 'antd/lib/typography/Title';
 import moment from 'moment';
 import { useContext, useEffect, useState } from 'react';
@@ -166,22 +176,33 @@ const FeedContainer = () => {
 					</Col>{' '} */}
 						{/* */}
 					</Row>
-					<Title level={4}>Check out what users are spotting!</Title>
-					<RangePicker
-						value={range}
-						disabledDate={(current) => current > moment.now()}
-						onChange={(val) => {
-							setRange(val);
-							setStartDate(val[0]['_d']);
-							setEndDate(val[1]['_d']);
-						}}
-					/>
+					<Row>
+						<Title level={4}>
+							Check out what users are spotting!
+						</Title>
+					</Row>
+					<Row>
+						<RangePicker
+							value={range}
+							disabledDate={(current) => current > moment.now()}
+							onChange={(val) => {
+								setRange(val);
+								setStartDate(val[0]['_d']);
+								setEndDate(val[1]['_d']);
+							}}
+						/>
+					</Row>
 					<Divider></Divider>
-					<FeedMap
-						spottings={filteredSpottings}
-						handleInfoWindow={handleInfoWindow}
-						selectedSpotting={selectedSpotting}
-					/>
+					<Row>
+						<Col span={18}>
+							<FeedMap
+								spottings={filteredSpottings}
+								handleInfoWindow={handleInfoWindow}
+								selectedSpotting={selectedSpotting}
+							/>
+						</Col>
+						<Col span={6}>container for recent spottings</Col>
+					</Row>
 				</>
 			) : (
 				<Spin size="large" />
