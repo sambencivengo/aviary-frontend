@@ -10,7 +10,6 @@ import {
 	Space,
 	Spin,
 	Typography,
-	Popover,
 } from 'antd';
 import Sider, { SiderContext } from 'antd/lib/layout/Sider';
 import Title from 'antd/lib/typography/Title';
@@ -77,37 +76,29 @@ const FeedContainer = () => {
 	const { Text } = Typography;
 
 	const listOfSpottings = spottings.slice(0, 20).map((spotting) => {
-		// let spottingDate = new Date(spotting.date);
+		let spottingDate = new Date(spotting.date).toDateString();
 
-		const text = <span>Title</span>;
-		const content = (
-			<div>
-				<p>Content</p>
-				<p>Content</p>
-			</div>
-		);
 		return (
 			<>
-				<Popover
-					placement="leftTop"
-					title={text}
-					content={content}
-					trigger="click"
+				<Card
+					style={{ width: '100%' }}
+					onClick={() => {
+						setSelectedSpotting(spotting);
+					}}
+					hoverable={true}
 				>
-					<Card
-						style={{ width: '100%' }}
-						onClick={() => {
-							console.log(spotting);
-						}}
-					>
-						<Row>
-							<Text>{spotting.bird.common_name}</Text>
-						</Row>
-						<Row>
+					<Row>
+						<Col span={12}>
+							<Text style={{ textAlign: 'left' }}>
+								{spotting.bird.common_name}
+							</Text>
 							<Text>Seen by: {spotting.user.username}</Text>
-						</Row>
-					</Card>
-				</Popover>
+							{/* <Row> */}
+							{/* </Row> */}
+						</Col>
+						<Col span={12}>{spottingDate}</Col>
+					</Row>
+				</Card>
 			</>
 		);
 	});
@@ -207,14 +198,14 @@ const FeedContainer = () => {
 					</Row>
 					<Divider></Divider>
 					<Row>
-						<Col span={18}>
+						<Col span={17}>
 							<FeedMap
 								spottings={filteredSpottings}
 								handleInfoWindow={handleInfoWindow}
 								selectedSpotting={selectedSpotting}
 							/>
 						</Col>
-						<Col span={6}>
+						<Col span={7}>
 							<div
 								style={{
 									padding: '20px',
