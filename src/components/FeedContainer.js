@@ -10,6 +10,7 @@ import {
 	Space,
 	Spin,
 	Typography,
+	Popover,
 } from 'antd';
 import Sider, { SiderContext } from 'antd/lib/layout/Sider';
 import Title from 'antd/lib/typography/Title';
@@ -78,16 +79,35 @@ const FeedContainer = () => {
 	const listOfSpottings = spottings.slice(0, 20).map((spotting) => {
 		// let spottingDate = new Date(spotting.date);
 
+		const text = <span>Title</span>;
+		const content = (
+			<div>
+				<p>Content</p>
+				<p>Content</p>
+			</div>
+		);
 		return (
 			<>
-				<Card style={{ width: '100%' }}>
-					<Row>
-						<Text>{spotting.bird.common_name}</Text>
-					</Row>
-					<Row>
-						<Text>Seen by: {spotting.user.username}</Text>
-					</Row>
-				</Card>
+				<Popover
+					placement="leftTop"
+					title={text}
+					content={content}
+					trigger="click"
+				>
+					<Card
+						style={{ width: '100%' }}
+						onClick={() => {
+							console.log(spotting);
+						}}
+					>
+						<Row>
+							<Text>{spotting.bird.common_name}</Text>
+						</Row>
+						<Row>
+							<Text>Seen by: {spotting.user.username}</Text>
+						</Row>
+					</Card>
+				</Popover>
 			</>
 		);
 	});
