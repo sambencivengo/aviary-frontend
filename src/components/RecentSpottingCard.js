@@ -9,6 +9,7 @@ const RecentSpottingCard = ({
 }) => {
 	const { Title } = Typography;
 	const { Text } = Typography;
+	const { Link } = Typography;
 
 	let spottingDate = new Date(spotting.date).toDateString();
 
@@ -50,7 +51,13 @@ const RecentSpottingCard = ({
 			<Row>
 				<Col span={12}>
 					<Row>
-						<Text>{spotting.bird.common_name}</Text>
+						<Link
+							onClick={() => {
+								handleSelectedSpotting(spotting);
+							}}
+						>
+							{spotting.bird.common_name}
+						</Link>
 					</Row>
 					<Text>Seen by: {spotting.user.username}</Text>
 					<Row>

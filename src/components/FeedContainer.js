@@ -138,8 +138,21 @@ const FeedContainer = () => {
 		setSelectedSpotting(spotting);
 	};
 
-	useEffect(() => {});
+	async function getUser(url = '') {
+		const response = await fetch(url);
+		return response.json();
+	}
+
 	const [drawerSpotting, setDrawerSpotting] = useState(null);
+	const [drawerUser, setDrawerUser] = useState(null);
+	useEffect(() => {
+		drawerSpotting &&
+			getUser(`/users/${drawerSpotting.user.id}`).then((user) =>
+				setDrawerUser(user)
+			);
+	}, [drawerSpotting]);
+
+	console.log(drawerSpotting);
 
 	function openDrawer(spotting) {
 		setDrawerVisible(true);
@@ -196,13 +209,13 @@ const FeedContainer = () => {
 						visible={drawerVisible}
 						destroyOnClose={true}
 					>
-						{drawerSpotting && (
+						{drawerUser && (
 							<>
 								<Title level={3}>
-									{drawerSpotting.user.username
+									{drawerUser.username
 										.charAt(0)
 										.toUpperCase() +
-										drawerSpotting.user.username.slice(1)}
+										drawerUser.username.slice(1)}
 								</Title>
 								<p>Some contents...</p>
 								<p>Some contents...</p>
