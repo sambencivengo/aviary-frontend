@@ -12,6 +12,7 @@ import {
 	Spin,
 	Typography,
 } from 'antd';
+import Meta from 'antd/lib/card/Meta';
 import Sider, { SiderContext } from 'antd/lib/layout/Sider';
 import Title from 'antd/lib/typography/Title';
 import moment from 'moment';
@@ -211,14 +212,43 @@ const FeedContainer = () => {
 					>
 						{drawerUser && (
 							<>
-								<Title level={3}>
+								<Title level={1}>
 									{drawerUser.username
 										.charAt(0)
 										.toUpperCase() +
 										drawerUser.username.slice(1)}
 								</Title>
-								<p>Some contents...</p>
-								<p>Some contents...</p>
+								<Text>
+									Total number of birds seen:{' '}
+									{drawerUser.spottings.length}
+								</Text>
+								<Title level={4}>Recent spottings:</Title>
+								{drawerUser.spottings
+									.splice(0, 3)
+									.map((spotting) => {
+										return (
+											<Card
+												hoverable
+												style={{ width: 240 }}
+												cover={
+													<img
+														alt="example"
+														src={
+															spotting.bird.image
+														}
+													/>
+												}
+											>
+												<Meta
+													title={
+														spotting.bird
+															.common_name
+													}
+													// description="www.instagram.com"
+												/>
+											</Card>
+										);
+									})}
 							</>
 						)}
 					</Drawer>
