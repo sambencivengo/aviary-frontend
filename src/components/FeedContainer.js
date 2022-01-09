@@ -227,26 +227,35 @@ const FeedContainer = () => {
 									.splice(0, 3)
 									.map((spotting) => {
 										return (
-											<Card
-												hoverable
-												style={{ width: 240 }}
-												cover={
-													<img
-														alt="example"
-														src={
-															spotting.bird.image
-														}
-													/>
-												}
+											<div
+												style={{
+													padding: '20px',
+												}}
 											>
-												<Meta
-													title={
-														spotting.bird
-															.common_name
+												<Card
+													hoverable
+													style={{
+														width: 240,
+													}}
+													cover={
+														<img
+															alt="example"
+															src={
+																spotting.bird
+																	.image
+															}
+														/>
 													}
-													// description="www.instagram.com"
-												/>
-											</Card>
+												>
+													<Meta
+														title={
+															spotting.bird
+																.common_name
+														}
+														// description="www.instagram.com"
+													/>
+												</Card>
+											</div>
 										);
 									})}
 							</>
