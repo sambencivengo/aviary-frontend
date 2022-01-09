@@ -3,6 +3,7 @@ import {
 	Col,
 	DatePicker,
 	Divider,
+	Drawer,
 	Form,
 	Input,
 	message,
@@ -17,7 +18,6 @@ import moment from 'moment';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FeedMap from './FeedMap';
-
 import FollowedUsersContainer from './FollowedUsersContainer';
 import RecentSpottingsContainer from './RecentSpottingsContainer';
 
@@ -25,6 +25,7 @@ import UnfollowedUsersContainer from './UnfollowedUsersContainer';
 import { UserContext } from './UserProvider';
 
 const FeedContainer = () => {
+	const [drawerVisible, setDrawerVisible] = useState(false);
 	const [users, setUsers] = useState([]);
 	const [followings, setFollowings] = useState([]);
 	const [followedLoaded, setFollowedLoaded] = useState(false);
@@ -137,6 +138,17 @@ const FeedContainer = () => {
 		setSelectedSpotting(spotting);
 	};
 
+	useEffect(() => {});
+	const [drawerSpotting, setDrawerSpotting] = useState(null);
+
+	function openDrawer(spotting) {
+		setDrawerVisible(true);
+		setDrawerSpotting(spotting);
+	}
+	function closeDrawer() {
+		setDrawerSpotting(null);
+		setDrawerVisible(false);
+	}
 	return (
 		<>
 			{followedLoaded && notfollowedLoaded ? (
@@ -172,11 +184,31 @@ const FeedContainer = () => {
 						</Col>
 						<Col span={7}>
 							<RecentSpottingsContainer
+								openDrawer={openDrawer}
 								filteredSpottings={filteredSpottings}
 								handleSelectedSpotting={handleSelectedSpotting}
 							/>
 						</Col>
 					</Row>
+					<Drawer
+						placement="right"
+						onClose={closeDrawer}
+						visible={drawerVisible}
+						destroyOnClose={true}
+					>
+						{drawerSpotting && (
+							<>
+								<Title level={3}>
+									{drawerSpotting.user.username
+										.charAt(0)
+										.toUpperCase() +
+										drawerSpotting.user.username.slice(1)}
+								</Title>
+								<p>Some contents...</p>
+								<p>Some contents...</p>
+							</>
+						)}
+					</Drawer>
 				</>
 			) : (
 				<Spin size="large" />

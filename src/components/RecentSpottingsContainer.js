@@ -4,6 +4,7 @@ import RecentSpottingCard from './RecentSpottingCard';
 const RecentSpottingsContainer = ({
 	filteredSpottings,
 	handleSelectedSpotting,
+	openDrawer,
 }) => {
 	const renderListOfSpottings = filteredSpottings
 		.slice(0, 20)
@@ -11,6 +12,7 @@ const RecentSpottingsContainer = ({
 			return (
 				<>
 					<RecentSpottingCard
+						openDrawer={openDrawer}
 						spotting={spotting}
 						handleSelectedSpotting={handleSelectedSpotting}
 					/>
