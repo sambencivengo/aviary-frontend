@@ -75,34 +75,6 @@ const FeedContainer = () => {
 	};
 	const { Text } = Typography;
 
-	const listOfSpottings = spottings.slice(0, 20).map((spotting) => {
-		let spottingDate = new Date(spotting.date).toDateString();
-
-		return (
-			<>
-				<Card
-					style={{ width: '100%' }}
-					onClick={() => {
-						setSelectedSpotting(spotting);
-					}}
-					hoverable={true}
-				>
-					<Row>
-						<Col span={12}>
-							<Text style={{ textAlign: 'left' }}>
-								{spotting.bird.common_name}
-							</Text>
-							<Text>Seen by: {spotting.user.username}</Text>
-							{/* <Row> */}
-							{/* </Row> */}
-						</Col>
-						<Col span={12}>{spottingDate}</Col>
-					</Row>
-				</Card>
-			</>
-		);
-	});
-
 	function handleFollow(user) {
 		const dataobj = {
 			follower_id: currentUser.id,
@@ -190,9 +162,13 @@ const FeedContainer = () => {
 							value={range}
 							disabledDate={(current) => current > moment.now()}
 							onChange={(val) => {
-								setRange(val);
-								setStartDate(val[0]['_d']);
-								setEndDate(val[1]['_d']);
+								if (val) {
+									setRange(val);
+									setStartDate(val[0]['_d']);
+									setEndDate(val[1]['_d']);
+								} else {
+									setRange(null);
+								}
 							}}
 						/>
 					</Row>
@@ -217,7 +193,58 @@ const FeedContainer = () => {
 								}}
 							>
 								<Space direction="vertical">
-									{listOfSpottings}
+									{filteredSpottings
+										.slice(0, 20)
+										.map((spotting) => {
+											let spottingDate = new Date(
+												spotting.date
+											).toDateString();
+											return (
+												<>
+													<Card
+														style={{
+															width: '100%',
+														}}
+														onClick={() => {
+															setSelectedSpotting(
+																spotting
+															);
+														}}
+														hoverable={true}
+													>
+														<Row>
+															<Col span={12}>
+																<Text
+																	style={{
+																		textAlign:
+																			'left',
+																	}}
+																>
+																	{
+																		spotting
+																			.bird
+																			.common_name
+																	}
+																</Text>
+																<Text>
+																	Seen by:{' '}
+																	{
+																		spotting
+																			.user
+																			.username
+																	}
+																</Text>
+																{/* <Row> */}
+																{/* </Row> */}
+															</Col>
+															<Col span={12}>
+																{spottingDate}
+															</Col>
+														</Row>
+													</Card>
+												</>
+											);
+										})}
 								</Space>
 							</div>
 						</Col>
