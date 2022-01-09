@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import FeedMap from './FeedMap';
 
 import FollowedUsersContainer from './FollowedUsersContainer';
+import RecentSpottingsContainer from './RecentSpottingsContainer';
 
 import UnfollowedUsersContainer from './UnfollowedUsersContainer';
 import { UserContext } from './UserProvider';
@@ -132,26 +133,14 @@ const FeedContainer = () => {
 		return spotting;
 	});
 
+	const handleSelectedSpotting = (spotting) => {
+		setSelectedSpotting(spotting);
+	};
+
 	return (
 		<>
 			{followedLoaded && notfollowedLoaded ? (
 				<>
-					<Row>
-						{/* <Col span={18}>
-						<FollowedUsersContainer
-							followings={followings}
-							handleUnFollow={handleUnFollow}
-						/>
-					</Col>
-					{/* <Col span={6}></Col> */}
-						{/* <Col span={6}>
-						<UnfollowedUsersContainer
-							users={users}
-							handleFollow={handleFollow}
-						/>
-					</Col>{' '} */}
-						{/* */}
-					</Row>
 					<Row>
 						<Title level={4}>
 							Check out what users are spotting!
@@ -182,71 +171,10 @@ const FeedContainer = () => {
 							/>
 						</Col>
 						<Col span={7}>
-							<div
-								style={{
-									padding: '20px',
-									overflowY: 'scroll',
-									backgroundColor: '#E7E7E7',
-									color: 'white',
-									height: '70vh',
-									borderRadius: '2px 2px 2px 2px',
-								}}
-							>
-								<Space direction="vertical">
-									{filteredSpottings
-										.slice(0, 20)
-										.map((spotting) => {
-											let spottingDate = new Date(
-												spotting.date
-											).toDateString();
-											return (
-												<>
-													<Card
-														style={{
-															width: '100%',
-														}}
-														onClick={() => {
-															setSelectedSpotting(
-																spotting
-															);
-														}}
-														hoverable={true}
-													>
-														<Row>
-															<Col span={12}>
-																<Text
-																	style={{
-																		textAlign:
-																			'left',
-																	}}
-																>
-																	{
-																		spotting
-																			.bird
-																			.common_name
-																	}
-																</Text>
-																<Text>
-																	Seen by:{' '}
-																	{
-																		spotting
-																			.user
-																			.username
-																	}
-																</Text>
-																{/* <Row> */}
-																{/* </Row> */}
-															</Col>
-															<Col span={12}>
-																{spottingDate}
-															</Col>
-														</Row>
-													</Card>
-												</>
-											);
-										})}
-								</Space>
-							</div>
+							<RecentSpottingsContainer
+								filteredSpottings={filteredSpottings}
+								handleSelectedSpotting={handleSelectedSpotting}
+							/>
 						</Col>
 					</Row>
 				</>
