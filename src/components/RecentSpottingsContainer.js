@@ -6,7 +6,6 @@ const RecentSpottingsContainer = ({
 	spottings,
 	handleSelectedSpotting,
 	openDrawer,
-	filteredSpottings,
 }) => {
 	const [containerSpottings, setContainerSpottings] = useState(spottings);
 

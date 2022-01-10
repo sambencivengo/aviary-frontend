@@ -128,14 +128,6 @@ const FeedContainer = () => {
 
 	const [range, setRange] = useState();
 
-	const filteredSpottings = spottings.filter((spotting) => {
-		let spottingDate = new Date(spotting.date);
-		if (range) {
-			return spottingDate >= startDate && spottingDate <= endDate;
-		}
-		return spotting;
-	});
-
 	const handleSelectedSpotting = (spotting) => {
 		setSelectedSpotting(spotting);
 	};
@@ -163,14 +155,24 @@ const FeedContainer = () => {
 		setDrawerVisible(false);
 	}
 
+	const filteredSpottings = spottings.filter((spotting) => {
+		let spottingDate = new Date(spotting.date);
+		if (range) {
+			return spottingDate >= startDate && spottingDate <= endDate;
+		}
+		return spotting;
+	});
+
 	const [filterUsersSpottings, setFilterUsersSpottings] = useState(false);
 	const spottingsMinusUserSpottings = filteredSpottings.filter(
 		(spotting) => spotting.user.id !== currentUser.id
 	);
 	const handleCheckBox = () => {
-		setFilterUsersSpottings(!filteredSpottings);
+		setFilterUsersSpottings(!filterUsersSpottings);
 	};
-
+	if (filterUsersSpottings === true) {
+	} else {
+	}
 	return (
 		<>
 			{followedLoaded && notfollowedLoaded ? (
@@ -199,18 +201,23 @@ const FeedContainer = () => {
 									}}
 								/>
 							</Row>
+							<Row>
+								<Checkbox onChange={handleCheckBox}>
+									Include your spottings
+								</Checkbox>
+							</Row>
 						</Col>
-						<Col span={7}>
-							<Checkbox onChange={handleCheckBox}>
-								Include your spottings
-							</Checkbox>
-						</Col>
+						<Col span={7}></Col>
 					</Row>
 					<Divider></Divider>
 					<Row>
 						<Col span={17}>
 							<FeedMap
-								spottings={filteredSpottings}
+								spottings={
+									filterUsersSpottings
+										? filteredSpottings
+										: spottingsMinusUserSpottings
+								}
 								handleInfoWindow={handleInfoWindow}
 								selectedSpotting={selectedSpotting}
 							/>
@@ -218,9 +225,12 @@ const FeedContainer = () => {
 						<Col span={7}>
 							<RecentSpottingsContainer
 								openDrawer={openDrawer}
-								spottings={filteredSpottings}
+								spottings={
+									filterUsersSpottings
+										? filteredSpottings
+										: spottingsMinusUserSpottings
+								}
 								handleSelectedSpotting={handleSelectedSpotting}
-								filteredSpottings={filteredSpottings}
 							/>
 						</Col>
 					</Row>
