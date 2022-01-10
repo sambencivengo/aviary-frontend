@@ -1,6 +1,11 @@
 import { Button, Card, Col, Row } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import { Typography } from 'antd';
+import {
+	EditOutlined,
+	EllipsisOutlined,
+	SettingOutlined,
+} from '@ant-design/icons';
 
 const RecentSpottingCard = ({
 	spotting,
@@ -18,10 +23,26 @@ const RecentSpottingCard = ({
 			style={{
 				width: '100%',
 			}}
-			onClick={() => {
-				handleSelectedSpotting(spotting);
-			}}
 			hoverable={true}
+			actions={[
+				<Button
+					style={{ alignItems: 'center' }}
+					type="link"
+					onClick={() => {
+						handleSelectedSpotting(spotting);
+					}}
+				>
+					Locate
+				</Button>,
+
+				<Button
+					style={{ alignItems: 'center' }}
+					type="link"
+					onClick={() => openDrawer(spotting)}
+				>
+					View Profile
+				</Button>,
+			]}
 		>
 			<Row>
 				<Col span={12}>
@@ -31,21 +52,12 @@ const RecentSpottingCard = ({
 						}}
 					>
 						{spotting.bird.common_name}
-					</Text>
+					</Text>{' '}
 					<Text>Seen by: {spotting.user.username}</Text>
 					{/* <Row> */}
 					{/* </Row> */}
 				</Col>
-				<Col span={12}>
-					{spottingDate}
-					<Button
-						style={{ alignItems: 'center' }}
-						type="link"
-						onClick={() => openDrawer(spotting)}
-					>
-						View Profile
-					</Button>
-				</Col>
+				<Col span={12}>{spottingDate}</Col>
 			</Row>
 		</Card>
 		// <div
