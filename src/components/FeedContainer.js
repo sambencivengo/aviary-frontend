@@ -1,5 +1,6 @@
 import {
 	Card,
+	Checkbox,
 	Col,
 	DatePicker,
 	Divider,
@@ -153,8 +154,6 @@ const FeedContainer = () => {
 			);
 	}, [drawerSpotting]);
 
-	console.log(drawerSpotting);
-
 	function openDrawer(spotting) {
 		setDrawerVisible(true);
 		setDrawerSpotting(spotting);
@@ -163,29 +162,49 @@ const FeedContainer = () => {
 		setDrawerSpotting(null);
 		setDrawerVisible(false);
 	}
+
+	const [filterUsersSpottings, setFilterUsersSpottings] = useState(false);
+	const spottingsMinusUserSpottings = filteredSpottings.filter(
+		(spotting) => spotting.user.id !== currentUser.id
+	);
+	const handleCheckBox = () => {
+		setFilterUsersSpottings(!filteredSpottings);
+	};
+
 	return (
 		<>
 			{followedLoaded && notfollowedLoaded ? (
 				<>
 					<Row>
-						<Title level={4}>
-							Check out what users are spotting!
-						</Title>
-					</Row>
-					<Row>
-						<RangePicker
-							value={range}
-							disabledDate={(current) => current > moment.now()}
-							onChange={(val) => {
-								if (val) {
-									setRange(val);
-									setStartDate(val[0]['_d']);
-									setEndDate(val[1]['_d']);
-								} else {
-									setRange(null);
-								}
-							}}
-						/>
+						<Col span={17}>
+							<Row>
+								<Title level={4}>
+									Check out what users are spotting!
+								</Title>
+							</Row>
+							<Row>
+								<RangePicker
+									value={range}
+									disabledDate={(current) =>
+										current > moment.now()
+									}
+									onChange={(val) => {
+										if (val) {
+											setRange(val);
+											setStartDate(val[0]['_d']);
+											setEndDate(val[1]['_d']);
+										} else {
+											setRange(null);
+										}
+									}}
+								/>
+							</Row>
+						</Col>
+						<Col span={7}>
+							<Checkbox onChange={handleCheckBox}>
+								Include your spottings
+							</Checkbox>
+						</Col>
 					</Row>
 					<Divider></Divider>
 					<Row>
@@ -199,8 +218,9 @@ const FeedContainer = () => {
 						<Col span={7}>
 							<RecentSpottingsContainer
 								openDrawer={openDrawer}
-								filteredSpottings={filteredSpottings}
+								spottings={filteredSpottings}
 								handleSelectedSpotting={handleSelectedSpotting}
+								filteredSpottings={filteredSpottings}
 							/>
 						</Col>
 					</Row>

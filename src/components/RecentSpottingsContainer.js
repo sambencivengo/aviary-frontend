@@ -1,24 +1,26 @@
 import { Space } from 'antd';
+import { useState } from 'react';
 import RecentSpottingCard from './RecentSpottingCard';
 
 const RecentSpottingsContainer = ({
-	filteredSpottings,
+	spottings,
 	handleSelectedSpotting,
 	openDrawer,
+	filteredSpottings,
 }) => {
-	const renderListOfSpottings = filteredSpottings
-		.slice(0, 20)
-		.map((spotting) => {
-			return (
-				<>
-					<RecentSpottingCard
-						openDrawer={openDrawer}
-						spotting={spotting}
-						handleSelectedSpotting={handleSelectedSpotting}
-					/>
-				</>
-			);
-		});
+	const [containerSpottings, setContainerSpottings] = useState(spottings);
+
+	const renderListOfSpottings = spottings.slice(0, 10).map((spotting) => {
+		return (
+			<>
+				<RecentSpottingCard
+					openDrawer={openDrawer}
+					spotting={spotting}
+					handleSelectedSpotting={handleSelectedSpotting}
+				/>
+			</>
+		);
+	});
 
 	return (
 		<>
