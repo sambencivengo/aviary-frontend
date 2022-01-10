@@ -14,57 +14,30 @@ const RecentSpottingCard = ({
 	let spottingDate = new Date(spotting.date).toDateString();
 
 	return (
-		// <Card
-		// 	style={{
-		// 		width: '100%',
-		// 	}}
-		// 	onClick={() => {
-		// 		handleSelectedSpotting(spotting);
-		// 	}}
-		// 	hoverable={true}
-		// >
-		// 	<Row>
-		// 		<Col span={12}>
-		// 			<Text
-		// 				style={{
-		// 					textAlign: 'left',
-		// 				}}
-		// 			>
-		// 				{spotting.bird.common_name}
-		// 			</Text>
-		// 			<Text>Seen by: {spotting.user.username}</Text>
-		// 			{/* <Row> */}
-		// 			{/* </Row> */}
-		// 		</Col>
-		// 		<Col span={12}>{spottingDate}</Col>
-		// 	</Row>
-		// </Card>
-		<div
+		<Card
 			style={{
-				width: '40vh',
-				backgroundColor: 'white',
-				padding: '10px',
-				textAlign: 'left',
-				height: '120px',
+				width: '100%',
 			}}
+			onClick={() => {
+				handleSelectedSpotting(spotting);
+			}}
+			hoverable={true}
 		>
 			<Row>
 				<Col span={12}>
-					<Row>
-						<Link
-							onClick={() => {
-								handleSelectedSpotting(spotting);
-							}}
-						>
-							{spotting.bird.common_name}
-						</Link>
-					</Row>
+					<Text
+						style={{
+							textAlign: 'left',
+						}}
+					>
+						{spotting.bird.common_name}
+					</Text>
 					<Text>Seen by: {spotting.user.username}</Text>
-					<Row>
-						<Text>{spottingDate}</Text>
-					</Row>
+					{/* <Row> */}
+					{/* </Row> */}
 				</Col>
 				<Col span={12}>
+					{spottingDate}
 					<Button
 						style={{ alignItems: 'center' }}
 						type="link"
@@ -74,7 +47,43 @@ const RecentSpottingCard = ({
 					</Button>
 				</Col>
 			</Row>
-		</div>
+		</Card>
+		// <div
+		// 	style={{
+		// 		width: '40vh',
+		// 		backgroundColor: 'white',
+		// 		padding: '10px',
+		// 		textAlign: 'left',
+		// 		height: '120px',
+		// 	}}
+		// >
+		// 	<Row>
+		// 		<Col span={12}>
+		// 			<Row>
+		// 				<Link
+		// 					onClick={() => {
+		// 						handleSelectedSpotting(spotting);
+		// 					}}
+		// 				>
+		// 					{spotting.bird.common_name}
+		// 				</Link>
+		// 			</Row>
+		// 			<Text>Seen by: {spotting.user.username}</Text>
+		// 			<Row>
+		// 				<Text>{spottingDate}</Text>
+		// 			</Row>
+		// 		</Col>
+		// 		<Col span={12}>
+		// 			<Button
+		// 				style={{ alignItems: 'center' }}
+		// 				type="link"
+		// 				onClick={() => openDrawer(spotting)}
+		// 			>
+		// 				View Profile
+		// 			</Button>
+		// 		</Col>
+		// 	</Row>
+		// </div>
 	);
 };
 
