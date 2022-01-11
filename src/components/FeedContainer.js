@@ -1,4 +1,5 @@
 import {
+	Button,
 	Card,
 	Checkbox,
 	Col,
@@ -18,7 +19,7 @@ import Sider, { SiderContext } from 'antd/lib/layout/Sider';
 import Title from 'antd/lib/typography/Title';
 import moment from 'moment';
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FeedMap from './FeedMap';
 import FollowedUsersContainer from './FollowedUsersContainer';
 import RecentSpottingsContainer from './RecentSpottingsContainer';
@@ -170,9 +171,10 @@ const FeedContainer = () => {
 	const handleCheckBox = () => {
 		setFilterUsersSpottings(!filterUsersSpottings);
 	};
-	if (filterUsersSpottings === true) {
-	} else {
-	}
+	// if (filterUsersSpottings === true) {
+	// } else {
+	// }
+
 	return (
 		<>
 			{followedLoaded && notfollowedLoaded ? (
@@ -235,6 +237,13 @@ const FeedContainer = () => {
 						</Col>
 					</Row>
 					<Drawer
+						title={
+							drawerUser && (
+								<Link to={`/aviary/${drawerUser.id}`}>
+									View Aviary
+								</Link>
+							)
+						}
 						placement="right"
 						onClose={closeDrawer}
 						visible={drawerVisible}
@@ -242,12 +251,17 @@ const FeedContainer = () => {
 					>
 						{drawerUser && (
 							<>
-								<Title level={1}>
-									{drawerUser.username
-										.charAt(0)
-										.toUpperCase() +
-										drawerUser.username.slice(1)}
-								</Title>
+								<Row>
+									<Title
+										level={2}
+										style={{ marginTop: '5px' }}
+									>
+										{drawerUser.username
+											.charAt(0)
+											.toUpperCase() +
+											drawerUser.username.slice(1)}
+									</Title>
+								</Row>
 								<Text>
 									Total number of birds seen:{' '}
 									{drawerUser.spottings.length}
