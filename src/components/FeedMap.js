@@ -43,7 +43,12 @@ const FeedMap = ({ spottings, handleInfoWindow, selectedSpotting }) => {
 			lng: spotting.long,
 		};
 		const date = spotting.date;
-		const legibleDate = new Date(date).toDateString();
+		const legibleDate = new Date(date).toLocaleDateString('en-US', {
+			weekday: 'long',
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+		});
 		return (
 			<Marker
 				key={spotting.id}

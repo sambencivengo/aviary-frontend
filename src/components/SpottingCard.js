@@ -11,7 +11,12 @@ const SpottingCard = ({
 	handleDelete,
 }) => {
 	const date = spotting.date;
-	const legibleDate = new Date(date).toDateString();
+	const legibleDate = new Date(date).toLocaleDateString('en-US', {
+		weekday: 'long',
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	});
 
 	const { Text } = Typography;
 	return (
@@ -53,7 +58,7 @@ const SpottingCard = ({
 							textAlign: 'center',
 						}}
 					>
-						Spotted: {legibleDate}
+						{legibleDate}
 					</p>
 					<Divider></Divider>
 					<div style={{ overflowY: 'scroll', maxHeight: '15vh' }}>

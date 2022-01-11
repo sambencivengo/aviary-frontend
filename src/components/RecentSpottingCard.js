@@ -16,7 +16,12 @@ const RecentSpottingCard = ({
 	const { Text } = Typography;
 	const { Link } = Typography;
 
-	let spottingDate = new Date(spotting.date).toDateString();
+	let spottingDate = new Date(spotting.date).toLocaleDateString('en-US', {
+		weekday: 'long',
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	});
 
 	return (
 		<Card
@@ -53,11 +58,14 @@ const RecentSpottingCard = ({
 					>
 						{spotting.bird.common_name}
 					</Text>{' '}
-					<Text>Seen by: {spotting.user.username}</Text>
 					{/* <Row> */}
 					{/* </Row> */}
 				</Col>
-				<Col span={12}>{spottingDate}</Col>
+				<Text>Seen by: {spotting.user.username}</Text>
+				<Col span={12}> </Col>
+			</Row>
+			<Row>
+				<p style={{ fontSize: '10px' }}>{spottingDate}</p>
 			</Row>
 		</Card>
 		// <div
