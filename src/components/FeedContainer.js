@@ -254,6 +254,7 @@ const FeedContainer = () => {
 								</Text>
 								<Title level={4}>Recent spottings:</Title>
 								{drawerUser.spottings
+									.reverse()
 									.splice(0, 3)
 									.map((spotting) => {
 										return (
