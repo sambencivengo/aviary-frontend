@@ -6,6 +6,8 @@ import { EnvironmentOutlined } from '@ant-design/icons';
 const UserAviaryContainer = () => {
 	const [top, setTop] = useState(10);
 	const [bottom, setBottom] = useState(10);
+	const [showMap, setShowMap] = useState(false);
+
 	return (
 		<>
 			<Affix offsetTop={top}>
@@ -15,7 +17,9 @@ const UserAviaryContainer = () => {
 				<Button
 					style={{ float: 'right' }}
 					type="primary"
-					// onClick={handleShowMap}
+					onClick={() => {
+						// setShowMap(!showMap);
+					}}
 				>
 					Map <EnvironmentOutlined />
 				</Button>
