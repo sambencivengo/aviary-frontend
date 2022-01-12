@@ -28,18 +28,15 @@ const UserAviary = () => {
 						return (
 							<>
 								<Space key={spotting.id} size={[8, 16]} wrap>
-									{new Array(1).fill(null).map((_, index) => (
-										// eslint-disable-next-line react/no-array-index-key
-										<SpottingCard
-											// handleCardClick={handleCardClick}
-											// handleDelete={handleDelete}
-											key={spotting.id}
-											spotting={spotting}
-											// currentUser={currentUser}
-											// editMode={editMode}
-											// displayEditForm={displayEditForm}
-										/>
-									))}
+									<SpottingCard
+										// handleCardClick={handleCardClick}
+										// handleDelete={handleDelete}
+										key={spotting.id}
+										spotting={spotting}
+										// currentUser={currentUser}
+										// editMode={editMode}
+										// displayEditForm={displayEditForm}
+									/>
 								</Space>
 							</>
 						);
