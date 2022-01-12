@@ -5,11 +5,17 @@ import SpottingCard from './SpottingCard';
 import { EnvironmentOutlined } from '@ant-design/icons';
 import AviaryMap from './AviaryMap';
 
+import { Link, Outlet } from 'react-router-dom';
+
 const UserAviary = ({}) => {
 	let params = useParams();
 	const [loading, setLoading] = useState(false);
 	const [user, setUser] = useState({});
+
+	const [top, setTop] = useState(10);
+	const [bottom, setBottom] = useState(10);
 	const [showMap, setShowMap] = useState(false);
+	const [selectedSpotting, setSelectedSpotting] = useState(null);
 
 	useEffect(() => {
 		fetch(`/users/${params.userId}`)
@@ -21,17 +27,31 @@ const UserAviary = ({}) => {
 			.finally(() => setLoading(true));
 	}, []);
 
-	const [top, setTop] = useState(10);
-	const [bottom, setBottom] = useState(10);
 	const handleShowMap = () => {
 		// setSelectedSpotting(null);
 		// setShowMap(!showMap);
 		// setEnableCardClick(!enableCardClick);
 	};
+
+	console.log(user);
 	return (
 		<>
+			<Affix offsetTop={top}>
+				<Button style={{ float: 'left' }}>
+					<Link to={'/feed'}>Back to Feed</Link>
+				</Button>
+				<Button
+					style={{ float: 'right' }}
+					type="primary"
+					onClick={() => {
+						setShowMap(!showMap);
+					}}
+				>
+					Map <EnvironmentOutlined />
+				</Button>
+			</Affix>
 			<h2>{user.username}'s Aviary </h2>
-			{showMap ? <AviaryMap /> : <p>no map</p>}
+			{showMap ? <AviaryMap spottings={user.spottings} /> : <p>no map</p>}
 
 			{loading ? (
 				user.spottings.length > 0 ? (

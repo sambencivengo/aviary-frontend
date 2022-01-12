@@ -27,9 +27,9 @@ ReactDOM.render(
 					<Route path="/myaviary" element={<SpottingsContainer />} />
 					<Route path="/spotabird" element={<SpottingForm />} />
 					<Route path="/feed" element={<FeedContainer />} />
-					<Route path="/aviary" element={<UserAviaryContainer />}>
-						<Route path=":userId" element={<UserAviary />} />
-					</Route>
+					<Route path="/aviary/:userId" element={<UserAviary />} />
+					{/* <Route path=":userId" element={<UserAviary />} /> */}
+					{/* </Route> */}
 				</Route>
 
 				<Route
