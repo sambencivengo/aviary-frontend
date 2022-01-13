@@ -133,26 +133,28 @@ const UserAviary = ({}) => {
 										paddingBottom: '20px',
 									}}
 								>
-									{user.spottings.map((spotting) => {
-										console.log(spotting);
-										return (
-											<Space
-												key={spotting.id}
-												size={[8, 16]}
-												wrap
-											>
-												<>
-													<SpottingCard
-														key={spotting.id}
-														spotting={spotting}
-														onClick={
-															handleCardClick
-														}
-													/>
-												</>
-											</Space>
-										);
-									})}
+									{user.spottings
+										.reverse()
+										.map((spotting) => {
+											console.log(spotting);
+											return (
+												<Space
+													key={spotting.id}
+													size={[8, 16]}
+													wrap
+												>
+													<>
+														<SpottingCard
+															key={spotting.id}
+															spotting={spotting}
+															onClick={
+																handleCardClick
+															}
+														/>
+													</>
+												</Space>
+											);
+										})}
 								</div>
 							</Col>
 							<Col span={12}>
@@ -168,7 +170,6 @@ const UserAviary = ({}) => {
 					</>
 				) : (
 					user.spottings.map((spotting) => {
-						console.log(spotting);
 						return (
 							<>
 								<Space key={spotting.id} size={[8, 16]} wrap>
