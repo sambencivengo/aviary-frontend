@@ -78,7 +78,43 @@ const UserAviary = ({}) => {
 			</Affix>
 			<h2>{user.username}'s Aviary </h2>
 			<Divider></Divider>
-
+			<Drawer
+				// title={drawerBird.bird.common_name}
+				placement="right"
+				onClose={closeDrawer}
+				visible={drawerVisible}
+				destroyOnClose={true}
+				size="large"
+			>
+				{selectedSpotting && (
+					<>
+						<Space align="center">
+							<img
+								style={{
+									maxWidth: '100%',
+									// maxWidth: '90vh',
+								}}
+								src={selectedSpotting.bird.image}
+							/>
+						</Space>
+						<Title level={2} style={{ paddingTop: '15px' }}>
+							{selectedSpotting.bird.common_name}
+						</Title>
+						<Divider orientation="left">
+							<Text italic>{selectedSpotting.bird.sci_name}</Text>
+						</Divider>
+						<div
+							style={{
+								backgroundColor: '#E8E8E4',
+								padding: '10px',
+							}}
+						>
+							<Text>{selectedSpotting.bird.description}</Text>
+						</div>
+					</>
+				)}
+			</Drawer>
+			;
 			{user.spottings.length > 0 ? (
 				showMap ? (
 					<>
@@ -134,61 +170,6 @@ const UserAviary = ({}) => {
 										}}
 									/>
 								</Space>
-								<Drawer
-									// title={drawerBird.bird.common_name}
-									placement="right"
-									onClose={closeDrawer}
-									visible={drawerVisible}
-									destroyOnClose={true}
-									size="large"
-								>
-									{selectedSpotting && (
-										<>
-											<Space align="center">
-												<img
-													style={{
-														maxWidth: '100%',
-														// maxWidth: '90vh',
-													}}
-													src={
-														selectedSpotting.bird
-															.image
-													}
-												/>
-											</Space>
-											<Title
-												level={2}
-												style={{ paddingTop: '15px' }}
-											>
-												{
-													selectedSpotting.bird
-														.common_name
-												}
-											</Title>
-											<Divider orientation="left">
-												<Text italic>
-													{
-														selectedSpotting.bird
-															.sci_name
-													}
-												</Text>
-											</Divider>
-											<div
-												style={{
-													backgroundColor: '#E8E8E4',
-													padding: '10px',
-												}}
-											>
-												<Text>
-													{
-														selectedSpotting.bird
-															.description
-													}
-												</Text>
-											</div>
-										</>
-									)}
-								</Drawer>
 							</>
 						);
 					})
