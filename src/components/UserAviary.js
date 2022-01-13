@@ -145,6 +145,9 @@ const UserAviary = ({}) => {
 													<SpottingCard
 														key={spotting.id}
 														spotting={spotting}
+														onClick={
+															handleCardClick
+														}
 													/>
 												</>
 											</Space>
