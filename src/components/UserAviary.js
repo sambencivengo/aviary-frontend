@@ -53,7 +53,13 @@ const UserAviary = ({}) => {
 	const handleCardClick = (spotting) => {
 		if (showMap === false) {
 			openDrawer(spotting);
+		} else {
+			setSelectedSpotting(spotting);
 		}
+	};
+	const resetInfoWindow = () => {
+		setSelectedSpotting(null);
+		console.log('clicked map');
 	};
 
 	if (loading === false) {
@@ -114,7 +120,7 @@ const UserAviary = ({}) => {
 					</>
 				)}
 			</Drawer>
-			;
+
 			{user.spottings.length > 0 ? (
 				showMap ? (
 					<>
@@ -152,6 +158,7 @@ const UserAviary = ({}) => {
 									onMarkerClicked={onMarkerClicked}
 									spottings={user.spottings}
 									selectedSpotting={selectedSpotting}
+									resetInfoWindow={resetInfoWindow}
 								/>
 							</Col>
 						</Row>
@@ -165,9 +172,7 @@ const UserAviary = ({}) => {
 									<SpottingCard
 										key={spotting.id}
 										spotting={spotting}
-										onClick={() => {
-											handleCardClick(spotting);
-										}}
+										onClick={handleCardClick}
 									/>
 								</Space>
 							</>

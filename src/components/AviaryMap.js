@@ -10,6 +10,7 @@ const AviaryMap = ({
 	selectedSpotting,
 	onMarkerClicked,
 	onMarkerCloseClicked,
+	resetInfoWindow,
 }) => {
 	const { currentUser } = useContext(UserContext);
 
@@ -93,6 +94,10 @@ const AviaryMap = ({
 						mapContainerStyle={mapStyles}
 						zoom={zoom}
 						center={center}
+						onClick={(e) => {
+							resetInfoWindow();
+							console.log(e);
+						}}
 					>
 						<Button
 							style={{ marginTop: '10px' }}
