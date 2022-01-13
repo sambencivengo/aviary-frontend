@@ -1,4 +1,4 @@
-import { Affix, Button, Space, Spin } from 'antd';
+import { Affix, Button, Col, Divider, Row, Space, Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SpottingCard from './SpottingCard';
@@ -34,6 +34,9 @@ const UserAviary = ({}) => {
 	};
 
 	console.log(user);
+	if (loading === false) {
+		return <Spin size="large" />;
+	}
 	return (
 		<>
 			<Affix offsetTop={top}>
@@ -51,10 +54,48 @@ const UserAviary = ({}) => {
 				</Button>
 			</Affix>
 			<h2>{user.username}'s Aviary </h2>
-			{showMap ? <AviaryMap spottings={user.spottings} /> : <p>no map</p>}
+			<Divider></Divider>
 
-			{loading ? (
-				user.spottings.length > 0 ? (
+			{user.spottings.length > 0 ? (
+				showMap ? (
+					<>
+						<Row>
+							<Col span={12}>
+								<div
+									style={{
+										maxHeight: '75vh',
+										overflowY: 'scroll',
+										paddingBottom: '20px',
+									}}
+								>
+									<Space size="large" align="center" wrap>
+										{user.spottings.map((spotting) => {
+											console.log(spotting);
+											return (
+												<>
+													<SpottingCard
+														key={spotting.id}
+														spotting={spotting}
+													/>
+												</>
+											);
+										})}
+									</Space>
+								</div>
+							</Col>
+							<Col span={12}>
+								<Space size="large" wrap>
+									<div
+										style={{ paddingTop: '30px' }}
+										id="map"
+									>
+										<AviaryMap spottings={user.spottings} />
+									</div>
+								</Space>
+							</Col>
+						</Row>
+					</>
+				) : (
 					user.spottings.map((spotting) => {
 						console.log(spotting);
 						return (
@@ -62,23 +103,16 @@ const UserAviary = ({}) => {
 								<Space key={spotting.id} size={[8, 16]} wrap>
 									<> </>
 									<SpottingCard
-										// handleCardClick={handleCardClick}
-										// handleDelete={handleDelete}
 										key={spotting.id}
 										spotting={spotting}
-										// currentUser={currentUser}
-										// editMode={editMode}
-										// displayEditForm={displayEditForm}
 									/>
 								</Space>
 							</>
 						);
 					})
-				) : (
-					<h1>This user hasn't seen any birds!</h1>
 				)
 			) : (
-				<Spin size="large" />
+				<h1>This user hasn't seen any birds!</h1>
 			)}
 		</>
 	);
