@@ -37,7 +37,6 @@ const UserAviary = ({}) => {
 		setEnableCardClick(!enableCardClick);
 	};
 
-	console.log(user);
 	const closeDrawer = () => {
 		setDrawerVisible(false);
 		setSelectedSpotting(null);
@@ -134,7 +133,12 @@ const UserAviary = ({}) => {
 									}}
 								>
 									{user.spottings
-										.reverse()
+										.sort(function (a, b) {
+											return (
+												new Date(b.date) -
+												new Date(a.date)
+											);
+										})
 										.map((spotting) => {
 											console.log(spotting);
 											return (
@@ -169,19 +173,27 @@ const UserAviary = ({}) => {
 						</Row>
 					</>
 				) : (
-					user.spottings.map((spotting) => {
-						return (
-							<>
-								<Space key={spotting.id} size={[8, 16]} wrap>
-									<SpottingCard
+					user.spottings
+						.sort(function (a, b) {
+							return new Date(b.date) - new Date(a.date);
+						})
+						.map((spotting) => {
+							return (
+								<>
+									<Space
 										key={spotting.id}
-										spotting={spotting}
-										onClick={handleCardClick}
-									/>
-								</Space>
-							</>
-						);
-					})
+										size={[8, 16]}
+										wrap
+									>
+										<SpottingCard
+											key={spotting.id}
+											spotting={spotting}
+											onClick={handleCardClick}
+										/>
+									</Space>
+								</>
+							);
+						})
 				)
 			) : (
 				<h1>This user hasn't seen any birds!</h1>
