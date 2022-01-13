@@ -231,7 +231,7 @@ const SpottingsContainer = () => {
 							}}
 						>
 							{renderCards}
-							<Affix offsetBottom={bottom}></Affix>
+							{/* <Affix offsetBottom={bottom}></Affix> */}
 						</div>
 					</Col>
 				) : (

@@ -35,6 +35,7 @@ const AviaryMap = ({
 	// 	}
 	// }
 	// setLocation();
+	console.log(selectedSpotting);
 	const markers = spottings.map((spotting) => {
 		return (
 			<AviaryMarker
