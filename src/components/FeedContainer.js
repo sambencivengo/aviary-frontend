@@ -180,7 +180,9 @@ const FeedContainer = () => {
 			{followedLoaded && notfollowedLoaded ? (
 				<>
 					<Row>
-						<Col span={17}>
+						<Col span={8}></Col>
+
+						<Col span={8}>
 							<Row>
 								<Title level={4}>
 									Check out what users are spotting!
@@ -204,12 +206,14 @@ const FeedContainer = () => {
 								/>
 							</Row>
 							<Row>
-								<Checkbox onChange={handleCheckBox}>
-									Include your spottings
-								</Checkbox>
+								<div style={{}}>
+									<Checkbox onChange={handleCheckBox}>
+										Include your spottings
+									</Checkbox>
+								</div>
 							</Row>
 						</Col>
-						<Col span={7}></Col>
+						<Col span={8}></Col>
 					</Row>
 					<Divider></Divider>
 					<Row>
