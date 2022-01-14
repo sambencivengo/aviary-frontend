@@ -40,8 +40,10 @@ function App() {
 					// 	console.log('empty pathname');
 					// 	navigate('/home');
 					// }
-					if (user.username) {
+					if (user.username && location.pathname === '/') {
 						navigate('/home');
+					} else if (user.username) {
+						navigate(location);
 					} else {
 						navigate('/login');
 					}
