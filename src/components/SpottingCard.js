@@ -62,9 +62,7 @@ const SpottingCard = ({
 					</p>
 					<Divider></Divider>
 					<div style={{ overflowY: 'scroll', maxHeight: '15vh' }}>
-						<p style={{ textAlign: 'left' }}>
-							Field Notes: {spotting.notes}
-						</p>
+						<p style={{ textAlign: 'left' }}>{spotting.notes}</p>
 					</div>
 				</Card>
 			</div>

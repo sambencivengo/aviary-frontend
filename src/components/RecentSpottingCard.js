@@ -1,4 +1,4 @@
-import { Button, Card, Col, Row } from 'antd';
+import { Button, Card, Col, Row, Space } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import { Typography } from 'antd';
 import {
@@ -26,7 +26,7 @@ const RecentSpottingCard = ({
 	return (
 		<Card
 			style={{
-				width: '100%',
+				minWidth: '40vh',
 			}}
 			hoverable={true}
 			actions={[
@@ -49,61 +49,30 @@ const RecentSpottingCard = ({
 				</Button>,
 			]}
 		>
-			<Row>
-				<Col span={12}>
-					<Text
-						style={{
-							textAlign: 'left',
-						}}
-					>
-						{spotting.bird.common_name}
-					</Text>{' '}
-					{/* <Row> */}
-					{/* </Row> */}
+			<Space
+				direction="horizontal"
+				style={{ width: '100%', justifyContent: 'center' }}
+			>
+				<Col>
+					<Row>
+						<Text
+							style={{
+								textAlign: 'left',
+								fontWeight: 500,
+							}}
+						>
+							{spotting.bird.common_name}
+						</Text>{' '}
+					</Row>
+					<Row>
+						<Text>Seen by: {spotting.user.username}</Text>
+					</Row>
+					<Row>
+						<p style={{ fontSize: '14px' }}>{spottingDate}</p>
+					</Row>
 				</Col>
-				<Text>Seen by: {spotting.user.username}</Text>
-				<Col span={12}> </Col>
-			</Row>
-			<Row>
-				<p style={{ fontSize: '10px' }}>{spottingDate}</p>
-			</Row>
+			</Space>
 		</Card>
-		// <div
-		// 	style={{
-		// 		width: '40vh',
-		// 		backgroundColor: 'white',
-		// 		padding: '10px',
-		// 		textAlign: 'left',
-		// 		height: '120px',
-		// 	}}
-		// >
-		// 	<Row>
-		// 		<Col span={12}>
-		// 			<Row>
-		// 				<Link
-		// 					onClick={() => {
-		// 						handleSelectedSpotting(spotting);
-		// 					}}
-		// 				>
-		// 					{spotting.bird.common_name}
-		// 				</Link>
-		// 			</Row>
-		// 			<Text>Seen by: {spotting.user.username}</Text>
-		// 			<Row>
-		// 				<Text>{spottingDate}</Text>
-		// 			</Row>
-		// 		</Col>
-		// 		<Col span={12}>
-		// 			<Button
-		// 				style={{ alignItems: 'center' }}
-		// 				type="link"
-		// 				onClick={() => openDrawer(spotting)}
-		// 			>
-		// 				View Profile
-		// 			</Button>
-		// 		</Col>
-		// 	</Row>
-		// </div>
 	);
 };
 
